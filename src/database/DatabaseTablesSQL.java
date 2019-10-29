@@ -37,8 +37,9 @@ public class DatabaseTablesSQL {
     public static final String CREATE_CUSTOMERS_TABLE_SQL = "CREATE TABLE customers("
                                                           + "CustomerID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
                                                           + "Name VARCHAR(50) NOT NULL,"
-                                                          + "IDNumber VARCHAR(50),"
-                                                          + "BankAccountNumber INTEGER,"
+                                                          + "IDNumber VARCHAR(50) NOT NULL,"
+                                                          + "BankAccountNumber BIGINT NOT NULL,"
+                                                          + "ContactNumber BIGINT NOT NULL,"
                                                           + "PRIMARY KEY (CustomerID))";
     
     //this table contains the avaliable venues
@@ -80,6 +81,7 @@ public class DatabaseTablesSQL {
                                                       + "Addon1 VARCHAR(50) NOT NULL,"
                                                       + "Addon2 VARCHAR(50) NOT NULL,"
                                                       + "Addon3 VARCHAR(50) NOT NULL,"
+                                                      + "DueDate TIMESTAMP NOT NULL,"
                                                       + "TotalPrice DECIMAL NOT NULL,"
                                                       + "PRIMARY KEY (SaleID))";
     
