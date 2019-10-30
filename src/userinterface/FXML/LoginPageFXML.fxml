@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="348.0" prefWidth="719.0" style="-fx-background-color: #e2ebf0;" xmlns="http://javafx.com/javafx/8.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userinterface.controllers.LoginPageController">
+   <children>
+      <ImageView fx:id="logoView" fitHeight="171.0" fitWidth="143.0" layoutX="561.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/logo.png" />
+         </image>
+         <effect>
+            <Reflection fraction="0.87" topOffset="5.0" topOpacity="0.75" />
+         </effect>
+      </ImageView>
+      <JFXTextField fx:id="usernameInput" focusColor="#8a8a8a" labelFloat="true" layoutX="66.0" layoutY="80.0" prefHeight="40.0" prefWidth="487.0" promptText="Username" style="-fx-text-fill: #8a8a8a;" unFocusColor="#b0c8d6">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <effect>
+            <Reflection bottomOpacity="0.15" />
+         </effect>
+      </JFXTextField>
+      <JFXPasswordField fx:id="passwordInput" focusColor="#8a8a8a" labelFloat="true" layoutX="66.0" layoutY="181.0" prefHeight="40.0" prefWidth="487.0" promptText="Password" unFocusColor="#b0c8d6">
+         <effect>
+            <Reflection />
+         </effect>
+      </JFXPasswordField>
+      <JFXButton fx:id="logInButton" buttonType="RAISED" layoutX="5.0" layoutY="282.0" prefHeight="39.0" prefWidth="709.0" style="-fx-background-color: #b0c8d6;" text="Log In">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="partyPlannerLabel" layoutX="66.0" prefHeight="39.0" prefWidth="487.0" text="PARTY PLANNERS MALDIVES">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="0.18571428571428572" endY="1.0" startX="1.0">
+               <stops>
+                  <Stop color="#6de4ff" />
+                  <Stop color="#0886c9" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <effect>
+            <Reflection />
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+   </children>
+</AnchorPane>

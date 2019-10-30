@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userinterface.controllers.PartiesController">
+   <children>
+      <Pane prefHeight="78.0" prefWidth="1372.0" style="-fx-background-color: linear-gradient(to left, #c2e9fb, #809cca);">
+         <children>
+            <JFXButton layoutX="1238.0" prefHeight="32.0" prefWidth="111.0" text="Log Out">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/log_out.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <Label layoutX="1258.0" layoutY="49.0" text="Hello, ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="1296.0" layoutY="49.0" text="User!">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="108.0" layoutY="11.0" text="PARTY PLANNERS MALDIVES" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="65.0" fitWidth="102.0" layoutX="28.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/logo.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+      <Pane layoutY="78.0" prefHeight="690.0" prefWidth="200.0" style="-fx-background-color: #e2ebf0;">
+         <children>
+            <JFXButton layoutX="-4.0" prefHeight="45.0" prefWidth="204.0" style="-fx-background-color: #e2ebf0; -fx-padding: 0 60 0 0;" text="Home">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/home.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font></JFXButton>
+            <JFXButton layoutY="63.0" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #e2ebf0; -fx-padding: 0 75 0 0;" text="Sales">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/sales.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font></JFXButton>
+            <Label alignment="CENTER" layoutY="113.0" prefHeight="45.0" prefWidth="200.0" style="-fx-padding: 0 20 0 0;" text="Party Management" textFill="#8a8a8aa3">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <JFXButton layoutY="163.0" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #b0c8d6; -fx-padding: 0 75 0 0;" text="Parties">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/party.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutY="227.0" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #e2ebf0; -fx-padding: 0 70 0 0;" text="Venues">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/venues.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font></JFXButton>
+            <JFXButton alignment="CENTER_RIGHT" layoutX="1.0" layoutY="291.0" prefHeight="45.0" prefWidth="199.0" style="-fx-background-color: #e2ebf0; -fx-padding: 0 25 0 0;" text="Addons &amp; Catering">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/add_ons.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font></JFXButton>
+            <JFXButton layoutY="355.0" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #e2ebf0; -fx-padding: 0 60 0 0;" text="Customers">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/customers.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <Label alignment="CENTER" layoutY="405.0" prefHeight="45.0" prefWidth="200.0" style="-fx-padding: 0 100 0 0;" text="Settings" textFill="#8a8a8aad">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <JFXButton layoutY="455.0" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #e2ebf0; -fx-padding: 0 95 0 0;" text="Users">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/users.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+         </children>
+      </Pane>
+      <JFXTabPane layoutX="200.0" layoutY="78.0" prefHeight="690.0" prefWidth="1172.0" style="-fx-background-color: #e2ebf0;" stylesheets="@../CSS/TabPaneStyles.css" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0">
+         <tabs>
+            <Tab style="-fx-padding: 0 508 0 0;" text="Parties">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView editable="true" layoutX="-4.0" layoutY="-1.0" prefHeight="362.0" prefWidth="1176.0" stylesheets="@../CSS/TableViewStyle.css">
+                          <columns>
+                            <TableColumn editable="false" prefWidth="79.0" text="ID" />
+                            <TableColumn prefWidth="506.0" text="Type" />
+                              <TableColumn prefWidth="590.0" text="Price" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab style="-fx-padding: 0 508 0 0;" text="Status">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+         </tabs></JFXTabPane>
+   </children>
+</AnchorPane>

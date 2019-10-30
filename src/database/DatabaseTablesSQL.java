@@ -49,7 +49,7 @@ public class DatabaseTablesSQL {
                                                        + "Address VARCHAR(50) NOT NULL UNIQUE,"
                                                        + "Capacity INTEGER NOT NULL,"
                                                        + "Price DECIMAL,"
-                                                       + "PRMIARY KEY (VenueID))";
+                                                       + "PRIMARY KEY (VenueID))";
     
     //this table contains the Add-ons
     public static final String CREATE_ADD_ONS_TABLE_SQL = "CREATE TABLE add_ons ("
@@ -62,6 +62,7 @@ public class DatabaseTablesSQL {
     public static final String CREATE_PARTY_DETAILS_TABLE_SQL = "CREATE TABLE party_details ("
                                                         + "PartyID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
                                                         + "Type VARCHAR(50) NOT NULL,"
+                                                        + "Price INTEGER NOT NULL,"
                                                         + "PRIMARY KEY (PartyID))";
     
     //this table contains the catering options
@@ -90,10 +91,10 @@ public class DatabaseTablesSQL {
                                                      + "PaymentID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
                                                      + "SaleID INTEGER NOT NULL,"
                                                      + "CustomerID INTEGER NOT NULL,"
-                                                     + "AMOUNT DUE DECIMAL,"
-                                                     + "DUE DATE TIMESTAMP,"
-                                                     + "AMOUNT PAID DECIMAL,"
-                                                     + "DATE PAID DECIMAL,"
+                                                     + "AmountDue DECIMAL,"
+                                                     + "DueDate DATE,"
+                                                     + "AmountPaid DECIMAL,"
+                                                     + "DatePaid DATE,"
                                                      + "PRIMARY KEY (PaymentID),"
                                                      + "FOREIGN KEY (SaleID) REFERENCES sales (SaleID),"
                                                      + "FOREIGN KEY (CustomerID) REFERENCES customers(CustomerID))";
