@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -130,13 +131,32 @@
                </graphic></JFXButton>
          </children>
       </Pane>
-      <JFXTabPane layoutX="200.0" layoutY="78.0" prefHeight="690.0" prefWidth="1172.0" style="-fx-background-color: #e2ebf0;" stylesheets="@../CSS/TabPaneStyles.css" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0">
+      <JFXTabPane layoutX="200.0" layoutY="78.0" prefHeight="690.0" prefWidth="1172.0" style="-fx-background-color: #e2ebf0;" stylesheets="@../CSS/TabPaneStyles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0">
          <tabs>
             <Tab style="-fx-padding: 0 508 0 0;" text="Parties">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView editable="true" layoutX="-4.0" layoutY="-1.0" prefHeight="362.0" prefWidth="1176.0" stylesheets="@../CSS/TableViewStyle.css">
+                        <Pane layoutX="-2.0" layoutY="596.0" prefHeight="58.0" prefWidth="1174.0" style="-fx-background-color: #e2ebf0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0">
+                           <children>
+                              <JFXButton layoutX="2.0" layoutY="-2.0" prefHeight="59.0" prefWidth="388.0" style="-fx-background-color: #b0c8d6;" text="Add" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton layoutX="393.0" layoutY="-2.0" prefHeight="59.0" prefWidth="388.0" style="-fx-background-color: #b0c8d6;" text="Modify" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton layoutX="784.0" layoutY="-2.0" prefHeight="59.0" prefWidth="388.0" style="-fx-background-color: #b0c8d6;" text="Remove" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </Pane>
+                        <TableView editable="true" layoutX="-4.0" layoutY="-1.0" prefHeight="592.0" prefWidth="1176.0" stylesheets="@../CSS/TableViewStyle.css" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                             <TableColumn editable="false" prefWidth="79.0" text="ID" />
                             <TableColumn prefWidth="506.0" text="Type" />
@@ -149,7 +169,14 @@
             </Tab>
             <Tab style="-fx-padding: 0 508 0 0;" text="Status">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane hbarPolicy="NEVER" layoutX="308.0" layoutY="253.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                          </content>
+                        </ScrollPane>
+                     </children></AnchorPane>
               </content>
             </Tab>
          </tabs></JFXTabPane>

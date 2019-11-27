@@ -5,8 +5,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 
-public class HomeController {
+public class CustomersController {
 
     @FXML
     private ResourceBundle resources;
@@ -19,6 +20,9 @@ public class HomeController {
 
     @FXML
     private Label currentUserName;
+
+    @FXML
+    private JFXButton goToHomeButton;
 
     @FXML
     private JFXButton goToSalesButton;
@@ -42,16 +46,20 @@ public class HomeController {
     private JFXButton goToUsersButton;
 
     @FXML
+    private TableView<?> customersTableView;
+
+    @FXML
+    private JFXButton modifyCustomersButton;
+
+    @FXML
+    private JFXButton removeCustomersButton;
+
+    @FXML
     void initialize() {
         
     }
     
-    public void initHome(final UIManager uiManager, String currentUsername){
-        currentUserName.setText(currentUsername);
-        
-    }
-    
-    public void setCurrentUsername(String currentUsername){
+    public void initCustomers(String currentUsername){
         currentUserName.setText(currentUsername);
     }
 }

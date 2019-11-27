@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
  */
 package userinterface.controllers;
 
@@ -21,10 +19,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import static userinterface.CenterUIOnScreen.CenterUIOnScreen;
 
 public class LoginPageController {
 
@@ -58,60 +57,53 @@ public class LoginPageController {
                 String username = usernameInput.getText();
                 String password = passwordInput.getText();
                 
-                if((username != "") && (password != "")){
-                    User userLogin = new User(username, password); //create user object
+                User userLogin = new User(username, password); //create user object
                     
-                    try {
-                        //if the user is in the database
-                        if(userLogin.authenticateLogin() != 0){
-                            userLogin.insertUserAccessRecord();  //update the database records
+                try {
+                    //if the user is in the database
+                    if(userLogin.authenticateLogin() != 0){
+                        userLogin.insertUserAccessRecord();  //update the database records
                             
-                            //open the home view
                             
-                        } else if(userLogin.authenticateLogin() == 0){ //user is not in the database
-                            //display error message
-                            Stage errorStage = new Stage();
-                            
-                            try {
-                                //get the fxml
-                                Parent root = FXMLLoader.load(getClass().getResource("/userinterface/FXML/LoginErrorFXML.fxml"));
-                                
-                                Scene scene = new Scene(root); //create a new scene
-                                errorStage.setScene(scene); //load the scene into the stage
-                                errorStage.setResizable(false); 
-                                errorStage.show();
-                                errorStage.centerOnScreen();
-                                
-                                CenterUIOnScreen(errorStage);
-                                
-                            } catch (IOException ex) {
-                                Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
+                        //open the home view
+                        Stage mainStage = new Stage(); //create a new stage for the main application
+                        try {
                         
-                    } catch (SQLException ex) {
-                        Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/userinterface/FXML/Home.fxml"));    
+                        Parent root = (Parent)loader.load(); //load the fxml
+                        HomeController controller = loader.getController(); //get the controller
+                        controller.setCurrentUsername(username); //set the username to the current user
+                        
+                        Scene homeScene = new Scene(root); //create a new scene
+                        mainStage.setScene(homeScene); //set the scene to the mainStage   
+                        logInButton.getScene().getWindow().hide(); //hide the current window
+                       
+                        mainStage.show(); //show the main Stage - scene home
+                        
+                        mainStage.setMaximized(true); //maximize the current stage
+                                
                     
-                } else {
-                    Stage errorStage = new Stage();
-
-                    try {
-                        //get the fxml
-                        Parent root = FXMLLoader.load(getClass().getResource("/userinterface/FXML/LoginErrorFXML.fxml"));
                                 
-                        Scene scene = new Scene(root); //create a new scene
-                        errorStage.setScene(scene); //load the scene into the stage
-                        errorStage.setResizable(false); 
-                        errorStage.show();
-                        CenterUIOnScreen(errorStage);   
-                    } catch (IOException ex) {
-                        Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IOException ex) {
+                            Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                            
+                    } else if(userLogin.authenticateLogin() == 0){ //user is not in the database
+                        //display error message
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setTitle("Log In Error!");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Invalid Username/Password!");
+                            
+                        alert.showAndWait();
                     }
-                                
+                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                    
             }
         });
         

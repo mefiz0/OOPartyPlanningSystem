@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import static userinterface.CenterUIOnScreen.CenterUIOnScreen;
 
 public class OOPartyPlanningSystem extends Application{
 
@@ -31,14 +30,17 @@ public class OOPartyPlanningSystem extends Application{
             Logger.getLogger(OOPartyPlanningSystem.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Parent root = FXMLLoader.load(getClass().getResource("/userinterface/FXML/LoginPageFXML.fxml")); //get the loginpage fxml
-
+        Parent root = FXMLLoader.load(getClass().getResource("/userinterface/FXML/LoginPage.fxml")); //get the loginpage fxml
+        
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setX((screenBounds.getWidth() - 719) / 2 ); //center x value is half of screen width - width of stage
+        primaryStage.setY((screenBounds.getHeight() - 348) / 2); //center y value is half of screen height - height of stage
+        
         Scene scene = new Scene(root); //create a new scene
         primaryStage.setScene(scene); //load the scene into the stage
         primaryStage.setResizable(false); 
         primaryStage.show();
         
-        CenterUIOnScreen(primaryStage);
     }
     
 }
