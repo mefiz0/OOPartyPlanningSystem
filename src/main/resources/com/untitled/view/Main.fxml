@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.untitled.controllers.MainController">
+   <top>
+      <HBox prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <JFXButton fx:id="navButton" contentDisplay="CENTER" ellipsisString="" prefHeight="30.0" prefWidth="22.0" ripplerFill="WHITE" styleClass="nav-button" stylesheets="@../style/MainStyle.css" text=" ">
+               <HBox.margin>
+                  <Insets left="10.0" top="8.0" />
+               </HBox.margin>
+               <graphic>
+                  <FontAwesomeIcon fx:id="navIcon" iconName="BARS" styleClass="nav-button-icon" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <JFXDrawer fx:id="navBar" prefHeight="532.0" prefWidth="181.0" styleClass="sidebar" stylesheets="@../style/MainStyle.css" visible="false" BorderPane.alignment="CENTER">
+         <effect>
+            <DropShadow height="0.0" radius="4.75" />
+         </effect>
+         <children>
+            <VBox prefHeight="464.0" prefWidth="188.0">
+               <children>
+                  <JFXButton fx:id="homeButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Home" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets top="150.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon iconName="HOME" size="1.5em" styleClass="homeIcon" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="salesButton" alignment="BASELINE_LEFT" graphicTextGap="47.0" layoutX="10.0" layoutY="110.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" style="-fx-background-color: #2b3b4e;" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Sales" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon iconName="DOLLAR" size="1.5em" styleClass="salesIcon" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="tasksButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="10.0" layoutY="146.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Tasks" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon iconName="TASKS" size="1.5em" styleClass="tasksIcon" />
+                     </graphic>
+                  </JFXButton>
+                  <Label alignment="CENTER" prefHeight="16.0" prefWidth="185.0" text="Party Management" textFill="#455f7d">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXButton fx:id="PartiesButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Parties" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon iconName="GIFT" size="1.5em" styleClass="partiesIcon" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="venuesButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Venues" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon iconName="BUILDING" size="1.5em" styleClass="venuesIcon" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="addonsButton" alignment="BASELINE_LEFT" graphicTextGap="15.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Addons &amp; Catering" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon iconName="PLUS_SQUARE" size="1.5em" styleClass="addonsIcon" />
+                     </graphic>
+
+                  </JFXButton>
+                  <JFXButton fx:id="customersButton" alignment="BASELINE_LEFT" graphicTextGap="30.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Customers" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon iconName="USERS" size="1.5em" styleClass="customersIcon" />
+                     </graphic>
+                  </JFXButton>
+                  <Label alignment="CENTER" prefHeight="16.0" prefWidth="185.0" text="Settings" textFill="#455f7d">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXButton fx:id="userSettingsButton" alignment="BASELINE_LEFT" graphicTextGap="45.0" prefHeight="30.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Users" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon iconName="USER" size="1.5em" styleClass="usersIcon" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </children></JFXDrawer>
+   </left>
+</BorderPane>

@@ -1,0 +1,30 @@
+
+Home
+
+Sales
+
+Tasks list
+    --party tasks
+     --add
+     --update
+
+--Party Management
+Parties
+    --Add new
+    --modify
+    --delete
+Venues
+    --add
+    --delete
+    --modify
+Addons&Catering
+    --add
+    --delete
+    --modify
+Customers
+    --add
+    --delete
+    --modify
+
+--Settings
+Users

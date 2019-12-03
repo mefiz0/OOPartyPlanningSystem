@@ -1,0 +1,30 @@
+
+.nav-button-icon{
+    -fx-fill: #000000;
+}
+
+.nav-button-icon:hover{
+    -fx-fill:#5a7ca3;
+}
+
+.nav-button:hover{
+    -fx-background-color: lightgray;
+}
+
+.sidebar{
+    -fx-background-color:  #222f3e;
+}
+
+.sidebar-button{
+    -fx-background-color:  #2b3b4e;
+    -fx-text-fill: #fff;
+    
+}
+
+.sidebar-button:hover{
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-text-fill: #b8b1b1;
+    -fx-border-color: #16A9FA;
+    -fx-border-width: 0px 0px 0px 3px;
+}
