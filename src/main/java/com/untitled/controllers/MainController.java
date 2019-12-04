@@ -3,10 +3,16 @@ package main.java.com.untitled.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 public class MainController {
 
@@ -15,6 +21,9 @@ public class MainController {
 
     @FXML
     private URL location;
+    
+    @FXML
+    private BorderPane borderPane;
 
     @FXML
     private JFXButton navButton;
@@ -48,10 +57,9 @@ public class MainController {
 
     @FXML
     private JFXButton userSettingsButton;
-
+    
     @FXML
     void initialize() {
-        
         //if the nav button is clicked show the nav bar
         navButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) ->{
             
@@ -59,27 +67,41 @@ public class MainController {
             if(navBar.isVisible() == true){
                 navBar.setVisible(false);
                 navIcon.setStyle("-fx-fill: #000000;");
+                borderPane.setLeft(null);
                 
             }else if(navBar.isVisible() == false){
+                borderPane.setLeft(navBar);
                 navBar.setVisible(true);
                 navIcon.setStyle("-fx-fill: #5a7ca3;");
             }
             
         });//end navButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) ->{})
         
-        
+        //load the home view into the center of the border pane
         homeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) ->{
-            resetButtons();
-            homeButton.setStyle("-fx-background-color: #5a7ca3;");
+            try {
+                resetButtons();
+                homeButton.setStyle("-fx-background-color: #5a7ca3;");
+                
+                FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/main/resources/com/untitled/view/Home.fxml"));
+                
+                AnchorPane home = homeLoader.load(); //load the home fxml and set it to the anchor pane
+                HomeController homeController = homeLoader.getController(); //set the controller
+                
+                borderPane.setCenter(home); //set it to center
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         
+        //load the sales view into the center of the border pane
         salesButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) ->{
             resetButtons();
             salesButton.setStyle("-fx-background-color: #5a7ca3;");
         });
     }
     
-    //this resets the colors of the buttons when another button is pressed
+    //resets the colors of the buttons when another button is pressed
     private void resetButtons(){
         homeButton.setStyle("-fx-background-color: #2b3b4e;");
         salesButton.setStyle("-fx-background-color: #2b3b4e;");
