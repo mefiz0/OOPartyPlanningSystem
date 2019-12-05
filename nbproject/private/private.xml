@@ -4,9 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/sath/Desktop/VC/OOPartyPlanningSystem/src/main/resources/com/untitled/view/Home.fxml</file>
-            <file>file:/C:/Users/sath/Desktop/VC/OOPartyPlanningSystem/src/main/resources/com/untitled/style/MainStyle.css</file>
             <file>file:/C:/Users/sath/Desktop/VC/OOPartyPlanningSystem/src/main/java/com/untitled/controllers/HomeController.java</file>
+            <file>file:/C:/Users/sath/Desktop/VC/OOPartyPlanningSystem/src/main/resources/com/untitled/view/Parties.fxml</file>
             <file>file:/C:/Users/sath/Desktop/VC/OOPartyPlanningSystem/src/main/java/com/untitled/controllers/MainController.java</file>
+            <file>file:/C:/Users/sath/Desktop/VC/OOPartyPlanningSystem/src/main/java/com/untitled/controllers/PartiesController.java</file>
         </group>
     </open-files>
 </project-private>

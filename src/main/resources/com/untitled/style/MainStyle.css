@@ -1,12 +1,4 @@
 
-.nav-button-icon{
-    -fx-fill: #000000;
-}
-
-.nav-button-icon:hover{
-    -fx-fill:#5a7ca3;
-}
-
 .nav-button:hover{
     -fx-background-color: lightgray;
 }
@@ -15,20 +7,33 @@
     -fx-background-color:  #222f3e;
 }
 
-.sidebar-button{
+.buttons_main{
     -fx-background-color:  #2b3b4e;
     -fx-text-fill: #fff;
     
 }
 
-.sidebar-button:hover{
+.buttons_main:hover{
     -fx-background-color: transparent;
     -fx-background-radius: 0px;
     -fx-text-fill: #b8b1b1;
-    -fx-border-color: #16A9FA;
+    -fx-border-color: #4099ff;
     -fx-border-width: 0px 0px 0px 3px;
 }
 
 .main-background{
     -fx-background-color: #fff;
+}
+
+.buttons_other{
+    -fx-background-color:  #2b3b4e;
+    -fx-text-fill: #fff;
+}
+
+.buttons_other:hover{
+    -fx-background-color: #334354;
+    -fx-background-radius: 0px;
+    -fx-text-fill: #e5e5e5;
+    -fx-border-color: #4099ff;
+    -fx-border-width: 0px 0px 3px 0px;
 }

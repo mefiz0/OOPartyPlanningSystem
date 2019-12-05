@@ -36,7 +36,7 @@
          <children>
             <VBox prefHeight="464.0" prefWidth="188.0">
                <children>
-                  <JFXButton fx:id="homeButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Home" textFill="WHITE">
+                  <JFXButton fx:id="homeButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons-css" stylesheets="@../style/MainStyle.css" text="Home" textFill="WHITE">
                      <VBox.margin>
                         <Insets top="150.0" />
                      </VBox.margin>
@@ -44,7 +44,7 @@
                         <FontAwesomeIcon iconName="HOME" size="1.5em" styleClass="homeIcon" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="salesButton" alignment="BASELINE_LEFT" graphicTextGap="47.0" layoutX="10.0" layoutY="110.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" style="-fx-background-color: #2b3b4e;" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Sales" textFill="WHITE">
+                  <JFXButton fx:id="salesButton" alignment="BASELINE_LEFT" graphicTextGap="47.0" layoutX="10.0" layoutY="110.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" style="-fx-background-color: #2b3b4e;" styleClass="buttons-css" stylesheets="@../style/MainStyle.css" text="Sales" textFill="WHITE">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -52,7 +52,7 @@
                         <FontAwesomeIcon iconName="DOLLAR" size="1.5em" styleClass="salesIcon" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="tasksButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="10.0" layoutY="146.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Tasks" textFill="WHITE">
+                  <JFXButton fx:id="tasksButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="10.0" layoutY="146.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons-css" stylesheets="@../style/MainStyle.css" text="Tasks" textFill="WHITE">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -65,7 +65,7 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Label>
-                  <JFXButton fx:id="PartiesButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Parties" textFill="WHITE">
+                  <JFXButton fx:id="partiesButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons-css" stylesheets="@../style/MainStyle.css" text="Parties" textFill="WHITE">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -73,7 +73,7 @@
                         <FontAwesomeIcon iconName="GIFT" size="1.5em" styleClass="partiesIcon" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="venuesButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Venues" textFill="WHITE">
+                  <JFXButton fx:id="venuesButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons-css" stylesheets="@../style/MainStyle.css" text="Venues" textFill="WHITE">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -81,7 +81,7 @@
                         <FontAwesomeIcon iconName="BUILDING" size="1.5em" styleClass="venuesIcon" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="addonsButton" alignment="BASELINE_LEFT" graphicTextGap="15.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Addons &amp; Catering" textFill="WHITE">
+                  <JFXButton fx:id="addonsButton" alignment="BASELINE_LEFT" graphicTextGap="15.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons-css" stylesheets="@../style/MainStyle.css" text="Addons &amp; Catering" textFill="WHITE">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -90,7 +90,7 @@
                      </graphic>
 
                   </JFXButton>
-                  <JFXButton fx:id="customersButton" alignment="BASELINE_LEFT" graphicTextGap="30.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Customers" textFill="WHITE">
+                  <JFXButton fx:id="customersButton" alignment="BASELINE_LEFT" graphicTextGap="30.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons-css" stylesheets="@../style/MainStyle.css" text="Customers" textFill="WHITE">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -103,7 +103,7 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Label>
-                  <JFXButton fx:id="userSettingsButton" alignment="BASELINE_LEFT" graphicTextGap="45.0" prefHeight="30.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="sidebar-button" stylesheets="@../style/MainStyle.css" text="Users" textFill="WHITE">
+                  <JFXButton fx:id="userSettingsButton" alignment="BASELINE_LEFT" graphicTextGap="45.0" prefHeight="30.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons-css" stylesheets="@../style/MainStyle.css" text="Users" textFill="WHITE">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
