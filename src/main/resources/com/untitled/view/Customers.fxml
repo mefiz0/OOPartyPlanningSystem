@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -172,4 +173,7 @@
          </graphic>
       </JFXButton>
    </children>
+   <effect>
+      <DropShadow offsetX="-1.0" offsetY="-1.0" />
+   </effect>
 </AnchorPane>

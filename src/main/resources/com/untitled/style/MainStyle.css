@@ -3,6 +3,10 @@
     -fx-background-color: lightgray;
 }
 
+.topbar{
+    -fx-background-color: #fff;
+}
+
 .sidebar{
     -fx-background-color:  #222f3e;
 }

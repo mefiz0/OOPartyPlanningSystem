@@ -12,10 +12,7 @@
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.untitled.controllers.MainController">
    <top>
-      <HBox prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
-         <effect>
-            <DropShadow />
-         </effect>
+      <HBox fx:id="topBar" prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: #fff;" styleClass="topbar" stylesheets="@../style/MainStyle.css" BorderPane.alignment="CENTER">
          <children>
             <JFXButton fx:id="navButton" contentDisplay="CENTER" ellipsisString="" prefHeight="30.0" prefWidth="22.0" ripplerFill="WHITE" styleClass="nav-button" stylesheets="@../style/MainStyle.css" text=" ">
                <HBox.margin>
@@ -30,27 +27,32 @@
    </top>
    <left>
       <JFXDrawer fx:id="navBar" prefHeight="532.0" prefWidth="181.0" styleClass="sidebar" stylesheets="@../style/MainStyle.css" visible="false" BorderPane.alignment="CENTER">
-         <effect>
-            <DropShadow height="0.0" radius="4.75" />
-         </effect>
          <children>
             <VBox prefHeight="464.0" prefWidth="188.0">
                <children>
                   <JFXButton fx:id="homeButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons-css" stylesheets="@../style/MainStyle.css" text="Home" textFill="WHITE">
                      <VBox.margin>
-                        <Insets top="150.0" />
+                        <Insets top="110.0" />
                      </VBox.margin>
                      <graphic>
                         <FontAwesomeIcon iconName="HOME" size="1.5em" styleClass="homeIcon" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="salesButton" alignment="BASELINE_LEFT" graphicTextGap="47.0" layoutX="10.0" layoutY="110.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" style="-fx-background-color: #2b3b4e;" styleClass="buttons-css" stylesheets="@../style/MainStyle.css" text="Sales" textFill="WHITE">
+                  <JFXButton fx:id="salesButton" alignment="BASELINE_LEFT" graphicTextGap="47.0" layoutX="10.0" layoutY="110.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons-css" stylesheets="@../style/MainStyle.css" text="Sales" textFill="WHITE">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                      <graphic>
                         <FontAwesomeIcon iconName="DOLLAR" size="1.5em" styleClass="salesIcon" />
                      </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="salesHistoryButton" alignment="BASELINE_LEFT" graphicTextGap="30.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons-css" stylesheets="@../style/MainStyle.css" text="Sales History" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIcon iconName="HISTORY" size="1.5em" styleClass="salesIcon" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
                   </JFXButton>
                   <JFXButton fx:id="tasksButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="10.0" layoutY="146.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons-css" stylesheets="@../style/MainStyle.css" text="Tasks" textFill="WHITE">
                      <VBox.margin>
@@ -113,6 +115,9 @@
                   </JFXButton>
                </children>
             </VBox>
-         </children></JFXDrawer>
+         </children>
+         <effect>
+            <DropShadow offsetY="-1.0" />
+         </effect></JFXDrawer>
    </left>
 </BorderPane>

@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -166,10 +167,13 @@
             </Tab>
          </tabs></JFXTabPane>
       <TextField layoutX="433.0" layoutY="14.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="488.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
-      <JFXButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="462.0" layoutY="14.0" AnchorPane.topAnchor="4.0">
+      <JFXButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="452.0" layoutY="4.0" AnchorPane.topAnchor="4.0">
          <graphic>
             <FontAwesomeIcon iconName="SEARCH" />
          </graphic>
       </JFXButton>
    </children>
+   <effect>
+      <DropShadow offsetX="-1.0" offsetY="-1.0" />
+   </effect>
 </AnchorPane>
