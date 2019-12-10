@@ -87,16 +87,43 @@ public class UserSettingsController {
     private JFXButton searchAccessButton;
 
     @FXML
-    void initialize() throws SQLException {
-        usernameColumn.setCellValueFactory(cellData -> cellData.getValue().getUsername());
-        passwordColumn.setCellValueFactory(cellData -> cellData.getValue().getPassword());
-        roleColumn.setCellValueFactory(cellData -> cellData.getValue().getRole());
+    void initialize() {
+        updateTableview();
+        updateComboBox();
         
-        UserDAO test = new UserDAO();
+    }
+    
+    //update the table view
+    public void updateTableview() {
+        try {
+            //set the columns
+            usernameColumn.setCellValueFactory(cellData -> cellData.getValue().getUsername());
+            passwordColumn.setCellValueFactory(cellData -> cellData.getValue().getPassword());
+            roleColumn.setCellValueFactory(cellData -> cellData.getValue().getRole());
+            
+            //create a new database access object
+            UserDAO test = new UserDAO();
+            
+            //get the data from the database
+            ObservableList<UserDAO> userList = test.getAllDatabaseRecords();
+            
+            //add the items to the users table
+            usersTable.setItems(userList);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserSettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//end updateTableView
+    
+    //add to combos
+    public void updateComboBox() {
+        //create an observable list
+        ObservableList comboBoxData = FXCollections.observableArrayList(
+                "Administrator",
+                "Event Sales",
+                "Event Manager"
+        );
         
-        ObservableList<UserDAO> userList = test.getAllDatabaseRecords();
-        
-        usersTable.setItems(userList);
+        addRoleInput.setItems(comboBoxData);
     }
     
 }
