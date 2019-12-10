@@ -9,7 +9,7 @@ package main.java.com.untitled;
  *
  * @author sath
  */
-public class Users {
+public class User {
     
     private String username;
     private String password;

@@ -4,6 +4,7 @@ a data access object template
 package main.java.com.untitled.dao;
 
 import java.sql.SQLException;
+import javafx.collections.ObservableList;
 
 public interface DAO {
     public final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver"; //specifies the driver

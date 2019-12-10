@@ -20,8 +20,8 @@ public class DatabaseTables {
                                                       + "Role VARCHAR(15) NOT NULL, "
                                                       + "PRIMARY KEY (UserID))";
     //insert admin details into the users table
-    public static final String INSERT_ADMIN_TO_USERS_TABLE_SQL = "INSERT INTO users (Username, Password, role) VALUES( "
-                                                               + "'Admin','Welcome@123', 'Administrator)";
+    public static final String INSERT_ADMIN_TO_USERS_TABLE_SQL = "INSERT INTO users (Username, Password, Role) VALUES("
+                                                                     + "'admin','admin123','Administrator')";
     /*
     CREATE USERS ACCESS HISTORY
     
@@ -41,7 +41,7 @@ public class DatabaseTables {
     */
     public static final String CREATE_CUSTOMERS_TABLE_SQL = "CREATE TABLE customers ( "
                                                           + "CustomerID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                                                          + "ID INTEGER NOT NULL,"
+                                                          + "ID INTEGER NOT NULL UNIQUE,"
                                                           + "Name VARCHAR(60) NOT NULL,"
                                                           + "BankAccountNumber INTEGER NOT NULL,"
                                                           + "ContactNumber INTEGER,"
@@ -55,7 +55,7 @@ public class DatabaseTables {
     */
     public static final String CREATE_ADDONS_TABLE_SQL = "CREATE TABLE addons ( "
                                                        + "AddOnsID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                                                       + "Type VARCHAR(60) NOT NULL,"
+                                                       + "Type VARCHAR(60) NOT NULL UNIQUE,"
                                                        + "Price INTEGER NOT NULL,"
                                                        + "PRIMARY KEY (AddOnsID))";
     /*
@@ -63,9 +63,9 @@ public class DatabaseTables {
     
     this table stores caterer information
     */
-    public static final String CREATE_CATERING_TABLE_SQL = "CREATE TABLE caterers ( "
+    public static final String CREATE_CATERERS_TABLE_SQL = "CREATE TABLE caterers ( "
                                                          + "CatererID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                                                         + "Caterer VARCHAR(60) NOT NULL,"
+                                                         + "Caterer VARCHAR(60) NOT NULL UNIQUE,"
                                                          + "Price INTEGER NOT NULL,"
                                                          + "PRIMARY KEY (CatererID))";
     
@@ -76,7 +76,7 @@ public class DatabaseTables {
     */
     public static final String CREATE_VENUES_TABLE_SQL = "CREATE TABLE venues ( "
                                                        + "VenueID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                                                       + "Venue VARCHAR(60) NOT NULL,"
+                                                       + "Venue VARCHAR(60) NOT NULL UNIQUE,"
                                                        + "Road VARCHAR(60) NOT NULL,"
                                                        + "Building VARCHAR(60) NOT NULL,"
                                                        + "Capacity INT NOT NULL,"
@@ -104,15 +104,15 @@ public class DatabaseTables {
     Relevant information is taken from the other tables.
     Foregin Key is not used to prevent data loss in the even the referred row is deleted.
     */
-    public final String CREATE_SOLD_TABLE_SQL = "CREATE TABLE sold ( "
+    public static final String CREATE_SOLD_TABLE_SQL = "CREATE TABLE sold ( "
                                               + "SoldID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
                                               + "PartyType VARCHAR(60) NOT NULL,"
                                               + "Venue VARCHAR(60) NOT NULL,"
                                               + "Caterer VARCHAR(60) NOT NULL,"
-                                              + "AddOnOne VARCHAR (60) NOT NULL,"
-                                              + "AddOnTwo VARCHAR (60) NOT NULL,"
-                                              + "AddOnThree VARCHAR (60) NOT NULL,"
-                                              + "Total Price DECIMAL NOT NULL,"
+                                              + "AddOnOne VARCHAR(60) NOT NULL,"
+                                              + "AddOnTwo VARCHAR(60) NOT NULL,"
+                                              + "AddOnThree VARCHAR(60) NOT NULL,"
+                                              + "TotalPrice DECIMAL NOT NULL, "
                                               + "PRIMARY KEY (SoldID))";
     
     /*

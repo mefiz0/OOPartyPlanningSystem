@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import main.java.com.untitled.db.DatabaseConnection;
 
 public class Main extends Application{
     
@@ -17,6 +18,9 @@ public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+       
+       DatabaseConnection.initDB();
+       
        Parent root = FXMLLoader.load(getClass().getResource("/main/resources/com/untitled/view/Main.fxml"));
        Scene scene = new Scene(root);
        primaryStage.setScene(scene);

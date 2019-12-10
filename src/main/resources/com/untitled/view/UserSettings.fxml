@@ -25,10 +25,11 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="partiesTable" layoutY="34.0" prefHeight="50.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="279.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                        <TableView fx:id="usersTable" layoutY="34.0" prefHeight="50.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="279.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn fx:id="usernameColumn" prefWidth="75.0" text="Username" />
+                              <TableColumn fx:id="passwordColumn" prefWidth="75.0" text="Password" />
+                              <TableColumn fx:id="roleColumn" prefWidth="75.0" text="Role" />
                            </columns>
                         </TableView>
                         <JFXTabPane layoutY="163.0" prefHeight="280.0" prefWidth="600.0" stylesheets="@../style/TabPaneStyle.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -51,12 +52,12 @@
                                                 <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <JFXTextField labelFloat="true" promptText="User Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                <JFXPasswordField labelFloat="true" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <JFXComboBox prefHeight="25.0" prefWidth="575.0" promptText="Role" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                <JFXTextField fx:id="addUsernameInput" labelFloat="true" promptText="User Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                <JFXPasswordField fx:id="addPasswordInput" labelFloat="true" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <JFXComboBox fx:id="addRoleInput" prefHeight="25.0" prefWidth="575.0" promptText="Role" visibleRowCount="3" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                                              </children>
                                           </GridPane>
-                                          <JFXButton layoutY="196.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Add" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                          <JFXButton fx:id="addUserButton" layoutY="196.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Add" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
@@ -69,7 +70,7 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <JFXButton layoutY="168.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Modify" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                          <JFXButton fx:id="modifyUserButton" layoutY="168.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Modify" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
@@ -88,9 +89,9 @@
                                                 <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <JFXPasswordField labelFloat="true" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <JFXComboBox prefHeight="25.0" prefWidth="606.0" promptText="Role" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                <JFXComboBox prefHeight="25.0" prefWidth="575.0" promptText="User Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <JFXPasswordField fx:id="modifyPasswordInput" labelFloat="true" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <JFXComboBox fx:id="roleModifyComboBox" prefHeight="25.0" prefWidth="606.0" promptText="Role" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                <JFXComboBox fx:id="usernameModifyComboBox" prefHeight="25.0" prefWidth="575.0" promptText="User Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -101,20 +102,20 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="600.0">
                                        <children>
-                                          <JFXButton layoutX="8.0" layoutY="169.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Remove" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                          <JFXButton fx:id="removeUserButton" layoutX="8.0" layoutY="169.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Remove" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXComboBox layoutX="278.0" layoutY="71.0" prefHeight="25.0" prefWidth="88.0" promptText="User Name" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="234.0" AnchorPane.topAnchor="71.0" />
+                                          <JFXComboBox fx:id="userRemoveComboBox" layoutX="278.0" layoutY="71.0" prefHeight="25.0" prefWidth="88.0" promptText="User Name" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="234.0" AnchorPane.topAnchor="71.0" />
                                        </children>
                                     </AnchorPane>
                                  </content>
                               </Tab>
                            </tabs>
                         </JFXTabPane>
-                        <TextField layoutX="481.0" layoutY="5.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="481.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="5.0" />
-                        <JFXButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="445.0" layoutY="5.0" AnchorPane.topAnchor="5.0">
+                        <TextField fx:id="searchUserInput" layoutX="481.0" layoutY="5.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="481.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="5.0" />
+                        <JFXButton fx:id="searchUserButton" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="445.0" layoutY="5.0" AnchorPane.topAnchor="5.0">
                            <graphic>
                               <FontAwesomeIcon iconName="SEARCH" />
                            </graphic>
@@ -127,14 +128,14 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="partiesTable1" prefHeight="50.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                        <TableView fx:id="accessHistoryTable" prefHeight="50.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
                            <columns>
                               <TableColumn prefWidth="75.0" text="C1" />
                               <TableColumn prefWidth="75.0" text="C2" />
                            </columns>
                         </TableView>
-                        <TextField layoutX="478.0" layoutY="13.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="481.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="5.0" />
-                        <JFXButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="445.0" layoutY="5.0" AnchorPane.topAnchor="5.0">
+                        <TextField fx:id="searchAccessInput" layoutX="478.0" layoutY="13.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="481.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="5.0" />
+                        <JFXButton fx:id="searchAccessButton" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="445.0" layoutY="5.0" AnchorPane.topAnchor="5.0">
                            <graphic>
                               <FontAwesomeIcon iconName="SEARCH" />
                            </graphic>

@@ -9,7 +9,7 @@ package main.java.com.untitled;
  *
  * @author sath
  */
-public class Addons {
+public class Addon {
     
     private String addonType;
     private int addonPrice;

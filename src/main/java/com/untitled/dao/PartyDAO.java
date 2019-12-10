@@ -47,7 +47,7 @@ public class PartyDAO implements DAO{
         
        //prepare the sql statement
        PreparedStatement ps = connection.prepareStatement(insertIntoPartiesTable);
-       //insert into the database
+       //execute statement
        ps.execute();
        
        //close the statement and the connection
@@ -60,14 +60,42 @@ public class PartyDAO implements DAO{
         //create a connection object
         Connection connection = DriverManager.getConnection(JDBC_URL);
         
-        //first get the PartyID
+        //define the sql statement
+        String deleteFromPartiesTable = "DELETE FROM parties WHERE Type = '" + this.type + "'";
         
+        //prepare the statement
+        PreparedStatement ps = connection.prepareStatement(deleteFromPartiesTable);
+        //execute statement
+        ps.execute();
+        
+        //close the statement and the connection
+        ps.close();
+        connection.close();
         
     }
 
     @Override
-    public void updateTable() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateTable() throws SQLException {
+        //create a connection object
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+        
+        //define the sql statement
+        String updatePartiesTable = "UPDATE parties SET "
+                                  + "Price = " + this.price + ", "
+                                  + "TaskOne = '" + this.taskOne + ", "
+                                  + "TaskTwo = '" + this.taskTwo + ", "
+                                  + "TaskThree = '" + this.taskThree + ", "
+                                  + "TaskFour = '" + this.taskFour + " "
+                                  + "WHERE Type = '" + this.type + "'";
+        
+        //prepare the statement
+        PreparedStatement ps = connection.prepareStatement(updatePartiesTable);
+        //execute statement
+        ps.execute();
+        
+        //close the statement and the connection
+        ps.close();
+        connection.close();
     }
     
 }

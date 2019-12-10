@@ -9,7 +9,7 @@ package main.java.com.untitled;
  *
  * @author sath
  */
-public class Catering {
+public class Caterer {
     
     private String caterer;
     private int price;
