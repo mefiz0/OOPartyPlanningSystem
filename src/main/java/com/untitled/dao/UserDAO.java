@@ -8,6 +8,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -16,30 +18,32 @@ import main.java.com.untitled.User;
 
 public class UserDAO implements DAO{
     //variable declarations
+    private IntegerProperty userID; //this is only used to generate the tableviews
     private StringProperty username;
     private StringProperty password;
     private StringProperty role;
-
+    
+    //getters and setters
+    //userID
+    public IntegerProperty getUserID() {
+        return userID;
+    }
+    public void setUserID(int userID) {    
+        this.userID = new SimpleIntegerProperty(userID);
+    }
+    
+    //username
     public StringProperty getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = new SimpleStringProperty(username);
     }
-
-    public StringProperty getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = new SimpleStringProperty(password);
-    }
-
+    
+    //role
     public StringProperty getRole() {
         return role;
     }
-
     public void setRole(String role) {
         this.role = new SimpleStringProperty(role);
     }
@@ -66,9 +70,9 @@ public class UserDAO implements DAO{
         String insertIntoUsersTable = "INSERT INTO users "
                                     + "(Username, Password, Role) "
                                     + "VALUES "
-                                    + "('" + this.username.get() + "', "
-                                    + "'" + this.password.get() + "', "
-                                    + "'" + this.role.get() + "'";
+                                    + "('" + this.username.get().toString() + "', "
+                                    + "'" + this.password.get().toString() + "', "
+                                    + "'" + this.role.get().toString() + "')";
         
         //prepare the statement
         PreparedStatement ps = connection.prepareStatement(insertIntoUsersTable);
@@ -118,35 +122,64 @@ public class UserDAO implements DAO{
         connection.close();
     }
     
-    public ObservableList<UserDAO> getAllDatabaseRecords() throws SQLException{
+    //get the database records and store them in an observable list for tableview generation
+    public ObservableList<UserDAO> getUserRecords() throws SQLException{
+        //create a connection object
         Connection connection = DriverManager.getConnection(JDBC_URL);
         
+        //prepare the statment
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM users");
         
         ResultSet rs = ps.executeQuery(); //get the result set
         
-        ObservableList<UserDAO> userList = getUserObjects(rs);
+        ObservableList<UserDAO> userList = getUserObjects(rs);  //get the user objects
         
         return userList;
         
     }
     
-    //generate a observable list which is used to generate a table view
+    //generate a observable list which is used to generate a table view 
     private ObservableList<UserDAO> getUserObjects(ResultSet resultSet) throws SQLException{
         
         ObservableList<UserDAO> userList = FXCollections.observableArrayList(); //create an observable array list
         
         while(resultSet.next()){
             UserDAO user = new UserDAO();
+            user.setUserID(Integer.parseInt(resultSet.getString("UserID")));
             user.setUsername(resultSet.getString("Username"));
             System.out.println("Username = " + resultSet.getString("Username"));
-            user.setPassword(resultSet.getString("Password"));
             user.setRole(resultSet.getString("Role"));
                 
             userList.add(user);
         }
         
         return userList;
-    } 
+    }
+    
+    //get a list of all users
+    public ObservableList<String> getListOfAllUsers() throws SQLException {
+        //create the conncetion object
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+        
+        //prepare the statement
+        PreparedStatement ps = connection.prepareStatement("SELECT Username FROM users");
+        
+        //get the result set
+        ResultSet rs = ps.executeQuery();
+        
+        //add the results to an observable list
+        ObservableList<String> usernames = FXCollections.observableArrayList();
+        String username;
+        
+        while(rs.next()){
+            username = rs.getString("Username");
+            
+            if(username.equals("admin") == false){
+                usernames.add(username);
+            }
+        }
+        
+        return usernames;
+    }
     
 }

@@ -5,10 +5,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import main.java.com.untitled.User;
+import main.java.com.untitled.dao.UserAccessDAO;
 import main.java.com.untitled.dao.UserDAO;
 
 public class UserSettingsController {
@@ -31,12 +30,12 @@ public class UserSettingsController {
 
     @FXML
     private TableView usersTable;
-
+    
+    @FXML
+    private TableColumn<UserDAO, Integer> userIDColumn;
+    
     @FXML
     private TableColumn<UserDAO, String> usernameColumn;
-
-    @FXML
-    private TableColumn<UserDAO, String> passwordColumn;
 
     @FXML
     private TableColumn<UserDAO, String> roleColumn;
@@ -48,7 +47,7 @@ public class UserSettingsController {
     private JFXPasswordField addPasswordInput;
 
     @FXML
-    private JFXComboBox<?> addRoleInput;
+    private JFXComboBox<String> addRoleInput;
 
     @FXML
     private JFXButton addUserButton;
@@ -60,16 +59,16 @@ public class UserSettingsController {
     private JFXPasswordField modifyPasswordInput;
 
     @FXML
-    private JFXComboBox<?> roleModifyComboBox;
+    private JFXComboBox<String> roleModifyComboBox;
 
     @FXML
-    private JFXComboBox<?> usernameModifyComboBox;
+    private JFXComboBox<String> usernameModifyComboBox;
 
     @FXML
     private JFXButton removeUserButton;
 
     @FXML
-    private JFXComboBox<?> userRemoveComboBox;
+    private JFXComboBox<String> userRemoveComboBox;
 
     @FXML
     private TextField searchUserInput;
@@ -78,44 +77,100 @@ public class UserSettingsController {
     private JFXButton searchUserButton;
 
     @FXML
-    private TableView<?> accessHistoryTable;
+    private TableView accessHistoryTable;
+    
+    @FXML
+    private TableColumn<UserAccessDAO, Integer> userIDAccessColumn;
 
     @FXML
-    private TextField searchAccessInput;
+    private TableColumn<UserAccessDAO, String> usernameAccessColumn;
 
     @FXML
-    private JFXButton searchAccessButton;
+    private TableColumn<UserAccessDAO, String> userRoleAccessColumn;
 
+    @FXML
+    private TableColumn<UserAccessDAO, Timestamp> userAccessTimeColumn;
+
+    @FXML
+    private TableColumn<UserAccessDAO, Timestamp> userLoggedOutTimeColumn;
+    
+    //list to hold the user information
+    private ObservableList<UserDAO> userList = FXCollections.observableArrayList();
+    
     @FXML
     void initialize() {
-        updateTableview();
-        updateComboBox();
+        //initialize all the tables and the combo boxes
+        updateUserTableView();
+        updateRoleComboBoxes();
+        updateUsernameComboBoxes();
+        updateAccessTableView();
+        
+        //when the addUserButton is pressed
+        addUserButton.setOnAction((event) -> {
+            addUserToDatabase(); //add a user to the database
+        });//end addUserButton.setOnAction((event) -> {})
+        
+        //when the modifyUserButton is pressed
+        modifyUserButton.setOnAction((event) -> {
+            modifyUserInDatabase(); //modify a user in the database
+        }); //end modifyUserButton.setOnAction((event) -> {})
+        
+        //when the removeUserButton is pressed
+        removeUserButton.setOnAction((event) -> {
+            removeUserInDatabase(); //remove a user from the database
+        }); //end removeUserButton.setOnAction((event) -> {})
+        
         
     }
     
-    //update the table view
-    public void updateTableview() {
+    //update the users table view
+    public void updateUserTableView() {
         try {
             //set the columns
+            userIDColumn.setCellValueFactory(cellData -> cellData.getValue().getUserID().asObject());
             usernameColumn.setCellValueFactory(cellData -> cellData.getValue().getUsername());
-            passwordColumn.setCellValueFactory(cellData -> cellData.getValue().getPassword());
             roleColumn.setCellValueFactory(cellData -> cellData.getValue().getRole());
             
             //create a new database access object
-            UserDAO test = new UserDAO();
+            UserDAO users = new UserDAO();
             
             //get the data from the database
-            ObservableList<UserDAO> userList = test.getAllDatabaseRecords();
+            userList = users.getUserRecords();
             
             //add the items to the users table
             usersTable.setItems(userList);
         } catch (SQLException ex) {
             Logger.getLogger(UserSettingsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//end updateTableView
+    }//end updateTableView(){}
     
-    //add to combos
-    public void updateComboBox() {
+     //update the access table view
+    public void updateAccessTableView() {
+        try {
+            ObservableList<UserAccessDAO> accessList = FXCollections.observableArrayList();
+            
+            //set the columns
+            userIDAccessColumn.setCellValueFactory(cellValue -> cellValue.getValue().getIDOfUser().asObject());
+            usernameAccessColumn.setCellValueFactory(cellData -> cellData.getValue().getUsername());
+            userRoleAccessColumn.setCellValueFactory(cellData -> cellData.getValue().getRole());
+            userAccessTimeColumn.setCellValueFactory(cellData -> cellData.getValue().getAccessTime());
+            userLoggedOutTimeColumn.setCellValueFactory(cellData -> cellData.getValue().getLoggedOutTime());
+            
+            //create a new database access object
+            UserAccessDAO usersAccess = new UserAccessDAO();
+            
+            //get the data from the database
+            accessList = usersAccess.getAccessRecords();
+            
+            //add the items to the users table
+            accessHistoryTable.setItems(accessList);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserSettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//end updateTableView(){}
+    
+    //add roles to role comboboxes
+    public void updateRoleComboBoxes() {
         //create an observable list
         ObservableList comboBoxData = FXCollections.observableArrayList(
                 "Administrator",
@@ -124,6 +179,88 @@ public class UserSettingsController {
         );
         
         addRoleInput.setItems(comboBoxData);
-    }
+        roleModifyComboBox.setItems(comboBoxData);
+    }// end updateRoleComboBox(){}
+    
+    //add usernames to the usernames combo boxes
+    public void updateUsernameComboBoxes() {
+        //update usernameModifyComboBox and userRemoveComboBox
+        UserDAO userDAO = new UserDAO();
+        try {
+            ObservableList usernames  = userDAO.getListOfAllUsers();
+            usernameModifyComboBox.setItems(usernames);
+            userRemoveComboBox.setItems(usernames);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserSettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//end uppdateUsernameComboBoxes(){}
+    
+    //add a new user to the database
+    public void addUserToDatabase(){
+        //get the input
+        String username = addUsernameInput.getText();
+        String password = addPasswordInput.getText();
+        String role = addRoleInput.getValue();
+            
+        //create the user object
+        User addUser = new User(username, password, role);
+            
+        //pass the user object to user data access object
+        UserDAO userDAO = new UserDAO(addUser);
+            
+        try {
+            //add the new user to the table
+            userDAO.insertIntoTable();
+        } catch (SQLException ex) {
+             Logger.getLogger(UserSettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        //update the table view and the username combo boxes
+        updateUserTableView();
+        updateUsernameComboBoxes();
+            
+        //reset the input fields
+        addUsernameInput.setText("");
+        addPasswordInput.setText("");
+    }//end addUserToDatabase(){}
+    
+    //modify a user in the database
+    public void modifyUserInDatabase(){
+        //get the input
+        String username = usernameModifyComboBox.getValue();
+        String newPassword = modifyPasswordInput.getText();
+        String newRole = roleModifyComboBox.getValue();
+        
+        //create a new user object
+        User modifyUser =  new User(username, newPassword, newRole);
+        
+        //create a new data access object and update the database
+        UserDAO modifyUserDAO = new UserDAO(modifyUser);
+        
+        try {
+            modifyUserDAO.updateTable();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserSettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//end modifyUserInDatabase() {}
+    
+    //remove a user in the database
+    public void removeUserInDatabase(){
+        //create the user object
+        User removeUser = new User(userRemoveComboBox.getValue());
+        
+        //pass the user object to the user data access object and update the database
+        UserDAO removeUserDAO = new UserDAO(removeUser);
+        try {
+            removeUserDAO.deleteFromTable();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserSettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //update the tableview and the username comboboxes
+        updateUserTableView();
+        updateUsernameComboBoxes();
+        
+    }//end removeUserInDatabase(){}
     
 }

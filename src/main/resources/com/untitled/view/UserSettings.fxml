@@ -5,11 +5,9 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -25,11 +23,11 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="usersTable" layoutY="34.0" prefHeight="50.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="279.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                        <TableView fx:id="usersTable" layoutY="-1.0" prefHeight="85.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="279.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
                            <columns>
-                              <TableColumn fx:id="usernameColumn" prefWidth="75.0" text="Username" />
-                              <TableColumn fx:id="passwordColumn" prefWidth="75.0" text="Password" />
-                              <TableColumn fx:id="roleColumn" prefWidth="75.0" text="Role" />
+                              <TableColumn fx:id="userIDColumn" minWidth="150.0" prefWidth="450.0" resizable="false" text="User ID" />
+                              <TableColumn fx:id="usernameColumn" minWidth="0.0" prefWidth="450.0" resizable="false" text="Username" />
+                              <TableColumn fx:id="roleColumn" prefWidth="450.0" resizable="false" text="Role" />
                            </columns>
                         </TableView>
                         <JFXTabPane layoutY="163.0" prefHeight="280.0" prefWidth="600.0" stylesheets="@../style/TabPaneStyle.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -114,12 +112,6 @@
                               </Tab>
                            </tabs>
                         </JFXTabPane>
-                        <TextField fx:id="searchUserInput" layoutX="481.0" layoutY="5.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="481.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="5.0" />
-                        <JFXButton fx:id="searchUserButton" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="445.0" layoutY="5.0" AnchorPane.topAnchor="5.0">
-                           <graphic>
-                              <FontAwesomeIcon iconName="SEARCH" />
-                           </graphic>
-                        </JFXButton>
                      </children>
                   </AnchorPane>
               </content>
@@ -128,18 +120,15 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="accessHistoryTable" prefHeight="50.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                        <TableView fx:id="accessHistoryTable" layoutY="-1.0" prefHeight="364.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn fx:id="userIDAccessColumn" prefWidth="270.0" resizable="false" text="User ID" />
+                              <TableColumn fx:id="usernameAccessColumn" prefWidth="270.0" resizable="false" text="Username" />
+                              <TableColumn fx:id="userRoleAccessColumn" prefWidth="270.0" resizable="false" text="Role" />
+                              <TableColumn fx:id="userAccessTimeColumn" prefWidth="270.0" resizable="false" text="Accessed Time" />
+                              <TableColumn fx:id="userLoggedOutTimeColumn" prefWidth="270.0" resizable="false" text="Logged Out Time" />
                            </columns>
                         </TableView>
-                        <TextField fx:id="searchAccessInput" layoutX="478.0" layoutY="13.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="481.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="5.0" />
-                        <JFXButton fx:id="searchAccessButton" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="445.0" layoutY="5.0" AnchorPane.topAnchor="5.0">
-                           <graphic>
-                              <FontAwesomeIcon iconName="SEARCH" />
-                           </graphic>
-                        </JFXButton>
                      </children>
                   </AnchorPane>
               </content>

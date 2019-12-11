@@ -41,4 +41,26 @@ public class User {
     }
     
     //end getters and setters
+    
+    //fully parametarized constructor
+    public User(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+    
+    //if only the username is passed
+    public User(String username){
+        this.username = username;
+        //set the others to null
+        this.password = null;
+        this.role = null;
+    }
+    
+    //empty constructor
+    public User(){
+        //empty
+    }
+    
+    
 }

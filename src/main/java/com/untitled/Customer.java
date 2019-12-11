@@ -60,4 +60,20 @@ public class Customer {
     
     //end getters and setters
     
+    //constructors
+    //fully parametraized
+    public Customer(String idNum, String name, int bankAccountNum, int contactNum, String emailAddress) {
+        this.idNum = idNum;
+        this.name = name;
+        this.bankAccountNum = bankAccountNum;
+        this.contactNum = contactNum;
+        this.emailAddress = emailAddress;
+    }
+    
+    //empty
+    public Customer(){
+        //empty
+    }
+    
+    
 }

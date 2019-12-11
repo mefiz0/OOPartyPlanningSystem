@@ -4,12 +4,9 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -19,10 +16,13 @@
 
 <AnchorPane id="AnchorPane" fx:id="customersPane" prefHeight="400.0" prefWidth="600.0" styleClass="main-background" stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.untitled.controllers.CustomersController">
    <children>
-      <TableView fx:id="partiesTable" layoutY="-37.0" prefHeight="196.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
+      <TableView fx:id="customersTable" layoutY="-2.0" prefHeight="122.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="customerIDColumn" prefWidth="270.0" text="ID" />
+          <TableColumn fx:id="customerNameColumn" prefWidth="270.0" text="Name" />
+            <TableColumn fx:id="customerBankColumn" prefWidth="270.0" text="Bank Account Number" />
+            <TableColumn fx:id="customerContactNumColumn" prefWidth="270.0" text="Contact Number" />
+            <TableColumn fx:id="customerEmailIDColumn" prefWidth="270.0" text="Email ID" />
         </columns>
       </TableView>
       <JFXTabPane layoutX="14.0" layoutY="272.0" prefHeight="280.0" prefWidth="600.0" stylesheets="@../style/TabPaneStyle.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -31,13 +31,12 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane layoutX="-9.0" prefHeight="135.0" prefWidth="548.0" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="-9.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="0.0">
+                        <GridPane layoutX="29.0" prefHeight="135.0" prefWidth="542.0" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="0.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="150.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="150.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
                           </columnConstraints>
                           <rowConstraints>
@@ -47,39 +46,14 @@
                               <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="ID:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Contact Number:" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <JFXTextField GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                              <JFXTextField GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Name:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Email:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Bank Account:" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <JFXTextField GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                              <JFXTextField GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                              <JFXTextField GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                              <JFXTextField fx:id="addCustomerID" labelFloat="true" promptText="ID" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                              <JFXTextField fx:id="addCustomerContactNum" labelFloat="true" promptText="Contact Number" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                              <JFXTextField fx:id="addCustomerBankNum" labelFloat="true" promptText="Bank Account Number" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                              <JFXTextField fx:id="addCustomerName" labelFloat="true" promptText="Name" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                              <JFXTextField fx:id="addCustomerEmail" labelFloat="true" promptText="Email" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                            </children>
                         </GridPane>
-                        <JFXButton layoutY="196.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Add" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <JFXButton fx:id="addCustomerButton" layoutY="196.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Add" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -91,13 +65,17 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane prefHeight="135.0" prefWidth="548.0" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="-9.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="0.0">
+                        <JFXButton fx:id="modifyCustomerButton" layoutY="168.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Modify" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <GridPane prefHeight="135.0" prefWidth="542.0" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="0.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="150.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="150.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
                            </columnConstraints>
                            <rowConstraints>
@@ -107,43 +85,13 @@
                               <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="ID:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Contact Number:" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <JFXTextField GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Name:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Email:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Bank Account:" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <JFXTextField GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                              <JFXTextField GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                              <JFXTextField GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                              <JFXComboBox prefWidth="602.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <JFXTextField fx:id="modifyCustomerContactNum" labelFloat="true" promptText="Contact Number" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                              <JFXTextField fx:id="modifyCustomerBankAccount" labelFloat="true" promptText="Bank Account Number" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                              <JFXTextField fx:id="modifyCustomerName" labelFloat="true" promptText="Name" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                              <JFXTextField fx:id="modifyCustomerEmail" labelFloat="true" promptText="Email" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                              <JFXComboBox fx:id="modifyCustomerIDSelect" labelFloat="true" prefHeight="25.0" prefWidth="948.0" promptText="ID" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
-                        <JFXButton layoutY="168.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Modify" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </JFXButton>
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -151,27 +99,16 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="600.0">
                      <children>
-                        <JFXButton layoutX="8.0" layoutY="169.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Remove" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <JFXButton fx:id="removeCustomer" layoutX="8.0" layoutY="169.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Remove" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </JFXButton>
-                        <JFXComboBox layoutX="278.0" layoutY="71.0" prefHeight="25.0" prefWidth="88.0" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="234.0" AnchorPane.topAnchor="71.0" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="234.0" layoutY="73.0" text="ID:" AnchorPane.leftAnchor="234.0" AnchorPane.topAnchor="73.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
+                        <JFXComboBox fx:id="removeCustomerIDSelect" labelFloat="true" layoutX="278.0" layoutY="71.0" prefHeight="25.0" prefWidth="88.0" promptText="ID" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="234.0" AnchorPane.topAnchor="71.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
          </tabs></JFXTabPane>
-      <TextField layoutX="433.0" layoutY="14.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="488.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
-      <JFXButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="462.0" layoutY="14.0" AnchorPane.topAnchor="4.0">
-         <graphic>
-            <FontAwesomeIcon iconName="SEARCH" />
-         </graphic>
-      </JFXButton>
    </children>
    <effect>
       <DropShadow offsetX="-1.0" offsetY="-1.0" />
