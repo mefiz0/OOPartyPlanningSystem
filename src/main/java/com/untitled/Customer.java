@@ -70,6 +70,15 @@ public class Customer {
         this.emailAddress = emailAddress;
     }
     
+    //only id
+    public Customer(String idNum){
+        this.idNum = idNum;
+        this.name = null;
+        this.bankAccountNum = 0;
+        this.contactNum = 0;
+        this.emailAddress = null;
+    }
+    
     //empty
     public Customer(){
         //empty

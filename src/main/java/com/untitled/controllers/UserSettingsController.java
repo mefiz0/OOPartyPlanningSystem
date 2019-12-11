@@ -71,12 +71,6 @@ public class UserSettingsController {
     private JFXComboBox<String> userRemoveComboBox;
 
     @FXML
-    private TextField searchUserInput;
-
-    @FXML
-    private JFXButton searchUserButton;
-
-    @FXML
     private TableView accessHistoryTable;
     
     @FXML
