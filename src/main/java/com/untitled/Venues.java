@@ -60,4 +60,24 @@ public class Venues {
     
     //end setters and getters
     
+    //constructor
+    public Venues(String venueName, String road, String Building, int capacity, int price) {
+        this.venueName = venueName;
+        this.road = road;
+        this.Building = Building;
+        this.capacity = capacity;
+        this.price = price;
+    }
+
+    public Venues(String venueName) {
+        this.venueName = venueName;
+        this.road = null;
+        this.Building = null;
+        this.capacity = 0;
+        this.price = 0;
+    }
+    
+    public Venues(){
+        //empty
+    }
 }
