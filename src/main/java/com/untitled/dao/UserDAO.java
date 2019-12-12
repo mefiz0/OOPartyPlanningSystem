@@ -70,9 +70,9 @@ public class UserDAO implements DAO{
         String insertIntoUsersTable = "INSERT INTO users "
                                     + "(Username, Password, Role) "
                                     + "VALUES "
-                                    + "('" + this.username.get().toString() + "', "
-                                    + "'" + this.password.get().toString() + "', "
-                                    + "'" + this.role.get().toString() + "')";
+                                    + "('" + this.username.get() + "', "
+                                    + "'" + this.password.get() + "', "
+                                    + "'" + this.role.get() + "')";
         
         //prepare the statement
         PreparedStatement ps = connection.prepareStatement(insertIntoUsersTable);
@@ -136,7 +136,7 @@ public class UserDAO implements DAO{
         
         return userList;
         
-    }
+    }//end public ObservableList<UserDAO> getUserRecords()
     
     //generate a observable list which is used to generate a table view 
     private ObservableList<UserDAO> getUserObjects(ResultSet resultSet) throws SQLException{
@@ -154,7 +154,7 @@ public class UserDAO implements DAO{
         }
         
         return userList;
-    }
+    } //ObservableList<UserDAO> getUserObjects(ResultSet resultSet)
     
     //get a list of all users
     public ObservableList<String> getListOfAllUsers() throws SQLException {
@@ -172,6 +172,7 @@ public class UserDAO implements DAO{
         String username;
         
         while(rs.next()){
+            //skip the admin as to not let the user modify it
             username = rs.getString("Username");
             
             if(username.equals("admin") == false){
@@ -180,6 +181,6 @@ public class UserDAO implements DAO{
         }
         
         return usernames;
-    }
+    }//end public ObservableList<String> getListOfAllUsers()
     
 }

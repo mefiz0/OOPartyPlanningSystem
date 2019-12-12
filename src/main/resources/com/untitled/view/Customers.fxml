@@ -99,7 +99,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="600.0">
                      <children>
-                        <JFXButton fx:id="removeCustomer" layoutX="8.0" layoutY="169.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Remove" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <JFXButton fx:id="removeCustomerButton" layoutX="8.0" layoutY="169.0" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Remove" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

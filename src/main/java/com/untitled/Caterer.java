@@ -32,4 +32,21 @@ public class Caterer {
     }
     
     //end getters and setters
+    
+    //constructors
+    
+    public Caterer(String caterer, int price) {
+        this.caterer = caterer;
+        this.price = price;
+    }
+
+    public Caterer(String caterer) {
+        this.caterer = caterer;
+    }
+
+    public Caterer() {
+        //empty
+    }
+    
+    
 }

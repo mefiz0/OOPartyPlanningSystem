@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.property.LongProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -42,7 +43,7 @@ public class CustomersController {
     private TableColumn<CustomerDAO, String> customerNameColumn;
 
     @FXML
-    private TableColumn<CustomerDAO, Integer> customerBankColumn;
+    private TableColumn<CustomerDAO, Long> customerBankColumn;
 
     @FXML
     private TableColumn<CustomerDAO, Integer> customerContactNumColumn;
@@ -87,7 +88,7 @@ public class CustomersController {
     private JFXComboBox<String> modifyCustomerIDSelect;
 
     @FXML
-    private JFXButton removeCustomer;
+    private JFXButton removeCustomerButton;
 
     @FXML
     private JFXComboBox<String> removeCustomerIDSelect;
@@ -104,7 +105,7 @@ public class CustomersController {
         addCustomerContactNum.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.matches("\\d{0,7}?")) {
+                if(!newValue.matches("\\d{0,7}?") && !newValue.equalsIgnoreCase("")) {
                     Platform.runLater(() -> {
                         addCustomerContactNum.setText("");
                     });
@@ -116,7 +117,7 @@ public class CustomersController {
         modifyCustomerContactNum.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.matches("\\d{0,7}?")) {
+                if(!newValue.matches("\\d{0,7}?") && !newValue.equalsIgnoreCase("")) {
                     Platform.runLater(() -> {
                         modifyCustomerContactNum.setText("");
                     });
@@ -128,7 +129,7 @@ public class CustomersController {
         addCustomerBankNum.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.matches("\\d{0,13}?")) {
+                if(!newValue.matches("\\d{0,13}?") && !newValue.equalsIgnoreCase("")) {
                     Platform.runLater(() -> {
                         addCustomerBankNum.setText("");
                     });
@@ -140,7 +141,7 @@ public class CustomersController {
         modifyCustomerBankAccount.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.matches("\\d{0,13}?")) {
+                if(!newValue.matches("\\d{0,13}?") && !newValue.equalsIgnoreCase("")) {
                     Platform.runLater(() -> {
                         modifyCustomerBankAccount.setText("");
                     });
@@ -172,7 +173,25 @@ public class CustomersController {
                 Logger.getLogger(CustomersController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }); //end modifyCustomerIDSelect.getSelectionModel().selectedItemProperty().addListener
-    }
+        
+        /*
+        Button presses
+        */
+        //when the add customer button is pressed
+        addCustomerButton.setOnAction((event) -> {
+            addCustomerToDatabase(); //add the customer to the database
+        });//end addCustomerButton.setOnAction
+        
+        //when the modify customer button is pressed
+        modifyCustomerButton.setOnAction((event) -> {
+            modifyCustomerInDatabase(); //modify the customer
+        });//end modifyCustomerButon.setOnAction
+        
+        //when the remove user button is pressed
+        removeCustomerButton.setOnAction((event) -> {
+            deleteCustomerInDatabase(); //remove the customer
+        });//end removeCustomerButton.setOnAction
+    }//end void initialize()
     
     //update the customers table
     public void updateTableView(){
@@ -212,15 +231,21 @@ public class CustomersController {
             Logger.getLogger(CustomersController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//end updateIDComboBoxes(){}
-    
+        
     //add the new customer to the database
     public void addCustomerToDatabase(){
         //get the data
         String customerID  = addCustomerID.getText();
         String customerName = addCustomerName.getText();
-        int customerBankNum = Integer.parseInt(addCustomerBankNum.getText());
+        long customerBankNum = Long.parseLong(addCustomerBankNum.getText());
         int customerContactNumber = Integer.parseInt(addCustomerContactNum.getText());
         String customerEmail = addCustomerEmail.getText();
+        
+        System.out.println(customerID);
+        System.out.println(customerName);
+        System.out.println(customerBankNum);
+        System.out.println(customerContactNumber);
+        System.out.println(customerEmail);
         
         //insert to a customer object
         Customer customer = new Customer(customerID, customerName, customerBankNum,
@@ -251,7 +276,7 @@ public class CustomersController {
         //get the data
         String customerID  = modifyCustomerIDSelect.getValue();
         String customerName = modifyCustomerName.getText();
-        int customerBankNum = Integer.parseInt(modifyCustomerBankAccount.getText());
+        long customerBankNum = Long.parseLong(modifyCustomerBankAccount.getText());
         int customerContactNumber = Integer.parseInt(modifyCustomerContactNum.getText());
         String customerEmail = modifyCustomerEmail.getText();
         
@@ -270,7 +295,6 @@ public class CustomersController {
         
         //update the table views
         updateTableView();
-        updateIDComboBoxes();
         
         //reset the text fields
         modifyCustomerName.setText("");
@@ -282,7 +306,7 @@ public class CustomersController {
     //delete a customer from the database
     public void deleteCustomerInDatabase(){
         //get the data
-        String customerID  = removeCustomer.getText();
+        String customerID  = removeCustomerIDSelect.getValue();
         
         //pass the data to a customer object
         Customer customer = new Customer(customerID);

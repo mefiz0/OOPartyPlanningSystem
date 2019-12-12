@@ -144,7 +144,7 @@ public class UserSettingsController {
             ObservableList<UserAccessDAO> accessList = FXCollections.observableArrayList();
             
             //set the columns
-            userIDAccessColumn.setCellValueFactory(cellValue -> cellValue.getValue().getIDOfUser().asObject());
+            userIDAccessColumn.setCellValueFactory(cellValue -> cellValue.getValue().getUserID().asObject());
             usernameAccessColumn.setCellValueFactory(cellData -> cellData.getValue().getUsername());
             userRoleAccessColumn.setCellValueFactory(cellData -> cellData.getValue().getRole());
             userAccessTimeColumn.setCellValueFactory(cellData -> cellData.getValue().getAccessTime());

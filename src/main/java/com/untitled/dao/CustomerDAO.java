@@ -10,7 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -21,7 +23,7 @@ public class CustomerDAO implements DAO{
     //variable declarations
     private StringProperty idNum;
     private StringProperty name;    
-    private IntegerProperty bankAccountNum;    
+    private LongProperty bankAccountNum;    
     private IntegerProperty contactNum;    
     private StringProperty emailAddress;
     
@@ -43,11 +45,11 @@ public class CustomerDAO implements DAO{
     }
 
     //bank account number
-    public IntegerProperty getBankAccountNum() {
+    public LongProperty getBankAccountNum() {
         return bankAccountNum;
     }
-    public void setBankAccountNum(int bankAccountNum) {
-        this.bankAccountNum = new SimpleIntegerProperty(bankAccountNum);
+    public void setBankAccountNum(long bankAccountNum) {
+        this.bankAccountNum = new SimpleLongProperty(bankAccountNum);
     }
     
     //contact number
@@ -73,7 +75,7 @@ public class CustomerDAO implements DAO{
     public CustomerDAO(Customer customer){
         this.idNum = new SimpleStringProperty(customer.getIdNum());
         this.name = new SimpleStringProperty(customer.getName());
-        this.bankAccountNum = new SimpleIntegerProperty(customer.getBankAccountNum());
+        this.bankAccountNum = new SimpleLongProperty(customer.getBankAccountNum());
         this.contactNum = new SimpleIntegerProperty(customer.getContactNum());
         this.emailAddress = new SimpleStringProperty(customer.getEmailAddress());
     }
@@ -91,11 +93,11 @@ public class CustomerDAO implements DAO{
         String insertIntoCustomersTable = "INSERT INTO customers "
                                         + "(ID, Name, BankAccountNumber, ContactNumber, Email) "
                                         + "VALUES "
-                                        + "('" + this.idNum + "', "
-                                        + "'" + this.name + "', "
-                                        + this.bankAccountNum + ", "
-                                        + this.contactNum + ", "
-                                        + "'" + this.emailAddress + "')";
+                                        + "('" + this.idNum.get() + "', "
+                                        + "'" + this.name.get() + "', "
+                                        + this.bankAccountNum.get() + ", "
+                                        + this.contactNum.get() + ", "
+                                        + "'" + this.emailAddress.get() + "')";
         //prepare the statement
         PreparedStatement ps = connection.prepareStatement(insertIntoCustomersTable);
         //execute statement
@@ -112,7 +114,7 @@ public class CustomerDAO implements DAO{
         Connection connection = DriverManager.getConnection(JDBC_URL);
         
         //define the sql statement
-        String deleteFromCustomersTable = "DELETE FROM customers WHERE ID = '" + this.idNum + "'";
+        String deleteFromCustomersTable = "DELETE FROM customers WHERE ID = '" + this.idNum.get() + "'";
         
         //prepare the statement
         PreparedStatement ps = connection.prepareStatement(deleteFromCustomersTable);
@@ -131,10 +133,10 @@ public class CustomerDAO implements DAO{
         
         //define the sql statement
         String updateCustomersTable = "UPDATE customers SET "
-                                    + "Name = '" + this.name + "', "
-                                    + "BankAccountNumber = " + this.bankAccountNum + ", "
-                                    + "ContactNumber = " + this.contactNum + ", "
-                                    + "Email = '" + this.emailAddress + "'";
+                                    + "Name = '" + this.name.get() + "', "
+                                    + "BankAccountNumber = " + this.bankAccountNum.get() + ", "
+                                    + "ContactNumber = " + this.contactNum.get() + ", "
+                                    + "Email = '" + this.emailAddress.get() + "'";
         //prepare the statement
         PreparedStatement ps = connection.prepareStatement(updateCustomersTable);
         //execute statement
@@ -168,7 +170,7 @@ public class CustomerDAO implements DAO{
             CustomerDAO customer = new CustomerDAO();
             customer.setIdNum(rs.getString("ID"));
             customer.setName(rs.getString("Name"));
-            customer.setBankAccountNum(rs.getInt("BankAccountNumber"));
+            customer.setBankAccountNum(rs.getLong("BankAccountNumber"));
             customer.setContactNum(rs.getInt("ContactNumber"));
             customer.setEmailAddress(rs.getString("Email"));
                 

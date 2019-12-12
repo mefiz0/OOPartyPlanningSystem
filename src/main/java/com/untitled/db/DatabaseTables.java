@@ -41,9 +41,9 @@ public class DatabaseTables {
     */
     public static final String CREATE_CUSTOMERS_TABLE_SQL = "CREATE TABLE customers ( "
                                                           + "CustomerID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                                                          + "ID INTEGER NOT NULL UNIQUE,"
+                                                          + "ID VARCHAR(60) NOT NULL UNIQUE,"
                                                           + "Name VARCHAR(60) NOT NULL,"
-                                                          + "BankAccountNumber INTEGER NOT NULL,"
+                                                          + "BankAccountNumber BIGINT NOT NULL,"
                                                           + "ContactNumber INTEGER,"
                                                           + "Email VARCHAR(60),"
                                                           + "PRIMARY KEY (CustomerID))";

@@ -13,7 +13,7 @@ public class Customer {
     
     private String idNum;
     private String name;    
-    private int bankAccountNum;    
+    private long bankAccountNum;    
     private int contactNum;    
     private String emailAddress;
     
@@ -35,10 +35,10 @@ public class Customer {
     }
 
     //bank account number
-    public int getBankAccountNum() {
+    public long getBankAccountNum() {
         return bankAccountNum;
     }
-    public void setBankAccountNum(int bankAccountNum) {
+    public void setBankAccountNum(long bankAccountNum) {
         this.bankAccountNum = bankAccountNum;
     }
     
@@ -62,7 +62,7 @@ public class Customer {
     
     //constructors
     //fully parametraized
-    public Customer(String idNum, String name, int bankAccountNum, int contactNum, String emailAddress) {
+    public Customer(String idNum, String name, long bankAccountNum, int contactNum, String emailAddress) {
         this.idNum = idNum;
         this.name = name;
         this.bankAccountNum = bankAccountNum;

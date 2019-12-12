@@ -33,4 +33,21 @@ public class Addon {
     
     //end setters and getters
     
+    //constructors
+    //fully parametrized constructor
+    public Addon(String type, int price){
+        this.addonType = type;
+        this.addonPrice = price;
+    }
+    
+    //only the type
+    public Addon(String type){
+        this.addonType = type;
+        this.addonPrice = 0;
+    }
+    
+    //empty constructor
+    public Addon(){
+        //empty
+    }
 }

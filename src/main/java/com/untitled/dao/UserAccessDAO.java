@@ -18,39 +18,39 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class UserAccessDAO implements DAO{
+public class UserAccessDAO extends UserDAO{
     
     //variable declarations
-    private IntegerProperty IdOfUser; //this is only used to generate the tableviews
-    private StringProperty username;
-    private StringProperty role;
+//    private IntegerProperty IdOfUser; //this is only used to generate the tableviews
+//    private StringProperty username;
+//    private StringProperty role;
     private ObjectProperty<Timestamp> accessTime;
     private ObjectProperty<Timestamp> loggedOutTime;
     
     //getters and setters
     //userID
-    public IntegerProperty getIDOfUser() {
-        return IdOfUser;
-    }
-    public void setUserID(int userID) {    
-        this.IdOfUser = new SimpleIntegerProperty(userID);
-    }
-    
-    //username
-    public StringProperty getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = new SimpleStringProperty(username);
-    }
-    
-    //role
-    public StringProperty getRole() {
-        return role;
-    }
-    public void setRole(String role) {
-        this.role = new SimpleStringProperty(role);
-    }
+//    public IntegerProperty getIDOfUser() {
+//        return IdOfUser;
+//    }
+//    public void setUserID(int userID) {    
+//        this.IdOfUser = new SimpleIntegerProperty(userID);
+//    }
+//    
+//    //username
+//    public StringProperty getUsername() {
+//        return username;
+//    }
+//    public void setUsername(String username) {
+//        this.username = new SimpleStringProperty(username);
+//    }
+//    
+//    //role
+//    public StringProperty getRole() {
+//        return role;
+//    }
+//    public void setRole(String role) {
+//        this.role = new SimpleStringProperty(role);
+//    }
     
     //access time
     public ObjectProperty<Timestamp> getAccessTime() {
@@ -81,7 +81,7 @@ public class UserAccessDAO implements DAO{
          //create a timestamp object
          Timestamp accessTime = new Timestamp(System.currentTimeMillis());
          //user id
-         int userID = Integer.parseInt(this.getIDOfUser().toString());
+         int userID = Integer.parseInt(this.getUserID().toString());
          
          //create a connection object
          Connection connection = DriverManager.getConnection(JDBC_URL);
@@ -113,7 +113,7 @@ public class UserAccessDAO implements DAO{
     @Override
     public void updateTable() throws SQLException{
         //get the userid
-        int userID = Integer.parseInt(this.getIDOfUser().toString());
+        int userID = Integer.parseInt(this.getUserID().toString());
         
         //get the current time
         Timestamp loggedOutTime = new Timestamp(System.currentTimeMillis());
