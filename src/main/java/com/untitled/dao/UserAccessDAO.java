@@ -9,49 +9,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class UserAccessDAO extends UserDAO{
     
     //variable declarations
-//    private IntegerProperty IdOfUser; //this is only used to generate the tableviews
-//    private StringProperty username;
-//    private StringProperty role;
     private ObjectProperty<Timestamp> accessTime;
     private ObjectProperty<Timestamp> loggedOutTime;
     
     //getters and setters
-    //userID
-//    public IntegerProperty getIDOfUser() {
-//        return IdOfUser;
-//    }
-//    public void setUserID(int userID) {    
-//        this.IdOfUser = new SimpleIntegerProperty(userID);
-//    }
-//    
-//    //username
-//    public StringProperty getUsername() {
-//        return username;
-//    }
-//    public void setUsername(String username) {
-//        this.username = new SimpleStringProperty(username);
-//    }
-//    
-//    //role
-//    public StringProperty getRole() {
-//        return role;
-//    }
-//    public void setRole(String role) {
-//        this.role = new SimpleStringProperty(role);
-//    }
-    
     //access time
     public ObjectProperty<Timestamp> getAccessTime() {
         return accessTime;
@@ -81,7 +50,7 @@ public class UserAccessDAO extends UserDAO{
          //create a timestamp object
          Timestamp accessTime = new Timestamp(System.currentTimeMillis());
          //user id
-         int userID = Integer.parseInt(this.getUserID().toString());
+         int userID = this.getUserID().get();
          
          //create a connection object
          Connection connection = DriverManager.getConnection(JDBC_URL);

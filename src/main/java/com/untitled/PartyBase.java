@@ -32,5 +32,19 @@ public class PartyBase {
     
     //end setters and getters
     
+    //constructors
+    public PartyBase(String type, int price) {
+        this.type = type;
+        this.price = price;
+    }
+
+    public PartyBase(String type) {
+        this.type = type;
+    }
+
+    public PartyBase() {
+        //empty
+    }
+    
     
 }

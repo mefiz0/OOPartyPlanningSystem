@@ -43,5 +43,23 @@ public class Party extends PartyBase{
     
     //end getters and setters
     
+    //constructors
+    public Party(String type, int price, String taskOne, String taskTwo, String taskThree, String taskFour) {
+        super(type, price);
+        this.taskOne = taskOne;
+        this.taskTwo = taskTwo;
+        this.taskThree = taskThree;
+        this.taskFour = taskFour;
+    }
+
+    public Party(String type) {
+        super(type);
+    }
+
+    public Party() {
+        //empty
+    }
+    
+    
     
 }
