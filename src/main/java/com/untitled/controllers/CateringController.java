@@ -17,9 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import main.java.com.untitled.Addon;
 import main.java.com.untitled.Caterer;
-import main.java.com.untitled.dao.AddonsDAO;
 import main.java.com.untitled.dao.CatererDAO;
 
 public class CateringController {
@@ -105,6 +103,23 @@ public class CateringController {
         /*
         End regex patterns
         */
+        
+        //add the data to the fields based on what is selected
+        modifyCatererSelect.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            //create a new addons data access object
+            CatererDAO catererDAO = new CatererDAO();
+            
+            //get the price from the database
+            String price = "0";
+            try {
+                price = Integer.toString(catererDAO.getPriceBasedOnCaterer(newValue));
+            } catch (SQLException ex) {
+                Logger.getLogger(AddonsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            //update the price
+            modifyCatererPrice.setText(price);
+        });
         
         //when the addCatererButton is pressed
         addCatererButton.setOnAction((event) -> {
@@ -210,6 +225,7 @@ public class CateringController {
         updateCaterersTable();
         
         //reset the input fields
+        modifyCatererSelect.getSelectionModel().clearSelection();
         modifyCatererPrice.setText("");
     }//end modifyCatererInDatabase()()
     
@@ -233,5 +249,8 @@ public class CateringController {
         //update the table and the combo boxes
         updateCaterersTable();
         updateCatererComboBoxes();
+        
+        //clear the selection
+        removeCatererSelect.getSelectionModel().clearSelection();
     }//end removeCatererInDatabase()
 }

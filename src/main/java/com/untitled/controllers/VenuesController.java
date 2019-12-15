@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -155,6 +156,25 @@ public class VenuesController {
         End regex
         */
         
+         modifyVenueSelect.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            //create a new Customer Data access object
+            VenuesDAO venuesDAO = new VenuesDAO();
+            
+            try {
+                //store the data in a hashmap
+                HashMap<String, String> data = venuesDAO.getVenueDataBasedOnVenue(newValue);
+                
+                //update the text fields
+                modifyRoad.setText(data.get("road"));
+                modifyBuilding.setText(data.get("building"));
+                modifyCapacity.setText(data.get("capacity"));
+                modifyPrice.setText(data.get("price"));
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(CustomersController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }); //end modifyCustomerIDSelect.getSelectionModel().selectedItemProperty().addListener
+        
         //when the addVenueButton is pressed
         addVenueButton.setOnAction((event) -> {
             addVenueToDatabase(); //add a new venue to the database
@@ -272,6 +292,7 @@ public class VenuesController {
         updateVenuesTable();
         
         //reset the text fields
+        modifyVenueSelect.getSelectionModel().clearSelection();
         modifyRoad.setText("");
         modifyBuilding.setText("");
         modifyCapacity.setText("");
@@ -298,5 +319,8 @@ public class VenuesController {
         //update the table and the combo boxes
         updateVenuesTable();
         updateVenuesComboBox();
+        
+        //clear the selection
+        removeVenueSelect.getSelectionModel().clearSelection();
     }//end deleteVenueFromDatabase()
 }

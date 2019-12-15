@@ -135,6 +135,10 @@ public class CatererDAO implements DAO{
         
         ObservableList<CatererDAO> caterersList = getCatererObjects(rs);  //get the user objects
         
+        //close the statement and the connection
+        ps.close();
+        connection.close();
+        
         return caterersList;
     }//end ObservableList<CatererDAO> getCaterersRecords()
     
@@ -175,6 +179,34 @@ public class CatererDAO implements DAO{
             caterersList.add(rs.getString("Caterer"));
         }
         
+        //close the statement and the connection
+        ps.close();
+        connection.close();
+        
         return caterersList;
     }//end getAllCaterers()
+    
+    //get the price of the current selected caterer
+    public int getPriceBasedOnCaterer(String caterer) throws SQLException{
+        //create the connection object
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+        
+        //prepare the statement
+        PreparedStatement ps = connection.prepareStatement("SELECT Price FROM caterers WHERE Caterer = '" + caterer + "'");
+        //get the result set
+        ResultSet rs = ps.executeQuery();
+        
+        //define the hashmap to store customer data
+        int price = 0;
+        
+        while(rs.next()){
+           price = rs.getInt("Price");
+        }
+        
+        //close the statement and the connection
+        ps.close();
+        connection.close();
+        
+        return price;
+    }
 }

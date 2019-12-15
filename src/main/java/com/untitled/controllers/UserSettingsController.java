@@ -236,6 +236,12 @@ public class UserSettingsController {
         } catch (SQLException ex) {
             Logger.getLogger(UserSettingsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        //update the table view
+        updateUserTableView();
+        
+        //clear the selection field
+        usernameModifyComboBox.getSelectionModel().clearSelection();
     }//end modifyUserInDatabase() {}
     
     //remove a user in the database
@@ -255,6 +261,8 @@ public class UserSettingsController {
         updateUserTableView();
         updateUsernameComboBoxes();
         
+        //clear the selection
+        userRemoveComboBox.getSelectionModel().clearSelection();
     }//end removeUserInDatabase(){}
     
 }

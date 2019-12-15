@@ -54,6 +54,10 @@ public class Party extends PartyBase{
 
     public Party(String type) {
         super(type);
+        this.taskOne = null;
+        this.taskTwo = null;
+        this.taskThree = null;
+        this.taskFour = null;
     }
 
     public Party() {

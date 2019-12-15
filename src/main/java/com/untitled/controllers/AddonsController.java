@@ -104,6 +104,23 @@ public class AddonsController {
         End regex patterns
         */
         
+        //add the data to the fields based on what is selected
+        modifyAddonSelect.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            //create a new addons data access object
+            AddonsDAO addonsDAO = new AddonsDAO();
+            
+            //get the price from the database
+            String price = "0";
+            try {
+                price = Integer.toString(addonsDAO.getPriceBasedOnAddon(newValue));
+            } catch (SQLException ex) {
+                Logger.getLogger(AddonsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            //update the price
+            modifyAddonPrice.setText(price);
+        });
+        
         //when the addNewAddonButton is pressed
         addNewAddOnButton.setOnAction((event) -> {
             addAddOnToDatabase(); //add a new Addon to the database
@@ -208,6 +225,7 @@ public class AddonsController {
         updateAddonsTable();
         
         //reset the input fields
+        modifyAddonSelect.getSelectionModel().clearSelection();
         modifyAddonPrice.setText("");
     }//end modifyAddonInDatabase()
     
@@ -231,5 +249,8 @@ public class AddonsController {
         //update the table and the combo boxes
         updateAddonsTable();
         updateTypeComboBoxes();
+        
+        //clear the selection
+        removeAddOnTypeSelect.getSelectionModel().clearSelection();
     }//end removeAddonInDatabase()
 }

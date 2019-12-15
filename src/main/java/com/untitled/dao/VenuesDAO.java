@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -170,6 +171,10 @@ public class VenuesDAO implements DAO{
         
         ObservableList<VenuesDAO> venuesList = getVenuesObjects(rs);  //get the user objects
         
+        //close the statement and the connection
+        ps.close();
+        connection.close();
+        
         return venuesList;
         
     }//end ObservableList<VenuesDAO> getVenuesRecords()
@@ -215,6 +220,58 @@ public class VenuesDAO implements DAO{
             venuesList.add(rs.getString("Venue"));
         }
         
+        //close the statement and the connection
+        ps.close();
+        connection.close();
+        
         return venuesList;
     }//end ObservableList<String> getListOfAllVenues()
+    
+    //get a hashmap of venue info based on the customerID selected
+    public HashMap<String, String> getVenueDataBasedOnVenue(String venue) throws SQLException{
+        //create the connection object
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+        
+        //prepare the statement
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM venues WHERE Venue = '" + venue + "'");
+        //get the result set
+        ResultSet rs = ps.executeQuery();
+        
+        //define the hashmap to store customer data
+        HashMap<String, String> venueData = new HashMap<>();
+        
+        //get everything as a string
+        while(rs.next()){
+           venueData.put("road", rs.getString("Road"));
+           venueData.put("building", rs.getString("Building"));
+           venueData.put("capacity", rs.getString("Capacity"));
+           venueData.put("price", rs.getString("Price"));
+        }
+        
+        //close the statement and the connection
+        ps.close();
+        connection.close();
+        
+        return venueData;
+    }
+    
+    //get the price of a selected venue
+    public int getPriceOfVenue(String venue) throws SQLException{
+        //create a new connection object
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+        
+        //prepare the statement
+        PreparedStatement ps = connection.prepareStatement("SELECT Price FROM venues WHERE Venue = '" + venue + "'");
+        //create the result set
+        ResultSet rs = ps.executeQuery();
+        
+        //get the results
+        int price = rs.getInt("Price");
+        
+        //close the statement and the connection
+        ps.close();
+        connection.close();
+        
+        return price;
+    }
 }

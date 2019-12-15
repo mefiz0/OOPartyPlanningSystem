@@ -134,6 +134,10 @@ public class AddonsDAO implements DAO{
         
         ObservableList<AddonsDAO> addonsList = getAddonsObjects(rs);  //get the user objects
         
+        //close the statement and the connection
+        ps.close();
+        connection.close();
+        
         return addonsList;
     }// public ObservableList<AddonsDAO> getAddonsRecords()
     
@@ -174,6 +178,32 @@ public class AddonsDAO implements DAO{
             typesList.add(rs.getString("Type"));
         }
         
+        //close the statement and the connection
+        ps.close();
+        connection.close();
+        
         return typesList;
     }//end getAllAddonsTypes
+    
+    //get the price of the current selected addon
+    public int getPriceBasedOnAddon(String addOn) throws SQLException{
+        //create the connection object
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+        
+        //prepare the statement
+        PreparedStatement ps = connection.prepareStatement("SELECT Price FROM addons WHERE Type = '" + addOn + "'");
+        //get the result set
+        ResultSet rs = ps.executeQuery();
+        
+        //define the hashmap to store customer data
+        int price = 0;
+        
+        price = rs.getInt("Price");
+        
+        //close the statement and the connection
+        ps.close();
+        connection.close();
+        
+        return price;
+    }
 }

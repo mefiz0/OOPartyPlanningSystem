@@ -3,9 +3,14 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,59 +18,118 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="441.0" prefWidth="600.0" styleClass="main-background" stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.untitled.controllers.SaleController">
-   <children>
-      <Separator layoutY="118.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Label layoutX="45.0" layoutY="137.0" text="Additional Information">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <GridPane layoutX="24.0" layoutY="15.0" prefHeight="30.0" prefWidth="553.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="70.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.33332824707031" minWidth="10.0" prefWidth="45.333343505859375" />
-          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <JFXComboBox labelFloat="true" prefHeight="25.0" prefWidth="500.0" promptText="Customer" GridPane.hgrow="ALWAYS" />
-            <JFXComboBox labelFloat="true" prefHeight="25.0" prefWidth="500.0" promptText="Party" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" />
-         </children>
-      </GridPane>
-      <Label layoutX="37.0" layoutY="347.0" text="Label">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <GridPane layoutX="35.0" layoutY="188.0" prefHeight="101.0" prefWidth="555.0" AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="188.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="70.66667175292969" minHeight="10.0" prefHeight="70.66667175292969" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="85.66667175292969" minHeight="10.0" prefHeight="55.33332824707031" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <JFXDatePicker prefHeight="25.0" prefWidth="300.0" promptText="Due Date" />
-            <JFXTimePicker prefWidth="300.0" GridPane.columnIndex="1" />
-            <JFXComboBox labelFloat="true" prefWidth="300.0" promptText="Venue" GridPane.columnIndex="2" />
-            <JFXComboBox prefWidth="300.0" promptText="Addon 1" GridPane.rowIndex="1" />
-            <JFXComboBox prefWidth="300.0" promptText="Addon 2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <JFXComboBox prefWidth="300.0" promptText="Addon 3" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-         </children>
-      </GridPane>
-      <JFXButton prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Sale!" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXButton>
-   </children>
+<AnchorPane id="AnchorPane" prefHeight="505.0" prefWidth="600.0" styleClass="main-background" stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.untitled.controllers.SaleController">
    <effect>
       <DropShadow offsetX="-1.0" offsetY="-1.0" />
    </effect>
+   <children>
+      <JFXTabPane stylesheets="@../style/TabPaneStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab text="Sale">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="600.0">
+                     <children>
+                        <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="118.0" />
+                        <Label layoutX="35.0" layoutY="168.0" text="Additional Information">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <GridPane prefHeight="30.0" prefWidth="553.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="40.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.33332824707031" minWidth="10.0" prefWidth="45.333343505859375" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <JFXComboBox fx:id="customerSaleSelect" labelFloat="true" prefHeight="25.0" prefWidth="500.0" promptText="Customer" GridPane.hgrow="ALWAYS" />
+                              <JFXComboBox fx:id="partySaleSelect" labelFloat="true" prefHeight="25.0" prefWidth="500.0" promptText="Party" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" />
+                           </children>
+                        </GridPane>
+                        <GridPane prefHeight="138.0" prefWidth="555.0" AnchorPane.bottomAnchor="142.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="188.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="70.66667175292969" minHeight="10.0" prefHeight="70.66667175292969" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="85.66667175292969" minHeight="10.0" prefHeight="55.33332824707031" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="85.66667175292969" minHeight="10.0" prefHeight="55.33332824707031" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <JFXDatePicker fx:id="addDueDate" defaultColor="#334354" editable="false" prefHeight="25.0" prefWidth="300.0" promptText="Due Date" />
+                              <JFXTimePicker fx:id="addDueTime" defaultColor="#334354" prefWidth="300.0" promptText="Due Time" GridPane.columnIndex="1" />
+                              <JFXComboBox fx:id="addVenueSelect" labelFloat="true" prefWidth="300.0" promptText="Venue" GridPane.columnIndex="2" />
+                              <JFXComboBox fx:id="addonOneSelect" labelFloat="true" prefWidth="300.0" promptText="Addon 1" GridPane.rowIndex="1" />
+                              <JFXComboBox fx:id="addonTwoSelect" labelFloat="true" prefWidth="300.0" promptText="Addon 2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <JFXComboBox fx:id="addonThreeSelect" labelFloat="true" prefWidth="300.0" promptText="Addon 3" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <JFXTextField fx:id="saleAmountPaid" labelFloat="true" prefWidth="300.0" promptText="Amount Paid" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <JFXComboBox fx:id="catererSelect" labelFloat="true" prefWidth="300.0" promptText="Caterer" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <JFXButton fx:id="saleButton" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Sale!" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <Label layoutX="25.0" layoutY="359.0" text="Sub Total:" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="361.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="25.0" layoutY="389.0" text="Total (incl. 6% GST):" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="391.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="subTotal" layoutX="98.0" layoutY="361.0" text="subTotal" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="361.0" />
+                        <Label fx:id="totalPrice" layoutX="165.0" layoutY="391.0" text="subTotal" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="391.0" />
+                        <Label fx:id="customerName" layoutX="25.0" layoutY="95.0" text="Label" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Payments">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="paymentsTable" prefHeight="163.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                        <JFXButton fx:id="makePaymentButton" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Make Payment" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <GridPane layoutX="31.0" prefHeight="66.0" prefWidth="540.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="29.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="150.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="150.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <JFXTextField fx:id="amountToBePaid" labelFloat="true" promptText="Amount To Be Paid" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                              <JFXComboBox fx:id="customerPaymentsSelect" labelFloat="true" prefHeight="25.0" prefWidth="945.0" promptText="Customer" />
+                              <JFXComboBox fx:id="partyPaymentSelect" labelFloat="true" prefHeight="25.0" prefWidth="945.0" promptText="Party" GridPane.columnIndex="2" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
 </AnchorPane>

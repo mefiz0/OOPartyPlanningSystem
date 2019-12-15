@@ -1,29 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="main-background" stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.untitled.controllers.SalesHistoryController">
-   <children>
-      <TableView fx:id="partiesTable" layoutX="10.0" layoutY="43.0" prefHeight="163.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
-         <columns>
-            <TableColumn prefWidth="75.0" text="C1" />
-            <TableColumn prefWidth="75.0" text="C2" />
-         </columns>
-      </TableView>
-      <TextField layoutX="433.0" layoutY="14.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.leftAnchor="488.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
-      <JFXButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="462.0" layoutY="14.0" AnchorPane.topAnchor="4.0">
-         <graphic>
-            <FontAwesomeIcon iconName="SEARCH" />
-         </graphic>
-      </JFXButton>
-   </children>
    <effect>
       <DropShadow offsetX="-1.0" offsetY="-1.0" />
    </effect>
+   <children>
+      <JFXTabPane stylesheets="@../style/TabPaneStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab text="Paid">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="partiesTable" prefHeight="363.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Unpaid">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="partiesTable1" prefHeight="363.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
 </AnchorPane>

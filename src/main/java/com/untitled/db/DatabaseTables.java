@@ -113,6 +113,7 @@ public class DatabaseTables {
                                               + "AddOnTwo VARCHAR(60) NOT NULL,"
                                               + "AddOnThree VARCHAR(60) NOT NULL,"
                                               + "TotalPrice DECIMAL NOT NULL, "
+                                              + "AmountPaid DECIMAL NULL,"
                                               + "PRIMARY KEY (SoldID))";
     
     /*
@@ -138,8 +139,6 @@ public class DatabaseTables {
     public static final String CREATE_PAYMENTS_TABLE_SQL = "CREATE TABLE payments ( "
                                                          + "PaymentID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
                                                          + "PurchaseID INTEGER NOT NULL,"
-                                                         + "DueDate DATE,"
-                                                         + "AmountPaid DECIMAL NOT NULL,"
-                                                         + "PRIMARY KEY (DueDate),"
+                                                         + "PRIMARY KEY (PaymentID),"
                                                          + "FOREIGN KEY (PurchaseID) REFERENCES purchases (PurchaseID))";
 }

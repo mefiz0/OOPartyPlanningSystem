@@ -40,6 +40,7 @@ public class PartyBase {
 
     public PartyBase(String type) {
         this.type = type;
+        this.price = 0;
     }
 
     public PartyBase() {

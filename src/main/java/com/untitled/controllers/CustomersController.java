@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.beans.property.LongProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -297,6 +296,7 @@ public class CustomersController {
         updateTableView();
         
         //reset the text fields
+        modifyCustomerIDSelect.getSelectionModel().clearSelection();
         modifyCustomerName.setText("");
         modifyCustomerEmail.setText("");
         modifyCustomerBankAccount.setText("");
@@ -323,6 +323,9 @@ public class CustomersController {
         //update the table views
         updateTableView();
         updateIDComboBoxes();
+        
+        //clear the combo box
+        removeCustomerIDSelect.getSelectionModel().clearSelection();
     }//end deleteCustomerInDatabase(){}
     
 }

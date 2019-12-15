@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -92,10 +93,10 @@ public class PartyDAO extends PartyBaseDAO{
                                          + "VALUES "
                                          + "('" + this.getType().get() + "', "
                                          + this.getPrice().get() +", "
-                                         + "'" + this.taskOne.get() + ", "
-                                         + "'" + this.taskTwo.get() + ", "
-                                         + "'" + this.taskThree.get() + ", "
-                                         + "'" + this.taskFour.get() +")";
+                                         + "'" + this.taskOne.get() + "', "
+                                         + "'" + this.taskTwo.get() + "', "
+                                         + "'" + this.taskThree.get() + "', "
+                                         + "'" + this.taskFour.get() +"')";
         
        //prepare the sql statement
        PreparedStatement ps = connection.prepareStatement(insertIntoPartiesTable);
@@ -134,10 +135,10 @@ public class PartyDAO extends PartyBaseDAO{
         //define the sql statement
         String updatePartiesTable = "UPDATE parties SET "
                                   + "Price = " + this.getPrice().get() + ", "
-                                  + "TaskOne = '" + this.taskOne.get() + ", "
-                                  + "TaskTwo = '" + this.taskTwo.get() + ", "
-                                  + "TaskThree = '" + this.taskThree.get() + ", "
-                                  + "TaskFour = '" + this.taskFour.get() + " "
+                                  + "TaskOne = '" + this.taskOne.get() + "', "
+                                  + "TaskTwo = '" + this.taskTwo.get() + "', "
+                                  + "TaskThree = '" + this.taskThree.get() + "', "
+                                  + "TaskFour = '" + this.taskFour.get() + "' "
                                   + "WHERE Type = '" + this.getType().get() + "'";
         
         //prepare the statement
@@ -162,6 +163,10 @@ public class PartyDAO extends PartyBaseDAO{
         
         ObservableList<PartyDAO> partiesList = getPartyObjects(rs);  //get the user objects
         
+        //close the statement and the connection
+        ps.close();
+        connection.close();
+        
         return partiesList;
     }
     
@@ -185,6 +190,8 @@ public class PartyDAO extends PartyBaseDAO{
             partiesList.add(party);
         }
         
+        //close the statement and the connection
+        
         return partiesList;
     }
     
@@ -206,6 +213,58 @@ public class PartyDAO extends PartyBaseDAO{
             partyTypes.add(rs.getString("Type"));
         }
         
+        //close the statement and the connection
+        ps.close();
+        connection.close();
+        
         return partyTypes;
+    }//end getListOfAllParty Types
+     
+     //get a hashmap of party info based on the customerID selected
+    public HashMap<String, String> getPartyDataBasedOnType(String type) throws SQLException{
+        //create the connection object
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+        
+        //prepare the statement
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM parties WHERE Type = '" + type + "'");
+        //get the result set
+        ResultSet rs = ps.executeQuery();
+        
+        //define the hashmap to store customer data
+        HashMap<String, String> partyData = new HashMap<>();
+        
+        while(rs.next()){
+           partyData.put("price", rs.getString("Price"));
+           partyData.put("taskOne", rs.getString("TaskOne"));
+           partyData.put("taskTwo", rs.getString("TaskTwo"));
+           partyData.put("taskThree", rs.getString("TaskThree"));
+           partyData.put("taskFour", rs.getString("TaskFour"));
+        }
+        
+       //close the statement and the connection
+        ps.close();
+        connection.close();
+        
+        return partyData;
+    }
+    
+    //get the price of a selected party
+    public int getPriceOfPartyBasedOnType(String type) throws SQLException{
+        //create a new connection object
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+        
+        //prepare the statement
+        PreparedStatement ps = connection.prepareStatement("SELECT Price FROM parties WHERE Type = '" + type + "'");
+        //create the result set
+        ResultSet rs = ps.executeQuery();
+        
+        //get the results
+        int price = rs.getInt("Price");
+        
+        //close the statement and the connection
+        ps.close();
+        connection.close();
+        
+        return price;
     }
 }

@@ -9,7 +9,3 @@
     -fx-stroke-width: 3pt;
     -fx-background-color:#4099ff;
 }
-
-.jfx-tab-pane .tab:selected {
-    -fx-background-color: #334354;
-}
