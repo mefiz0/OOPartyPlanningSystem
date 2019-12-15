@@ -19,8 +19,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import main.java.com.untitled.Party;
-import main.java.com.untitled.dao.CustomerDAO;
-import main.java.com.untitled.dao.PartyDAO;
+import main.java.com.untitled.models.CustomerModel;
+import main.java.com.untitled.models.PartyModel;
 
 public class PartiesController {
 
@@ -37,25 +37,25 @@ public class PartiesController {
     private TableView partiesTable;
 
     @FXML
-    private TableColumn<PartyDAO, Integer> rowNumColumn;
+    private TableColumn<PartyModel, Integer> rowNumColumn;
 
     @FXML
-    private TableColumn<PartyDAO, String> typeColumn;
+    private TableColumn<PartyModel, String> typeColumn;
 
     @FXML
-    private TableColumn<PartyDAO, Integer> priceColumn;
+    private TableColumn<PartyModel, Integer> priceColumn;
 
     @FXML
-    private TableColumn<PartyDAO, String> taskOneColumn;
+    private TableColumn<PartyModel, String> taskOneColumn;
 
     @FXML
-    private TableColumn<PartyDAO, String> taskTwoColumn;
+    private TableColumn<PartyModel, String> taskTwoColumn;
 
     @FXML
-    private TableColumn<PartyDAO, String> taskThreeColumn;
+    private TableColumn<PartyModel, String> taskThreeColumn;
 
     @FXML
-    private TableColumn<PartyDAO, String> taskFourColumn;
+    private TableColumn<PartyModel, String> taskFourColumn;
 
     @FXML
     private JFXTextField addType;
@@ -147,7 +147,7 @@ public class PartiesController {
         */
         modifyTypeSelect.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
             //create a new Customer Data access object
-            PartyDAO partyDAO = new PartyDAO();
+            PartyModel partyDAO = new PartyModel();
             
             try {
                 //store the data in a hashmap
@@ -184,7 +184,7 @@ public class PartiesController {
     //update the parties table view
     public void updateTableView(){
         //create the list to hold the data in
-        ObservableList<PartyDAO> partiesList = FXCollections.observableArrayList();
+        ObservableList<PartyModel> partiesList = FXCollections.observableArrayList();
         
         //set the columns
         rowNumColumn.setCellValueFactory(cellData -> cellData.getValue().getRowNum().asObject());
@@ -196,7 +196,7 @@ public class PartiesController {
         taskFourColumn.setCellValueFactory(cellData -> cellData.getValue().getTaskFour());
         
         //create a new database access object
-        PartyDAO partiesDAO = new PartyDAO();
+        PartyModel partiesDAO = new PartyModel();
         
         try {
             //get the data from the database
@@ -211,7 +211,7 @@ public class PartiesController {
     //add data to the type combo boxes
     public void updateTypeComboBoxes(){
         //create a new customerDAO
-        PartyDAO partyDAO = new PartyDAO();
+        PartyModel partyDAO = new PartyModel();
         
         try {
             ObservableList partyTypes = partyDAO.getListOfAllPartyTypes();
@@ -236,7 +236,7 @@ public class PartiesController {
         Party addParty =  new Party(type, basePrice, taskOne, taskTwo, taskThree, taskFour);
         
         //create a new party dao
-        PartyDAO partyDAO = new PartyDAO(addParty);
+        PartyModel partyDAO = new PartyModel(addParty);
         
         try {
             //update the database
@@ -272,7 +272,7 @@ public class PartiesController {
         Party party = new Party(type, basePrice, taskOne, taskTwo, taskThree, taskFour);
         
         //create a new party dao
-        PartyDAO partyDAO = new PartyDAO(party);
+        PartyModel partyDAO = new PartyModel(party);
         
         try {
             //update the database
@@ -303,7 +303,7 @@ public class PartiesController {
         Party removeParty = new Party(type);
         
         //create a new party dao
-        PartyDAO partyDAO = new PartyDAO(removeParty);
+        PartyModel partyDAO = new PartyModel(removeParty);
         
         try {
             //delete from the database

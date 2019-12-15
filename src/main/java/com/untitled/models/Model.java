@@ -1,12 +1,12 @@
 /*
 a data access object template
 */
-package main.java.com.untitled.dao;
+package main.java.com.untitled.models;
 
 import java.sql.SQLException;
 import javafx.collections.ObservableList;
 
-public interface DAO {
+public interface Model {
     public final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver"; //specifies the driver
     public final String JDBC_URL = "jdbc:derby:Database;create=true"; //specifies the database URL
     

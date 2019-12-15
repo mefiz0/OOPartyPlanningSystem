@@ -1,7 +1,7 @@
 /*
     Defines a "Data Access Object" for the customers class
  */
-package main.java.com.untitled.dao;
+package main.java.com.untitled.models;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,7 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.com.untitled.Customer;
 
-public class CustomerDAO implements DAO{
+public class CustomerModel implements Model{
     //variable declarations
     private StringProperty idNum;
     private StringProperty name;    
@@ -72,7 +72,7 @@ public class CustomerDAO implements DAO{
     
     //constructor
     //fully parametrized constructor
-    public CustomerDAO(Customer customer){
+    public CustomerModel(Customer customer){
         this.idNum = new SimpleStringProperty(customer.getIdNum());
         this.name = new SimpleStringProperty(customer.getName());
         this.bankAccountNum = new SimpleLongProperty(customer.getBankAccountNum());
@@ -80,7 +80,7 @@ public class CustomerDAO implements DAO{
         this.emailAddress = new SimpleStringProperty(customer.getEmailAddress());
     }
     //empty constructor
-    public CustomerDAO(){
+    public CustomerModel(){
         //empty
     }
     
@@ -148,7 +148,7 @@ public class CustomerDAO implements DAO{
     }
     
     //get the database records and store them in an observable list for tableview generation
-    public ObservableList<CustomerDAO> getCustomerRecords() throws SQLException{
+    public ObservableList<CustomerModel> getCustomerRecords() throws SQLException{
         //create a connection object
         Connection connection = DriverManager.getConnection(JDBC_URL);
         
@@ -157,17 +157,17 @@ public class CustomerDAO implements DAO{
         
         ResultSet rs = ps.executeQuery(); //get the result set
         
-        ObservableList<CustomerDAO> customersList = getCustomerObjects(rs);  //get the user objects
+        ObservableList<CustomerModel> customersList = getCustomerObjects(rs);  //get the user objects
         
         return customersList;
     }
     
     //generate a observable list which is used to generate a table view
-    private ObservableList<CustomerDAO> getCustomerObjects(ResultSet rs) throws SQLException{
-        ObservableList<CustomerDAO> customersList = FXCollections.observableArrayList(); //create an observable array list
+    private ObservableList<CustomerModel> getCustomerObjects(ResultSet rs) throws SQLException{
+        ObservableList<CustomerModel> customersList = FXCollections.observableArrayList(); //create an observable array list
         
         while(rs.next()){
-            CustomerDAO customer = new CustomerDAO();
+            CustomerModel customer = new CustomerModel();
             customer.setIdNum(rs.getString("ID"));
             customer.setName(rs.getString("Name"));
             customer.setBankAccountNum(rs.getLong("BankAccountNumber"));

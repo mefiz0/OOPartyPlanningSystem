@@ -1,7 +1,7 @@
 /*
 Defines a "data access object" for user accesses
 */
-package main.java.com.untitled.dao;
+package main.java.com.untitled.models;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class UserAccessDAO extends UserDAO{
+public class UserAccessModel extends UserModel{
     
     //variable declarations
     private ObjectProperty<Timestamp> accessTime;
@@ -40,7 +40,7 @@ public class UserAccessDAO extends UserDAO{
     //end getters and setters
     
     //constructor
-    public UserAccessDAO(){
+    public UserAccessModel(){
         //empty
     }
     
@@ -49,8 +49,10 @@ public class UserAccessDAO extends UserDAO{
     public void insertIntoTable() throws SQLException{
          //create a timestamp object
          Timestamp accessTime = new Timestamp(System.currentTimeMillis());
+         System.out.println(accessTime);
          //user id
          int userID = this.getUserID().get();
+         System.out.println(userID);
          
          //create a connection object
          Connection connection = DriverManager.getConnection(JDBC_URL);
@@ -60,7 +62,7 @@ public class UserAccessDAO extends UserDAO{
                                       + "(UserID, AccessTime) "
                                       + "VALUES "
                                       + "(" + userID + ", "
-                                      + accessTime + ")";
+                                      + "'" + accessTime + "')";
          
          //prepare the statement
          PreparedStatement ps = connection.prepareStatement(insertIntoAccessTable);
@@ -81,9 +83,6 @@ public class UserAccessDAO extends UserDAO{
     //update the logged out time of the table
     @Override
     public void updateTable() throws SQLException{
-        //get the userid
-        int userID = Integer.parseInt(this.getUserID().toString());
-        
         //get the current time
         Timestamp loggedOutTime = new Timestamp(System.currentTimeMillis());
         
@@ -92,8 +91,8 @@ public class UserAccessDAO extends UserDAO{
         
         //define the sql statement
         String updateAccessTable = "UPDATE access_history SET "
-                                 + "LoggedOutTime = " + loggedOutTime
-                                 + " WHERE UserID = " + userID;
+                                 + "LoggedOutTime = '" + loggedOutTime + "'"
+                                 + " WHERE AccessID = (SELECT MAX(AccessID) FROM access_history)";
         //prepare the statement
         PreparedStatement ps = connection.prepareStatement(updateAccessTable);
         //execute the query
@@ -104,7 +103,7 @@ public class UserAccessDAO extends UserDAO{
         connection.close();
     }
     
-    public ObservableList<UserAccessDAO> getAccessRecords() throws SQLException{
+    public ObservableList<UserAccessModel> getAccessRecords() throws SQLException{
         //create a connection object
         Connection connection = DriverManager.getConnection(JDBC_URL);
         
@@ -122,17 +121,17 @@ public class UserAccessDAO extends UserDAO{
         
         ResultSet rs = ps.executeQuery(); //get the result set
         
-        ObservableList<UserAccessDAO> accessList = getAccessObject(rs);  //get the user objects
+        ObservableList<UserAccessModel> accessList = getAccessObject(rs);  //get the user objects
         
         return accessList;
     }
     
     //get a list of user access data access objects
-    private ObservableList<UserAccessDAO> getAccessObject(ResultSet resultSet) throws SQLException{
-        ObservableList<UserAccessDAO> accessList = FXCollections.observableArrayList(); //create an observable array list
+    private ObservableList<UserAccessModel> getAccessObject(ResultSet resultSet) throws SQLException{
+        ObservableList<UserAccessModel> accessList = FXCollections.observableArrayList(); //create an observable array list
         
         while(resultSet.next()){
-            UserAccessDAO userAccess = new UserAccessDAO();
+            UserAccessModel userAccess = new UserAccessModel();
             userAccess.setUserID(resultSet.getInt("UserID"));
             userAccess.setUsername(resultSet.getString("Username"));
             userAccess.setRole(resultSet.getString("Role"));

@@ -6,22 +6,62 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.untitled.controllers.MainController">
    <top>
       <HBox fx:id="topBar" prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: #fff;" styleClass="topbar" stylesheets="@../style/MainStyle.css" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="navButton" contentDisplay="CENTER" ellipsisString="" prefHeight="30.0" prefWidth="22.0" ripplerFill="WHITE" styleClass="nav-button" stylesheets="@../style/MainStyle.css" text=" ">
-               <HBox.margin>
-                  <Insets left="10.0" top="8.0" />
-               </HBox.margin>
-               <graphic>
-                  <FontAwesomeIcon fx:id="navIcon" iconName="BARS" styleClass="nav-button-icon" />
-               </graphic>
-            </JFXButton>
+            <GridPane prefHeight="43.0" prefWidth="262.0" HBox.hgrow="ALWAYS">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="NEVER" maxWidth="121.0" minWidth="0.0" prefWidth="10.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="284.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="30.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="170.0" />
+                  <ColumnConstraints hgrow="NEVER" maxWidth="83.0" minWidth="10.0" prefWidth="41.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <JFXButton fx:id="navButton" contentDisplay="CENTER" ellipsisString="" prefHeight="30.0" prefWidth="22.0" ripplerFill="WHITE" styleClass="nav-button" stylesheets="@../style/MainStyle.css" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <graphic>
+                        <FontAwesomeIcon fx:id="navIcon" iconName="BARS" styleClass="nav-button-icon" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="closeButton" contentDisplay="CENTER" ellipsisString="" prefHeight="30.0" prefWidth="22.0" ripplerFill="WHITE" styleClass="nav-button" stylesheets="@../style/MainStyle.css" text=" " GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <graphic>
+                        <FontAwesomeIcon fx:id="closeIcon" iconName="CLOSE" styleClass="nav-button-icon" />
+                     </graphic>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </JFXButton>
+                  <AnchorPane prefHeight="200.0" prefWidth="140.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="usernameView" layoutX="30.0" layoutY="1.0" prefHeight="26.0" prefWidth="38.0" text="Label" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="roleView" layoutX="30.0" layoutY="26.0" prefHeight="16.0" prefWidth="32.0" text="Label" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </GridPane>
          </children>
       </HBox>
    </top>

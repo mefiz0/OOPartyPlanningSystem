@@ -18,7 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import main.java.com.untitled.Addon;
-import main.java.com.untitled.dao.AddonsDAO;
+import main.java.com.untitled.models.AddonsModel;
 
 public class AddonsController {
 
@@ -35,13 +35,13 @@ public class AddonsController {
     private TableView addonsTable;
     
     @FXML
-    private TableColumn<AddonsDAO, Integer> rowNumColumn;
+    private TableColumn<AddonsModel, Integer> rowNumColumn;
 
     @FXML
-    private TableColumn<AddonsDAO, String> typeColumn;
+    private TableColumn<AddonsModel, String> typeColumn;
 
     @FXML
-    private TableColumn<AddonsDAO, Integer> priceColumn;
+    private TableColumn<AddonsModel, Integer> priceColumn;
 
     @FXML
     private JFXTextField addType;
@@ -107,7 +107,7 @@ public class AddonsController {
         //add the data to the fields based on what is selected
         modifyAddonSelect.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
             //create a new addons data access object
-            AddonsDAO addonsDAO = new AddonsDAO();
+            AddonsModel addonsDAO = new AddonsModel();
             
             //get the price from the database
             String price = "0";
@@ -141,7 +141,7 @@ public class AddonsController {
      //update the addons table
     public void updateAddonsTable(){
         //create a list to hold the data in
-        ObservableList<AddonsDAO> addonsList = FXCollections.observableArrayList();
+        ObservableList<AddonsModel> addonsList = FXCollections.observableArrayList();
         
         //set the columns
         rowNumColumn.setCellValueFactory(cellData -> cellData.getValue().getRowNum().asObject());
@@ -149,7 +149,7 @@ public class AddonsController {
         priceColumn.setCellValueFactory(cellData -> cellData.getValue().getAddonPrice().asObject());
         
         //create an addons data access object
-        AddonsDAO addonsDAO = new AddonsDAO();
+        AddonsModel addonsDAO = new AddonsModel();
         
         try {
             addonsList = addonsDAO.getAddonsRecords();
@@ -164,7 +164,7 @@ public class AddonsController {
     //add data to the combo boxes
     public void updateTypeComboBoxes(){
         //create a new addons data access object
-        AddonsDAO addonsDAO = new AddonsDAO();
+        AddonsModel addonsDAO = new AddonsModel();
         
         try {
             ObservableList<String> typeList = addonsDAO.getAllAddonsTypes();
@@ -186,7 +186,7 @@ public class AddonsController {
         Addon addon = new Addon(type, price);
         
         //pass it to addons data access object
-        AddonsDAO addonsDAO = new AddonsDAO(addon);
+        AddonsModel addonsDAO = new AddonsModel(addon);
         try {
             //update the database
             addonsDAO.insertIntoTable();
@@ -213,7 +213,7 @@ public class AddonsController {
         Addon modifyAddon = new Addon(type, price);
         
         //create new addon data access object
-        AddonsDAO addonsDAO = new AddonsDAO(modifyAddon);
+        AddonsModel addonsDAO = new AddonsModel(modifyAddon);
         
         try {
             //update the database
@@ -238,7 +238,7 @@ public class AddonsController {
         Addon removeAddon = new Addon(type);
         
         //create a new addons data acces object and remove from the database
-        AddonsDAO addonsDAO =  new AddonsDAO(removeAddon);
+        AddonsModel addonsDAO =  new AddonsModel(removeAddon);
         
         try {
             addonsDAO.deleteFromTable();

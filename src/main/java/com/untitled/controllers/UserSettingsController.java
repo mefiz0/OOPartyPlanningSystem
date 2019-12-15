@@ -17,8 +17,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import main.java.com.untitled.User;
-import main.java.com.untitled.dao.UserAccessDAO;
-import main.java.com.untitled.dao.UserDAO;
+import main.java.com.untitled.models.UserAccessModel;
+import main.java.com.untitled.models.UserModel;
 
 public class UserSettingsController {
 
@@ -32,13 +32,13 @@ public class UserSettingsController {
     private TableView usersTable;
     
     @FXML
-    private TableColumn<UserDAO, Integer> userIDColumn;
+    private TableColumn<UserModel, Integer> userIDColumn;
     
     @FXML
-    private TableColumn<UserDAO, String> usernameColumn;
+    private TableColumn<UserModel, String> usernameColumn;
 
     @FXML
-    private TableColumn<UserDAO, String> roleColumn;
+    private TableColumn<UserModel, String> roleColumn;
 
     @FXML
     private JFXTextField addUsernameInput;
@@ -74,22 +74,22 @@ public class UserSettingsController {
     private TableView accessHistoryTable;
     
     @FXML
-    private TableColumn<UserAccessDAO, Integer> userIDAccessColumn;
+    private TableColumn<UserAccessModel, Integer> userIDAccessColumn;
 
     @FXML
-    private TableColumn<UserAccessDAO, String> usernameAccessColumn;
+    private TableColumn<UserAccessModel, String> usernameAccessColumn;
 
     @FXML
-    private TableColumn<UserAccessDAO, String> userRoleAccessColumn;
+    private TableColumn<UserAccessModel, String> userRoleAccessColumn;
 
     @FXML
-    private TableColumn<UserAccessDAO, Timestamp> userAccessTimeColumn;
+    private TableColumn<UserAccessModel, Timestamp> userAccessTimeColumn;
 
     @FXML
-    private TableColumn<UserAccessDAO, Timestamp> userLoggedOutTimeColumn;
+    private TableColumn<UserAccessModel, Timestamp> userLoggedOutTimeColumn;
     
     //list to hold the user information
-    private ObservableList<UserDAO> userList = FXCollections.observableArrayList();
+    private ObservableList<UserModel> userList = FXCollections.observableArrayList();
     
     @FXML
     void initialize() {
@@ -126,7 +126,7 @@ public class UserSettingsController {
             roleColumn.setCellValueFactory(cellData -> cellData.getValue().getRole());
             
             //create a new database access object
-            UserDAO users = new UserDAO();
+            UserModel users = new UserModel();
             
             //get the data from the database
             userList = users.getUserRecords();
@@ -141,7 +141,7 @@ public class UserSettingsController {
      //update the access table view
     public void updateAccessTableView() {
         try {
-            ObservableList<UserAccessDAO> accessList = FXCollections.observableArrayList();
+            ObservableList<UserAccessModel> accessList = FXCollections.observableArrayList();
             
             //set the columns
             userIDAccessColumn.setCellValueFactory(cellValue -> cellValue.getValue().getUserID().asObject());
@@ -151,7 +151,7 @@ public class UserSettingsController {
             userLoggedOutTimeColumn.setCellValueFactory(cellData -> cellData.getValue().getLoggedOutTime());
             
             //create a new database access object
-            UserAccessDAO usersAccess = new UserAccessDAO();
+            UserAccessModel usersAccess = new UserAccessModel();
             
             //get the data from the database
             accessList = usersAccess.getAccessRecords();
@@ -179,7 +179,7 @@ public class UserSettingsController {
     //add usernames to the usernames combo boxes
     public void updateUsernameComboBoxes() {
         //update usernameModifyComboBox and userRemoveComboBox
-        UserDAO userDAO = new UserDAO();
+        UserModel userDAO = new UserModel();
         try {
             ObservableList usernames  = userDAO.getListOfAllUsers();
             usernameModifyComboBox.setItems(usernames);
@@ -200,7 +200,7 @@ public class UserSettingsController {
         User addUser = new User(username, password, role);
             
         //pass the user object to user data access object
-        UserDAO userDAO = new UserDAO(addUser);
+        UserModel userDAO = new UserModel(addUser);
             
         try {
             //add the new user to the table
@@ -229,7 +229,7 @@ public class UserSettingsController {
         User modifyUser =  new User(username, newPassword, newRole);
         
         //create a new data access object and update the database
-        UserDAO modifyUserDAO = new UserDAO(modifyUser);
+        UserModel modifyUserDAO = new UserModel(modifyUser);
         
         try {
             modifyUserDAO.updateTable();
@@ -250,7 +250,7 @@ public class UserSettingsController {
         User removeUser = new User(userRemoveComboBox.getValue());
         
         //pass the user object to the user data access object and update the database
-        UserDAO removeUserDAO = new UserDAO(removeUser);
+        UserModel removeUserDAO = new UserModel(removeUser);
         try {
             removeUserDAO.deleteFromTable();
         } catch (SQLException ex) {

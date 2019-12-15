@@ -1,7 +1,7 @@
 /*
     Define a "Data Access Object" for the addons class
  */
-package main.java.com.untitled.dao;
+package main.java.com.untitled.models;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,9 +15,9 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.com.untitled.Addon;
-import static main.java.com.untitled.dao.DAO.JDBC_URL;
+import static main.java.com.untitled.models.Model.JDBC_URL;
 
-public class AddonsDAO implements DAO{
+public class AddonsModel implements Model{
     //variable declarations
     private IntegerProperty rowNum; //used only in tableview generation
     private StringProperty addonType;
@@ -51,12 +51,12 @@ public class AddonsDAO implements DAO{
     //end getters and setters
     
     //constructor
-    public AddonsDAO(Addon addons){
+    public AddonsModel(Addon addons){
         this.addonType = new SimpleStringProperty(addons.getAddonType());
         this.addonPrice = new SimpleIntegerProperty(addons.getAddonPrice());
     }
     
-    public AddonsDAO(){
+    public AddonsModel(){
         //empty
     }
     
@@ -121,7 +121,7 @@ public class AddonsDAO implements DAO{
     }
     
     //get the data for table view generation
-    public ObservableList<AddonsDAO> getAddonsRecords() throws SQLException{
+    public ObservableList<AddonsModel> getAddonsRecords() throws SQLException{
         //create a connection object
         Connection connection = DriverManager.getConnection(JDBC_URL);
         
@@ -132,7 +132,7 @@ public class AddonsDAO implements DAO{
         
         ResultSet rs = ps.executeQuery(); //get the result set
         
-        ObservableList<AddonsDAO> addonsList = getAddonsObjects(rs);  //get the user objects
+        ObservableList<AddonsModel> addonsList = getAddonsObjects(rs);  //get the user objects
         
         //close the statement and the connection
         ps.close();
@@ -142,12 +142,12 @@ public class AddonsDAO implements DAO{
     }// public ObservableList<AddonsDAO> getAddonsRecords()
     
     //get the add on objects from the database
-    private ObservableList<AddonsDAO> getAddonsObjects(ResultSet rs) throws SQLException{
-        ObservableList<AddonsDAO> addonsList = FXCollections.observableArrayList();
+    private ObservableList<AddonsModel> getAddonsObjects(ResultSet rs) throws SQLException{
+        ObservableList<AddonsModel> addonsList = FXCollections.observableArrayList();
         
         int i = 1; //this is a counter to set the rows in the table view
         while(rs.next()){
-            AddonsDAO addonsDAO = new AddonsDAO();
+            AddonsModel addonsDAO = new AddonsModel();
             addonsDAO.setRowNum(i);
             addonsDAO.setAddonType(rs.getString("Type"));
             addonsDAO.setAddonPrice(rs.getInt("Price"));

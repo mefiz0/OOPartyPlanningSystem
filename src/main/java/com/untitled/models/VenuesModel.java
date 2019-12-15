@@ -1,7 +1,7 @@
 /*
     Defines a "Data Access Object" for the venues class
  */
-package main.java.com.untitled.dao;
+package main.java.com.untitled.models;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,9 +16,9 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.com.untitled.Venues;
-import static main.java.com.untitled.dao.DAO.JDBC_URL;
+import static main.java.com.untitled.models.Model.JDBC_URL;
 
-public class VenuesDAO implements DAO{
+public class VenuesModel implements Model{
     
     //variable declarations
     private IntegerProperty rowNum; //only used for the row number in tableview
@@ -80,7 +80,7 @@ public class VenuesDAO implements DAO{
     //end getters and setters
     
     //constructor
-    public VenuesDAO(Venues venues){
+    public VenuesModel(Venues venues){
         this.venueName = new SimpleStringProperty(venues.getVenueName());
         this.road = new SimpleStringProperty(venues.getRoad());
         this.Building = new SimpleStringProperty(venues.getBuilding());
@@ -89,7 +89,7 @@ public class VenuesDAO implements DAO{
     }
     
     //empty constructor
-    public VenuesDAO(){
+    public VenuesModel(){
         //empty
     }
 
@@ -160,7 +160,7 @@ public class VenuesDAO implements DAO{
     }
     
     //get the database records and store them in an observable list for tableview generation
-    public ObservableList<VenuesDAO> getVenuesRecords() throws SQLException{
+    public ObservableList<VenuesModel> getVenuesRecords() throws SQLException{
         //create a connection object
         Connection connection = DriverManager.getConnection(JDBC_URL);
         
@@ -169,7 +169,7 @@ public class VenuesDAO implements DAO{
         
         ResultSet rs = ps.executeQuery(); //get the result set
         
-        ObservableList<VenuesDAO> venuesList = getVenuesObjects(rs);  //get the user objects
+        ObservableList<VenuesModel> venuesList = getVenuesObjects(rs);  //get the user objects
         
         //close the statement and the connection
         ps.close();
@@ -180,14 +180,14 @@ public class VenuesDAO implements DAO{
     }//end ObservableList<VenuesDAO> getVenuesRecords()
     
     //generate a observable list which is used to generate a table view 
-    private ObservableList<VenuesDAO> getVenuesObjects(ResultSet resultSet) throws SQLException{
+    private ObservableList<VenuesModel> getVenuesObjects(ResultSet resultSet) throws SQLException{
         
-        ObservableList<VenuesDAO> venuesList = FXCollections.observableArrayList(); //create an observable array list
+        ObservableList<VenuesModel> venuesList = FXCollections.observableArrayList(); //create an observable array list
         
         //row number
         int i = 1;
         while(resultSet.next()){
-            VenuesDAO venuesDAO = new VenuesDAO();
+            VenuesModel venuesDAO = new VenuesModel();
             venuesDAO.setRowNum(i);
             venuesDAO.setVenueName(resultSet.getString("Venue"));
             venuesDAO.setRoad(resultSet.getString("Road"));

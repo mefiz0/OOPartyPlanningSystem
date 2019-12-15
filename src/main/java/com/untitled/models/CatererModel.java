@@ -1,7 +1,7 @@
 /*
     Defines a "Data Access Object" for the catering class
  */
-package main.java.com.untitled.dao;
+package main.java.com.untitled.models;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,9 +15,9 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.com.untitled.Caterer;
-import static main.java.com.untitled.dao.DAO.JDBC_URL;
+import static main.java.com.untitled.models.Model.JDBC_URL;
 
-public class CatererDAO implements DAO{
+public class CatererModel implements Model{
     //variable declarations
     private IntegerProperty rowNum; //only used for the row number generation in table view
     private StringProperty caterer;
@@ -51,12 +51,12 @@ public class CatererDAO implements DAO{
     //end getters and setters
     
     //constructor
-    public CatererDAO(Caterer catering){
+    public CatererModel(Caterer catering){
         this.caterer = new SimpleStringProperty(catering.getCaterer());
         this.price = new SimpleIntegerProperty(catering.getPrice());
     }
     //empty constructor
-    public CatererDAO(){
+    public CatererModel(){
         //empty
     }
 
@@ -122,7 +122,7 @@ public class CatererDAO implements DAO{
     }
     
     //get the data for table view generation
-    public ObservableList<CatererDAO> getCaterersRecords() throws SQLException{
+    public ObservableList<CatererModel> getCaterersRecords() throws SQLException{
         //create a connection object
         Connection connection = DriverManager.getConnection(JDBC_URL);
         
@@ -133,7 +133,7 @@ public class CatererDAO implements DAO{
         
         ResultSet rs = ps.executeQuery(); //get the result set
         
-        ObservableList<CatererDAO> caterersList = getCatererObjects(rs);  //get the user objects
+        ObservableList<CatererModel> caterersList = getCatererObjects(rs);  //get the user objects
         
         //close the statement and the connection
         ps.close();
@@ -143,12 +143,12 @@ public class CatererDAO implements DAO{
     }//end ObservableList<CatererDAO> getCaterersRecords()
     
     //get the add on objects from the database
-    private ObservableList<CatererDAO> getCatererObjects(ResultSet rs) throws SQLException{
-        ObservableList<CatererDAO> caterersList = FXCollections.observableArrayList();
+    private ObservableList<CatererModel> getCatererObjects(ResultSet rs) throws SQLException{
+        ObservableList<CatererModel> caterersList = FXCollections.observableArrayList();
         
         int i = 1; //this is a counter to set the rows in the table view
         while(rs.next()){
-            CatererDAO catererDAO = new CatererDAO();
+            CatererModel catererDAO = new CatererModel();
             catererDAO.setRowNum(i);
             catererDAO.setCaterer(rs.getString("Caterer"));
             catererDAO.setPrice(rs.getInt("Price"));

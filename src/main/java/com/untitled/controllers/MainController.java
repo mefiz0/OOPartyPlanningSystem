@@ -5,17 +5,21 @@ import com.jfoenix.controls.JFXDrawer;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import main.java.com.untitled.models.UserAccessModel;
 
 public class MainController {
 
@@ -66,6 +70,19 @@ public class MainController {
 
     @FXML
     private JFXButton userSettingsButton;
+    
+    @FXML
+    private Label usernameView;
+
+    @FXML
+    private Label roleView;
+    
+    
+    @FXML
+    private JFXButton closeButton;
+
+    @FXML
+    private FontAwesomeIcon closeIcon;
     
     //Hashmap to preload and store all javafx anchor panes to improve perfomance
     HashMap<String, AnchorPane> viewPanes = new HashMap<>();
@@ -191,6 +208,28 @@ public class MainController {
             
             //disable the buttons
             userSettingsButton.setDisable(true);
+        });
+        
+        //when the mouse moves into the closeButton
+        closeButton.setOnMouseEntered((event) -> {
+            closeIcon.setFill(Color.RED);
+        });
+        
+        //when the mouse exits the closeButton
+        closeButton.setOnMouseExited((event) -> {
+            closeIcon.setFill(Color.BLACK);
+        });
+        
+        //when the closeButton is pressed
+        closeButton.setOnAction((event) -> {
+            UserAccessModel userAccess = new UserAccessModel();
+            try {
+                userAccess.updateTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Stage currentStage = (Stage) closeButton.getScene().getWindow();
+            currentStage.close();
         });
     }
     
@@ -364,5 +403,15 @@ public class MainController {
                 Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }).start();
+    }
+    
+    //set the username
+    public void setUsername(String username){
+        usernameView.setText(username);
+    }
+    
+    //set the role
+    public void setRole(String role){
+        roleView.setText(role);
     }
 }

@@ -1,5 +1,5 @@
 
-package main.java.com.untitled.dao;
+package main.java.com.untitled.models;
 
 import java.sql.SQLException;
 import javafx.beans.property.IntegerProperty;
@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class PartyBaseDAO implements DAO{
+public class PartyBaseModel implements Model{
     //variable declarations
     private StringProperty type;
     private IntegerProperty price;
@@ -32,7 +32,7 @@ public class PartyBaseDAO implements DAO{
     
     //constructor
 
-    public PartyBaseDAO() {
+    public PartyBaseModel() {
     }
     
     

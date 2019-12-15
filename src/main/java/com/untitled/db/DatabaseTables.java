@@ -29,10 +29,10 @@ public class DatabaseTables {
     */
     public static final String CREATE_USERS_ACCESS_HISTORY_TABLE_SQL = "CREATE TABLE access_history ("
                                                                      + "AccessID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                                                                     + "UserID INTEGER NOT NULL,"
-                                                                     + "AccessTime TIMESTAMP,"
-                                                                     + "LoggedOutTime TIMESTAMP,"
-                                                                     + "PRIMARY KEY (AccessID),"
+                                                                     + "UserID INTEGER NOT NULL, "
+                                                                     + "AccessTime TIMESTAMP, "
+                                                                     + "LoggedOutTime TIMESTAMP, "
+                                                                     + "PRIMARY KEY (AccessID), "
                                                                      + "FOREIGN KEY (UserID) REFERENCES users(UserID))";
     /*
     CREATE CUSTOMERS TABLE
@@ -113,7 +113,7 @@ public class DatabaseTables {
                                               + "AddOnTwo VARCHAR(60) NOT NULL,"
                                               + "AddOnThree VARCHAR(60) NOT NULL,"
                                               + "TotalPrice DECIMAL NOT NULL, "
-                                              + "AmountPaid DECIMAL NULL,"
+                                              + "AmountPaid DECIMAL,"
                                               + "PRIMARY KEY (SoldID))";
     
     /*
@@ -130,15 +130,4 @@ public class DatabaseTables {
                                                          + "PRIMARY KEY (PurchaseID),"
                                                          + "FOREIGN KEY (CustomerID) REFERENCES customers(CustomerID),"
                                                          + "FOREIGN KEY (SoldID) REFERENCES sold(SoldID))";
-    
-    /*
-    CREATE TABLE PAYMENTS
-    
-    This table contains a record of all purchases to be made
-    */
-    public static final String CREATE_PAYMENTS_TABLE_SQL = "CREATE TABLE payments ( "
-                                                         + "PaymentID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                                                         + "PurchaseID INTEGER NOT NULL,"
-                                                         + "PRIMARY KEY (PaymentID),"
-                                                         + "FOREIGN KEY (PurchaseID) REFERENCES purchases (PurchaseID))";
-}
+    }

@@ -41,3 +41,15 @@
     -fx-border-color: #4099ff;
     -fx-border-width: 0px 0px 3px 0px;
 }
+
+.jfx-text-field{
+    -jfx-focus-color: #4099ff;
+    -jfx-unfocus-color: #334354;
+    -fx-prompt-text-fill: #fff;
+    -fx-text-fill: #4099ff;
+}
+
+.login-background{
+    -fx-background-color:  #222f3e;
+}
+

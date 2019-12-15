@@ -14,20 +14,22 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.com.untitled.Sale;
-import main.java.com.untitled.dao.AddonsDAO;
-import main.java.com.untitled.dao.CustomerDAO;
-import main.java.com.untitled.dao.PartyDAO;
-import main.java.com.untitled.dao.SalesDAO;
-import main.java.com.untitled.dao.VenuesDAO;
+import main.java.com.untitled.models.AddonsModel;
+import main.java.com.untitled.models.CustomerModel;
+import main.java.com.untitled.models.PartyModel;
+import main.java.com.untitled.models.PaymentsModel;
+import main.java.com.untitled.models.SalesModel;
+import main.java.com.untitled.models.VenuesModel;
 
 public class SaleController {
-
-    @FXML
+        @FXML
     private ResourceBundle resources;
 
     @FXML
@@ -35,9 +37,6 @@ public class SaleController {
 
     @FXML
     private JFXComboBox<String> customerSaleSelect;
-    
-    @FXML
-    private Label customerName;
 
     @FXML
     private JFXComboBox<String> partySaleSelect;
@@ -76,26 +75,35 @@ public class SaleController {
     private Label totalPrice;
 
     @FXML
-    private TableView<?> paymentsTable;
+    private Label customerName;
+
+    @FXML
+    private TableView paymentsTable;
+
+    @FXML
+    private TableColumn<PaymentsModel, Integer> rowNumColumn;
+
+    @FXML
+    private TableColumn<PaymentsModel, String> customerIDColumn;
+
+    @FXML
+    private TableColumn<PaymentsModel, String> partyTypeColumn;
 
     @FXML
     private JFXButton makePaymentButton;
 
     @FXML
-    private JFXTextField amountToBePaid;
+    private JFXComboBox<String> customerPaymentsSelect;
 
     @FXML
-    private JFXComboBox<?> customerPaymentsSelect;
-
-    @FXML
-    private JFXComboBox<?> partyPaymentSelect;
+    private JFXComboBox<String> partyPaymentSelect;
 
     @FXML
     void initialize() {
         
         customerSaleSelect.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
             //create a new customer dao
-            CustomerDAO customerDAO = new CustomerDAO();
+            CustomerModel customerDAO = new CustomerModel();
             try {
                 //get the customer data hashmap
                 HashMap data = customerDAO.getCustomerDataBasedOnID(newValue);
@@ -108,13 +116,37 @@ public class SaleController {
         
     }
     
+    //update the table view
+    public void updateTableView(){
+        //create a new observableList
+        ObservableList salesList = FXCollections.observableArrayList();
+        
+        //set the columns
+        rowNumColumn.setCellValueFactory(cellData -> cellData.getValue().getRowNum().asObject());
+        customerIDColumn.setCellValueFactory(cellData -> cellData.getValue().getCustomerID());
+        partyTypeColumn.setCellValueFactory(cellData -> cellData.getValue().getPartyType());
+        
+        //create a new payments model
+        PaymentsModel payments = new PaymentsModel();
+        
+        try {
+            salesList = payments.getPaymentsRecords();
+        } catch (SQLException ex) {
+            Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //set the items in the table view
+        paymentsTable.setItems(salesList);
+    }//end updateTableView()
+
+    
     //set the combo boxes
-    public void updateSalesBoxes(){
+    public void updateSalesComboBoxes(){
         //create the data access objects
-        CustomerDAO customerDAO = new CustomerDAO();
-        PartyDAO partyDAO = new PartyDAO();
-        VenuesDAO venuesDAO = new VenuesDAO();
-        AddonsDAO addonsDAO = new AddonsDAO();
+        CustomerModel customerDAO = new CustomerModel();
+        PartyModel partyDAO = new PartyModel();
+        VenuesModel venuesDAO = new VenuesModel();
+        AddonsModel addonsDAO = new AddonsModel();
         
         try {
             //add all the data to a list
@@ -155,7 +187,7 @@ public class SaleController {
                      addonThree, caterer, amountPaid, total, party);
         
         //create a new Sale DAO object
-        SalesDAO salesDAO = new SalesDAO(sale);
+        SalesModel salesDAO = new SalesModel(sale);
         
         try {
             //update the database
@@ -164,5 +196,6 @@ public class SaleController {
             Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        //clear the inputs
     }
 }

@@ -1,4 +1,4 @@
-package main.java.com.untitled.dao;
+package main.java.com.untitled.models;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -16,7 +16,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import main.java.com.untitled.Sale;
 
-public class SalesDAO implements DAO{
+public class SalesModel implements Model{
     
     //define the variables
     private IntegerProperty rowNum; //used to present the row number only
@@ -131,7 +131,7 @@ public class SalesDAO implements DAO{
     
     //constructors
 
-    public SalesDAO(Sale sale) {
+    public SalesModel(Sale sale) {
         this.partyType = new SimpleStringProperty(sale.getType());
         this.venue = new SimpleStringProperty(sale.getVenue());
         this.date = new SimpleObjectProperty(sale.getDueDate());
@@ -144,7 +144,7 @@ public class SalesDAO implements DAO{
         this.amountPaid = new SimpleObjectProperty(sale.getAmountPaid());
     }
     
-    public SalesDAO(){
+    public SalesModel(){
         //empty
     }
     
@@ -210,23 +210,6 @@ public class SalesDAO implements DAO{
         ps.execute();
         ps.close();
         connection.close();
-        
-        //now add to the payments table if there is a payment pending
-        if(toBePaid.equals("Yes")){
-            //1 - get the purchase id
-            ps = connection.prepareStatement("SELECT MAX(PurchaseID) FROM purchases");
-            rs = ps.executeQuery();
-            int purchaseID = rs.getInt("PurchaseID");
-            ps.close();
-            connection.close();
-            
-            //2 - insert to the payments table
-            ps = connection.prepareStatement("INSERT INTO payments (PurchaseID) VALUES ("
-                                             + purchaseID  + ")");
-            ps.execute();
-            ps.execute();
-            connection.close();
-        }
     }
     
     @Override

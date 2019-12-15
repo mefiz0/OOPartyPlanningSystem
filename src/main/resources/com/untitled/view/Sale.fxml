@@ -99,8 +99,9 @@
                      <children>
                         <TableView fx:id="paymentsTable" prefHeight="163.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn fx:id="rowNumColumn" prefWidth="32.0" text="#" />
+                            <TableColumn fx:id="customerIDColumn" prefWidth="135.0" text="Customer ID" />
+                              <TableColumn fx:id="partyTypeColumn" minWidth="9.0" prefWidth="149.0" text="Party" />
                           </columns>
                         </TableView>
                         <JFXButton fx:id="makePaymentButton" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Make Payment" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -120,7 +121,6 @@
                               <RowConstraints minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <JFXTextField fx:id="amountToBePaid" labelFloat="true" promptText="Amount To Be Paid" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                               <JFXComboBox fx:id="customerPaymentsSelect" labelFloat="true" prefHeight="25.0" prefWidth="945.0" promptText="Customer" />
                               <JFXComboBox fx:id="partyPaymentSelect" labelFloat="true" prefHeight="25.0" prefWidth="945.0" promptText="Party" GridPane.columnIndex="2" />
                            </children>

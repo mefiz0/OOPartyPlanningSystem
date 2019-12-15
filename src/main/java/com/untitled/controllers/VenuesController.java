@@ -19,7 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import main.java.com.untitled.Venues;
-import main.java.com.untitled.dao.VenuesDAO;
+import main.java.com.untitled.models.VenuesModel;
 
 public class VenuesController {
 
@@ -36,22 +36,22 @@ public class VenuesController {
     private TableView venuesTable;
 
     @FXML
-    private TableColumn<VenuesDAO, Integer> rowNumColumn;
+    private TableColumn<VenuesModel, Integer> rowNumColumn;
 
     @FXML
-    private TableColumn<VenuesDAO, String> venueColumn;
+    private TableColumn<VenuesModel, String> venueColumn;
 
     @FXML
-    private TableColumn<VenuesDAO, String> roadColumn;
+    private TableColumn<VenuesModel, String> roadColumn;
 
     @FXML
-    private TableColumn<VenuesDAO, String> buildingColumn;
+    private TableColumn<VenuesModel, String> buildingColumn;
 
     @FXML
-    private TableColumn<VenuesDAO, Integer> capacityColumn;
+    private TableColumn<VenuesModel, Integer> capacityColumn;
 
     @FXML
-    private TableColumn<VenuesDAO, Integer> priceColumn;
+    private TableColumn<VenuesModel, Integer> priceColumn;
 
     @FXML
     private JFXTextField addVenue;
@@ -158,7 +158,7 @@ public class VenuesController {
         
          modifyVenueSelect.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
             //create a new Customer Data access object
-            VenuesDAO venuesDAO = new VenuesDAO();
+            VenuesModel venuesDAO = new VenuesModel();
             
             try {
                 //store the data in a hashmap
@@ -194,7 +194,7 @@ public class VenuesController {
     //update the table
     public void updateVenuesTable(){
         //create a new observable list
-        ObservableList<VenuesDAO> venuesList = FXCollections.observableArrayList();
+        ObservableList<VenuesModel> venuesList = FXCollections.observableArrayList();
         
         //set the columns
         rowNumColumn.setCellValueFactory(cellData -> cellData.getValue().getRowNum().asObject());
@@ -205,7 +205,7 @@ public class VenuesController {
         priceColumn.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());
         
         //create a new venues data access object
-        VenuesDAO venuesDAO = new VenuesDAO();
+        VenuesModel venuesDAO = new VenuesModel();
         
         try {
             venuesList = venuesDAO.getVenuesRecords();
@@ -219,7 +219,7 @@ public class VenuesController {
     //add data to the combo boxes
     public void updateVenuesComboBox(){
         //create a new data access object
-        VenuesDAO venuesDAO = new VenuesDAO();
+        VenuesModel venuesDAO = new VenuesModel();
         
         try {
             ObservableList<String> venuesList = venuesDAO.getListOfAllVenues();
@@ -246,7 +246,7 @@ public class VenuesController {
         Venues addVenues = new Venues(venue, road, building, capacity, price);
         
         //create a new venues data access object
-        VenuesDAO venuesDAO = new VenuesDAO(addVenues);
+        VenuesModel venuesDAO = new VenuesModel(addVenues);
         
         try {
             venuesDAO.insertIntoTable();
@@ -280,7 +280,7 @@ public class VenuesController {
         Venues modifyVenues = new Venues(venue, road, building, capacity, price);
         
         //create a new venues data access object
-        VenuesDAO venuesDAO = new VenuesDAO(modifyVenues);
+        VenuesModel venuesDAO = new VenuesModel(modifyVenues);
         
         try {
             venuesDAO.updateTable();
@@ -308,7 +308,7 @@ public class VenuesController {
         Venues removeVenue = new Venues(venue);
         
         //create a new venues data access object
-        VenuesDAO venuesDAO = new VenuesDAO(removeVenue);
+        VenuesModel venuesDAO = new VenuesModel(removeVenue);
         
         try {
             venuesDAO.deleteFromTable();

@@ -1,7 +1,7 @@
 /*
     Defines a "data access object" for the add to parties class
  */
-package main.java.com.untitled.dao;
+package main.java.com.untitled.models;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,9 +16,9 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.com.untitled.Party;
-import static main.java.com.untitled.dao.DAO.JDBC_URL;
+import static main.java.com.untitled.models.Model.JDBC_URL;
 
-public class PartyDAO extends PartyBaseDAO{
+public class PartyModel extends PartyBaseModel{
     
     //variable declarations
     private IntegerProperty rowNum; //user to generate the row number in table view
@@ -69,7 +69,7 @@ public class PartyDAO extends PartyBaseDAO{
     }
     
     //constructor
-    public PartyDAO(Party addParty){
+    public PartyModel(Party addParty){
         this.setType(addParty.getType());
         this.setPrice(addParty.getPrice());
         this.taskOne = new SimpleStringProperty(addParty.getTaskOne());
@@ -78,7 +78,7 @@ public class PartyDAO extends PartyBaseDAO{
         this.taskFour = new SimpleStringProperty(addParty.getTaskFour());
     }
     
-    public PartyDAO(){
+    public PartyModel(){
         //empty
     }
     
@@ -152,7 +152,7 @@ public class PartyDAO extends PartyBaseDAO{
     }
     
     //get the database records and store them in an observable list for tableview generation
-    public ObservableList<PartyDAO> getPartyRecords() throws SQLException{
+    public ObservableList<PartyModel> getPartyRecords() throws SQLException{
         //create a connection object
         Connection connection = DriverManager.getConnection(JDBC_URL);
         
@@ -161,7 +161,7 @@ public class PartyDAO extends PartyBaseDAO{
         
         ResultSet rs = ps.executeQuery(); //get the result set
         
-        ObservableList<PartyDAO> partiesList = getPartyObjects(rs);  //get the user objects
+        ObservableList<PartyModel> partiesList = getPartyObjects(rs);  //get the user objects
         
         //close the statement and the connection
         ps.close();
@@ -171,13 +171,13 @@ public class PartyDAO extends PartyBaseDAO{
     }
     
     //generate a observable list which is used to generate a table view
-    private ObservableList<PartyDAO> getPartyObjects(ResultSet rs) throws SQLException{
-        ObservableList<PartyDAO> partiesList = FXCollections.observableArrayList(); //create an observable array list
+    private ObservableList<PartyModel> getPartyObjects(ResultSet rs) throws SQLException{
+        ObservableList<PartyModel> partiesList = FXCollections.observableArrayList(); //create an observable array list
         
         int i = 1; //row number generations
         
         while(rs.next()){
-            PartyDAO party = new PartyDAO();
+            PartyModel party = new PartyModel();
             party.setRowNum(i);
             party.setType(rs.getString("Type"));
             party.setPrice(rs.getInt("Price"));

@@ -19,7 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import main.java.com.untitled.Customer;
-import main.java.com.untitled.dao.CustomerDAO;
+import main.java.com.untitled.models.CustomerModel;
 
 public class CustomersController {
 
@@ -36,19 +36,19 @@ public class CustomersController {
     private TableView customersTable;
 
     @FXML
-    private TableColumn<CustomerDAO, String> customerIDColumn;
+    private TableColumn<CustomerModel, String> customerIDColumn;
 
     @FXML
-    private TableColumn<CustomerDAO, String> customerNameColumn;
+    private TableColumn<CustomerModel, String> customerNameColumn;
 
     @FXML
-    private TableColumn<CustomerDAO, Long> customerBankColumn;
+    private TableColumn<CustomerModel, Long> customerBankColumn;
 
     @FXML
-    private TableColumn<CustomerDAO, Integer> customerContactNumColumn;
+    private TableColumn<CustomerModel, Integer> customerContactNumColumn;
 
     @FXML
-    private TableColumn<CustomerDAO, String> customerEmailIDColumn;
+    private TableColumn<CustomerModel, String> customerEmailIDColumn;
 
     @FXML
     private JFXTextField addCustomerID;
@@ -156,7 +156,7 @@ public class CustomersController {
         */
         modifyCustomerIDSelect.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
             //create a new Customer Data access object
-            CustomerDAO customerDAO = new CustomerDAO();
+            CustomerModel customerDAO = new CustomerModel();
             
             try {
                 //store the data in a hashmap
@@ -195,7 +195,7 @@ public class CustomersController {
     //update the customers table
     public void updateTableView(){
         //create the list to hold the data in
-        ObservableList<CustomerDAO> customersList = FXCollections.observableArrayList();
+        ObservableList<CustomerModel> customersList = FXCollections.observableArrayList();
         
         //set the columns
         customerIDColumn.setCellValueFactory(cellData -> cellData.getValue().getIdNum());
@@ -205,7 +205,7 @@ public class CustomersController {
         customerEmailIDColumn.setCellValueFactory(cellData -> cellData.getValue().getEmailAddress());
         
         //create a new database access object
-        CustomerDAO customers = new CustomerDAO();
+        CustomerModel customers = new CustomerModel();
         
         try {
             //get the data from the database
@@ -220,7 +220,7 @@ public class CustomersController {
     //add data to the id combo boxes
     public void updateIDComboBoxes(){
         //create a new customerDAO
-        CustomerDAO customerDAO = new CustomerDAO();
+        CustomerModel customerDAO = new CustomerModel();
         
         try {
             ObservableList customerNames = customerDAO.getListOfAllCustomerIDs();
@@ -250,7 +250,7 @@ public class CustomersController {
         Customer customer = new Customer(customerID, customerName, customerBankNum,
                                          customerContactNumber, customerEmail);
         //create a new customer data access object
-        CustomerDAO customerDAO = new CustomerDAO(customer);
+        CustomerModel customerDAO = new CustomerModel(customer);
         //insert the data into the table
         try {
             customerDAO.insertIntoTable();
@@ -284,7 +284,7 @@ public class CustomersController {
                                          customerContactNumber, customerEmail);
         
         //create a new customer data access object
-        CustomerDAO customerDAO = new CustomerDAO(customer);
+        CustomerModel customerDAO = new CustomerModel(customer);
         //insert the data into the table
         try {
             customerDAO.updateTable();
@@ -312,7 +312,7 @@ public class CustomersController {
         Customer customer = new Customer(customerID);
         
         //create a new customer data access object
-        CustomerDAO customerDAO = new CustomerDAO(customer);
+        CustomerModel customerDAO = new CustomerModel(customer);
         //dele the data in the table
         try {
             customerDAO.deleteFromTable();

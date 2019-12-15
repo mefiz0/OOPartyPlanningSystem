@@ -10,10 +10,10 @@ import java.math.RoundingMode;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
-import main.java.com.untitled.dao.AddonsDAO;
-import main.java.com.untitled.dao.CatererDAO;
-import main.java.com.untitled.dao.PartyDAO;
-import main.java.com.untitled.dao.VenuesDAO;
+import main.java.com.untitled.models.AddonsModel;
+import main.java.com.untitled.models.CatererModel;
+import main.java.com.untitled.models.PartyModel;
+import main.java.com.untitled.models.VenuesModel;
 
 public class Sale extends PartyBase{
     
@@ -148,10 +148,10 @@ public class Sale extends PartyBase{
     //calculate the subtotal
     public int calculateSubtotal() throws SQLException{
         //create the data access objects
-        PartyDAO partyDAO = new PartyDAO();
-        VenuesDAO venuesDAO = new VenuesDAO();
-        AddonsDAO addonsDAO = new AddonsDAO();
-        CatererDAO catererDAO = new CatererDAO();
+        PartyModel partyDAO = new PartyModel();
+        VenuesModel venuesDAO = new VenuesModel();
+        AddonsModel addonsDAO = new AddonsModel();
+        CatererModel catererDAO = new CatererModel();
         
         //get the prices
         int partyPrice = partyDAO.getPriceOfPartyBasedOnType(this.getType());

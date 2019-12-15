@@ -21,11 +21,11 @@ public class Main extends Application{
        
        DatabaseConnection.initDB();
        
-       Parent root = FXMLLoader.load(getClass().getResource("/main/resources/com/untitled/view/Main.fxml"));
+       Parent root = FXMLLoader.load(getClass().getResource("/main/resources/com/untitled/view/Login.fxml"));
        Scene scene = new Scene(root);
        primaryStage.setScene(scene);
-//       primaryStage.setMaximized(true);
-//       primaryStage.setResizable(false);
+       primaryStage.setResizable(false);
+       primaryStage.initStyle(StageStyle.UNDECORATED);
        primaryStage.show();
     }
     

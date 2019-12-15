@@ -77,9 +77,6 @@ public class DatabaseConnection {
 
         //check purchases table
         checkTable("purchases", dbmd, initTables, DatabaseTables.CREATE_PURCHASES_TABLE_SQL);
-
-        //check payments table
-        checkTable("payments", dbmd, initTables, DatabaseTables.CREATE_PAYMENTS_TABLE_SQL);
         
         initTables.close();
         connection.close();

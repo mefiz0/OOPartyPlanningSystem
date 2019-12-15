@@ -18,7 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import main.java.com.untitled.Caterer;
-import main.java.com.untitled.dao.CatererDAO;
+import main.java.com.untitled.models.CatererModel;
 
 public class CateringController {
 
@@ -35,13 +35,13 @@ public class CateringController {
     private TableView cateringTable;
     
     @FXML
-    private TableColumn<CatererDAO, Integer> rowNumColumn;
+    private TableColumn<CatererModel, Integer> rowNumColumn;
 
     @FXML
-    private TableColumn<CatererDAO, String> catererColumn;
+    private TableColumn<CatererModel, String> catererColumn;
 
     @FXML
-    private TableColumn<CatererDAO, Integer> priceColumn;
+    private TableColumn<CatererModel, Integer> priceColumn;
 
     @FXML
     private JFXButton addCatererButton;
@@ -107,7 +107,7 @@ public class CateringController {
         //add the data to the fields based on what is selected
         modifyCatererSelect.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
             //create a new addons data access object
-            CatererDAO catererDAO = new CatererDAO();
+            CatererModel catererDAO = new CatererModel();
             
             //get the price from the database
             String price = "0";
@@ -141,7 +141,7 @@ public class CateringController {
      //update the caterers table
     public void updateCaterersTable(){
         //create a list to hold the data in
-        ObservableList<CatererDAO> caterersList = FXCollections.observableArrayList();
+        ObservableList<CatererModel> caterersList = FXCollections.observableArrayList();
         
         //set the columns
         rowNumColumn.setCellValueFactory(cellData -> cellData.getValue().getRowNum().asObject());
@@ -149,7 +149,7 @@ public class CateringController {
         priceColumn.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());
         
         //create an caterer data access object
-        CatererDAO catererDAO = new CatererDAO();
+        CatererModel catererDAO = new CatererModel();
         
         try {
             caterersList = catererDAO.getCaterersRecords();
@@ -164,7 +164,7 @@ public class CateringController {
     //add data to the combo boxes
     public void updateCatererComboBoxes(){
         //create a new addons data access object
-        CatererDAO catererDAO = new CatererDAO();
+        CatererModel catererDAO = new CatererModel();
         
         try {
             ObservableList<String> catererList = catererDAO.getAllCaterers();
@@ -186,7 +186,7 @@ public class CateringController {
         Caterer caterer = new Caterer(catererName, price);
         
         //pass it to addons data access object
-        CatererDAO catererDAO = new CatererDAO(caterer);
+        CatererModel catererDAO = new CatererModel(caterer);
         try {
             //update the database
             catererDAO.insertIntoTable();
@@ -213,7 +213,7 @@ public class CateringController {
         Caterer modifyCaterer = new Caterer(catererName, price);
         
         //create new Caterer data access object
-        CatererDAO catererDAO = new CatererDAO(modifyCaterer);
+        CatererModel catererDAO = new CatererModel(modifyCaterer);
         
         try {
             //update the table
@@ -238,7 +238,7 @@ public class CateringController {
         Caterer removeCaterer = new Caterer(catererName);
         
         //create a new caterer data acces object and remove from the database
-        CatererDAO catererDAO =  new CatererDAO(removeCaterer);
+        CatererModel catererDAO =  new CatererModel(removeCaterer);
         
         try {
             catererDAO.deleteFromTable();
