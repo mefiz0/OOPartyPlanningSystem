@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.untitled;
+package main.java.com.untitled.Services;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -189,7 +189,7 @@ public class Sale extends PartyBase{
     //calculate the total price with gst
     public void calculateTotalPrice(int subTotal){
         //convert subtotal to a big decimal
-        BigDecimal subTotalBigDecimal = BigDecimal.valueOf(subTotal).subtract(this.amountPaid);
+        BigDecimal subTotalBigDecimal = BigDecimal.valueOf(subTotal);
         
         //get the gst value
         BigDecimal gstOfSubTotal = subTotalBigDecimal.multiply(GST).setScale(2, RoundingMode.HALF_UP);

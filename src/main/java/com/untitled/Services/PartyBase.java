@@ -1,7 +1,7 @@
 /*
     This class contains definitions for a generic party type
  */
-package main.java.com.untitled;
+package main.java.com.untitled.Services;
 
 /**
  *

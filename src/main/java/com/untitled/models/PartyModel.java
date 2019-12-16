@@ -15,7 +15,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import main.java.com.untitled.Party;
+import main.java.com.untitled.Services.Party;
 import static main.java.com.untitled.models.Model.JDBC_URL;
 
 public class PartyModel extends PartyBaseModel{

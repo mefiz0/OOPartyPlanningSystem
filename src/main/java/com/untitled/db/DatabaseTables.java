@@ -106,13 +106,16 @@ public class DatabaseTables {
     */
     public static final String CREATE_SOLD_TABLE_SQL = "CREATE TABLE sold ( "
                                               + "SoldID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
+                                              + "Identifier VARCHAR(120) NOT NULL UNIQUE,"
                                               + "PartyType VARCHAR(60) NOT NULL,"
                                               + "Venue VARCHAR(60) NOT NULL,"
                                               + "Caterer VARCHAR(60) NOT NULL,"
                                               + "AddOnOne VARCHAR(60) NOT NULL,"
                                               + "AddOnTwo VARCHAR(60) NOT NULL,"
                                               + "AddOnThree VARCHAR(60) NOT NULL,"
-                                              + "TotalPrice DECIMAL NOT NULL, "
+                                              + "DueDate DATE NOT NULL,"
+                                              + "DueTime TIME NOT NULL,"
+                                              + "TotalPrice DECIMAL NOT NULL,"
                                               + "AmountPaid DECIMAL,"
                                               + "PRIMARY KEY (SoldID))";
     
@@ -126,8 +129,28 @@ public class DatabaseTables {
                                                          + "PurchaseID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
                                                          + "CustomerID INTEGER NOT NULL,"
                                                          + "SoldID INTEGER NOT NULL,"
+                                                         + "TaskID INTEGER NOT NULL,"
                                                          + "ToBePaid VARCHAR(3),"
                                                          + "PRIMARY KEY (PurchaseID),"
                                                          + "FOREIGN KEY (CustomerID) REFERENCES customers(CustomerID),"
-                                                         + "FOREIGN KEY (SoldID) REFERENCES sold(SoldID))";
+                                                         + "FOREIGN KEY (SoldID) REFERENCES sold(SoldID),"
+                                                         + "FOREIGN KEY (TaskID) REFERENCES tasks(TaskID))";
+    
+    /*
+    CREATE TASKS TABLE
+    
+    this table is used for tasks management
+    */
+    public static final String CREATE_TASKS_TABLE_SQL = "CREATE TABLE tasks ( "
+                                                      + "TaskID INTEGER NOT NULL GENERATE ALWAYS IDENTITY (START WITH 1, INCREMENT BY 1),"
+                                                      + "TaskOne VARCHAR(60),"
+                                                      + "TaskTwo VARCHAR(60),"
+                                                      + "TaskThree VARCHAR(60),"
+                                                      + "TaskFour VARCHAR(60),"
+                                                      + "TaskOneProgress INTEGER,"
+                                                      + "TaskTwoProgress INTEGER,"
+                                                      + "TaskThreeProgress INTEGER,"
+                                                      + "TaskFourProgress INTEGER,"
+                                                      + "Status VARCHAR((10),"
+                                                      + "PRIMARY KEY(TaskID)";
     }

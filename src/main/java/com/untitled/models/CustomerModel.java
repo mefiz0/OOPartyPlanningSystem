@@ -17,7 +17,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import main.java.com.untitled.Customer;
+import main.java.com.untitled.Services.Customer;
 
 public class CustomerModel implements Model{
     //variable declarations

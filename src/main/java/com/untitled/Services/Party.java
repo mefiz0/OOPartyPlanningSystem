@@ -1,5 +1,5 @@
 
-package main.java.com.untitled;
+package main.java.com.untitled.Services;
 
 public class Party extends PartyBase{
     

@@ -16,7 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import main.java.com.untitled.User;
+import main.java.com.untitled.Services.User;
 import main.java.com.untitled.models.UserAccessModel;
 import main.java.com.untitled.models.UserModel;
 

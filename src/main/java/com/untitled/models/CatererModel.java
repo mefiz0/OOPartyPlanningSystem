@@ -14,7 +14,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import main.java.com.untitled.Caterer;
+import main.java.com.untitled.Services.Caterer;
 import static main.java.com.untitled.models.Model.JDBC_URL;
 
 public class CatererModel implements Model{

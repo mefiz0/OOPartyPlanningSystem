@@ -143,17 +143,6 @@ public class MainController {
             salesButton.setDisable(true);
         });
         
-        salesHistoryButton.setOnAction((event) -> {
-            resetButtons();
-            
-            //load from hashmap
-            SalesHistoryController saleHistoryController = (SalesHistoryController) viewControllers.get("SalesHistory");
-            borderPane.setCenter(viewPanes.get("SalesHistory"));
-            
-            //disable the buttons
-            salesHistoryButton.setDisable(true);
-        });
-        
         tasksButton.setOnAction((event) -> {
             resetButtons();
             
@@ -369,16 +358,6 @@ public class MainController {
                 //add to the hashmaps
                 viewPanes.put("Sale", salePane);
                 viewControllers.put("Sale", saleController);
-                
-                /*
-                Sales History
-                */
-                FXMLLoader salesHistoryLoader = new FXMLLoader(getClass().getResource("/main/resources/com/untitled/view/SalesHistory.fxml"));
-                AnchorPane salesHistoryPane = salesHistoryLoader.load();
-                SalesHistoryController salesHistoryController = salesHistoryLoader.getController();
-                //add to the hashmaps
-                viewPanes.put("SalesHistory", salesHistoryPane);
-                viewControllers.put("SalesHistory", salesHistoryController);
                 
                 /*
                 Tasks

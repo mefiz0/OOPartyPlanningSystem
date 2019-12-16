@@ -17,7 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import main.java.com.untitled.Caterer;
+import main.java.com.untitled.Services.Caterer;
 import main.java.com.untitled.models.CatererModel;
 
 public class CateringController {

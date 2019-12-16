@@ -14,12 +14,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import main.java.com.untitled.Sale;
+import main.java.com.untitled.Services.Sale;
 
 public class SalesModel implements Model{
     
     //define the variables
-    private IntegerProperty rowNum; //used to present the row number only
+    private StringProperty customerName; //used for unique identifier generation
     private StringProperty customerID;
     private StringProperty partyType;
     private StringProperty venue;
@@ -31,16 +31,16 @@ public class SalesModel implements Model{
     private StringProperty caterer;
     private ObjectProperty<BigDecimal> totalPrice;
     private ObjectProperty<BigDecimal> amountPaid;
-    
+
     //getters and setters
-    //row number
-    public IntegerProperty getRowNum() {
-        return rowNum;
+    //customer name
+    public StringProperty getCustomerName() {    
+        return customerName;
     }
-    public void setRowNum(int rowNum) {
-        this.rowNum = new SimpleIntegerProperty(rowNum);
+    public void setCustomerName(String customerName) {    
+        this.customerName = new SimpleStringProperty(customerName);
     }
-    
+
     //customer property
     public StringProperty getCustomerID() {    
         return customerID;
@@ -153,16 +153,22 @@ public class SalesModel implements Model{
         //create a new connection object
         Connection connection = DriverManager.getConnection(JDBC_URL);
         
+        //generate the unique identifier
+        String identifier = this.customerID.get() + "''s " + this.partyType.get() + " party";
+        
         //define the sql string
         String insertIntoSalesTable = "INSERT INTO sold "
-                                    + "(PartyType, Venue, Caterer, AddonOne, AddOnTwo, AddonThree, TotalPrice, AmountPaid) "
+                                    + "(Identifier, PartyType, Venue, Caterer, AddonOne, AddOnTwo, AddonThree, DueDate, DueTime, TotalPrice, AmountPaid) "
                                     + "VALUES "
-                                    + "('" + this.partyType.get() + "', "
+                                    + "('" + identifier + "', " 
+                                    + this.partyType.get() + "', "
                                     + "'" + this.venue.get() + "', "
                                     + "'" + this.caterer.get() + "', "
                                     + "'" + this.addonOne.get() + "', "
                                     + "'" + this.addonTwo.get() + "', "
                                     + "'" + this.addonThree.get() + "', "
+                                    + "'" + this.date.get() + "', "
+                                    + "'" + this.time.get() + "', "
                                     + this.totalPrice.get() + ", "
                                     + this.amountPaid.get() + ")";
         
@@ -170,25 +176,26 @@ public class SalesModel implements Model{
         PreparedStatement ps = connection.prepareStatement(insertIntoSalesTable);
         ps.execute();
         
-        //close the statement and the connection
-        ps.close();
-        connection.close();
-        
         //insert into the purchases table
         
         //1 - first we get the id from the sold table
-        ps = connection.prepareStatement("SELECT MAX(SoldID) From sold");
+        ps = connection.prepareStatement("SELECT MAX(SoldID) FROM sold");
         ResultSet rs = ps.executeQuery();
-        int soldID = rs.getInt("SoldID");
-        ps.close();
-        connection.close();
+        
+        int soldID = 0;
+        while(rs.next()){
+            soldID = rs.getInt(1);
+        }
         
         //2 - we get the customer id from the customers table
-        ps = connection.prepareStatement("SELECT CustomerID From customer WHERE CustomerID = '" + this.customerID.get() + "'");
+        ps = connection.prepareStatement("SELECT CustomerID FROM customers WHERE ID = '" + this.customerID.get() + "'");
         rs = ps.executeQuery();
-        int customerID = rs.getInt("CustomerID");
-        ps.close();
-        connection.close();
+        
+        int customerID = 0;
+        while(rs.next()){
+            customerID = rs.getInt("CustomerID");
+            System.out.println(customerID);
+        }
         
         //3 - add to the purchases table
         String toBePaid = null;
@@ -202,12 +209,15 @@ public class SalesModel implements Model{
             toBePaid = "No"; //set no 
         }else{
             toBePaid = "Yes"; //set yes
+            System.out.println(toBePaid);
         }
         
         //4 - insert record into purchases
-        ps = connection.prepareStatement("INSERT INTO purchases (SoldID, CustomerID, ToBePaid) VALUES("
-                                        + soldID + ", " + customerID + ", " + "'" + toBePaid + "'");
+        ps = connection.prepareStatement("INSERT INTO purchases (CustomerID, SoldID, ToBePaid) VALUES("
+                                        + customerID + ", " + soldID + ", '" + toBePaid + "')");
         ps.execute();
+        
+        //close the statement and the conenction
         ps.close();
         connection.close();
     }

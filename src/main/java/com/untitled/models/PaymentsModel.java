@@ -51,9 +51,9 @@ public class PaymentsModel implements Model{
     }
     
     //constructors
-    public PaymentsModel(StringProperty customerName, StringProperty partyType) {
-        this.customerID = customerID;
-        this.partyType = partyType;
+    public PaymentsModel(String customerID, String partyType) {
+        this.customerID = new SimpleStringProperty(customerID);
+        this.partyType = new SimpleStringProperty(partyType);
     }
     
     public PaymentsModel(){
@@ -88,56 +88,6 @@ public class PaymentsModel implements Model{
         ps.execute();
         connection.close();
     }//end update table
-
-    //get the database records and store them in an observable list for tableview generation
-    public ObservableList<PaymentsModel> getPaymentsRecords() throws SQLException{
-        //create a connection object
-        Connection connection = DriverManager.getConnection(JDBC_URL);
-        
-        //define the statement
-        String sqlStatement = "SELECT purchases.PurchaseID, "
-                            + "customers.ID, "
-                            + "sold.PartyType "
-                            + "FROM purchases "
-                            + "LEFT JOIN customers "
-                            + "ON purchases.CustomerID = customers.CustomerID "
-                            + "LEFT JOIN sold "
-                            + "ON purchases.SoldID = sold.SoldID "
-                            + "WHERE ToBePaid = 'YES'"; 
-        
-        //prepare the statment
-        PreparedStatement ps = connection.prepareStatement(sqlStatement);
-        
-        ResultSet rs = ps.executeQuery(); //get the result set
-        
-        ObservableList<PaymentsModel> paymentsList = getPaymentsObjects(rs);  //get the user objects
-        
-        //close the statement and the connection
-        ps.close();
-        connection.close();
-        
-        return paymentsList;
-    }//end ObservableList<PaymentsModel> getPaymentsRecords()
-    
-    //generate a observable list which is used to generate a table view
-    private ObservableList<PaymentsModel> getPaymentsObjects(ResultSet rs) throws SQLException{
-        ObservableList<PaymentsModel> paymentsList = FXCollections.observableArrayList(); //create an observable array list
-        
-        while(rs.next()){
-            PaymentsModel payments = new PaymentsModel();
-            
-            payments.setRowNum(rs.getInt("PurchaseID"));
-            payments.setCustomerID(rs.getString("ID"));
-            payments.setPartyType(rs.getString("PartyType"));
-            
-            paymentsList.add(payments);
-            
-        }
-        
-        //close the statement and the connection
-        
-        return paymentsList;
-    }//end ObservableList<PaymentsModel> getPaymentsObjects(ResultSet rs)
     
     //get the customer ids for combo boxes
     public ObservableList<String> getCustomerIDs() throws SQLException{

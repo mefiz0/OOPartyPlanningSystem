@@ -14,7 +14,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import main.java.com.untitled.User;
+import main.java.com.untitled.Services.User;
 
 public class UserModel implements Model{
     //variable declarations

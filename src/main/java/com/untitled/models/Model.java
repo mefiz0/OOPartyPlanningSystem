@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import javafx.collections.ObservableList;
 
 public interface Model {
-    public final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver"; //specifies the driver
     public final String JDBC_URL = "jdbc:derby:Database;create=true"; //specifies the database URL
     
     

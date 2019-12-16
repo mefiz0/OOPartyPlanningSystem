@@ -20,13 +20,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import main.java.com.untitled.Sale;
+import main.java.com.untitled.Services.Sale;
 import main.java.com.untitled.models.AddonsModel;
 import main.java.com.untitled.models.CatererModel;
 import main.java.com.untitled.models.CustomerModel;
 import main.java.com.untitled.models.PartyModel;
 import main.java.com.untitled.models.PaymentsModel;
 import main.java.com.untitled.models.SalesModel;
+import main.java.com.untitled.models.SalesTableModel;
 import main.java.com.untitled.models.VenuesModel;
 
 public class SaleController {
@@ -79,16 +80,46 @@ public class SaleController {
     private Label customerName;
 
     @FXML
-    private TableView paymentsTable;
+    private TableView salesTable;
 
     @FXML
-    private TableColumn<PaymentsModel, Integer> rowNumColumn;
+    private TableColumn<SalesTableModel, Integer> rowNumColumn;
 
     @FXML
-    private TableColumn<PaymentsModel, String> customerIDColumn;
+    private TableColumn<SalesTableModel, String> customerIDColumn;
 
     @FXML
-    private TableColumn<PaymentsModel, String> partyTypeColumn;
+    private TableColumn<SalesTableModel, String> customerNameColumn;
+
+    @FXML
+    private TableColumn<SalesTableModel, String> partyTypeColumn;
+
+    @FXML
+    private TableColumn<SalesTableModel, Date> dueDateColumn;
+
+    @FXML
+    private TableColumn<SalesTableModel, Time> dueTimeColumn;
+
+    @FXML
+    private TableColumn<SalesTableModel, String> venueColumn;
+
+    @FXML
+    private TableColumn<SalesTableModel, String> catererColumn;
+
+    @FXML
+    private TableColumn<SalesTableModel, String> addonOneColumn;
+
+    @FXML
+    private TableColumn<SalesTableModel, String> addonTwoColumn;
+
+    @FXML
+    private TableColumn<SalesTableModel, String> addonThreeColumn;
+
+    @FXML
+    private TableColumn<SalesTableModel, BigDecimal> totalPriceColumn;
+
+    @FXML
+    private TableColumn<SalesTableModel, String> toBePaidColumn;
 
     @FXML
     private JFXButton makePaymentButton;
@@ -104,6 +135,7 @@ public class SaleController {
 
     @FXML
     void initialize() {
+        //update the table view
         updateTableView();
         
         //set these to not visible at start
@@ -111,6 +143,7 @@ public class SaleController {
         totalPrice.setVisible(false);
         customerName.setVisible(false);
         
+        //when a customer id is selected print the customers name
         customerSaleSelect.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
             //create a new customer dao
             CustomerModel customerDAO = new CustomerModel();
@@ -122,7 +155,7 @@ public class SaleController {
             } catch (SQLException ex) {
                 Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+        }); //end customerSaleSelect.getSelectionModel().selectedItemProperty().addListener
         
         //calculate the prices
         calculatePricesButton.setOnAction((event) -> {
@@ -137,7 +170,6 @@ public class SaleController {
             sale.setAddonTwo(addonTwoSelect.getValue());
             sale.setAddonThree(addonThreeSelect.getValue());
             sale.setCaterer(catererSelect.getValue());
-            sale.setAmountPaid(new BigDecimal(saleAmountPaid.getText()));
             
             try {
                 //set the prices
@@ -150,7 +182,7 @@ public class SaleController {
                 Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-        });
+        }); //end   calculatePricesButton.setOnAction((event) -> {
         
         //set the combo boxes to get the data on click
         customerSaleSelect.setOnShowing((event) -> {
@@ -165,7 +197,7 @@ public class SaleController {
             } catch (SQLException ex) {
                 Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+        });//end customerSaleSelect.setOnShowing
         
         //set the combo boxes to get the data on click
         partySaleSelect.setOnShowing((event) -> {
@@ -180,7 +212,7 @@ public class SaleController {
             } catch (SQLException ex) {
                 Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+        }); //end partySaleSelect.setOnShowing
         
         //set the combo boxes to get the data on click
         addVenueSelect.setOnShowing((event) -> {
@@ -195,7 +227,7 @@ public class SaleController {
             } catch (SQLException ex) {
                 Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+        }); //addVenueSelect.setOnShowing
         
         //set the combo boxes to get the data on click
         addonOneSelect.setOnShowing((event) -> {
@@ -210,7 +242,7 @@ public class SaleController {
             } catch (SQLException ex) {
                 Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+        }); //addonOneSelect.setOnShowing
         
         //set the combo boxes to get the data on click
         addonTwoSelect.setOnShowing((event) -> {
@@ -225,7 +257,7 @@ public class SaleController {
             } catch (SQLException ex) {
                 Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+        }); //addonTwoSelect.setOnShowing
         
         //set the combo boxes to get the data on click
         addonThreeSelect.setOnShowing((event) -> {
@@ -240,7 +272,7 @@ public class SaleController {
             } catch (SQLException ex) {
                 Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+        }); //addonThreeSelect.setOnShowing
         
         catererSelect.setOnShowing((event) -> {
             //create the data access objects
@@ -254,31 +286,75 @@ public class SaleController {
             } catch (SQLException ex) {
                 Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+        }); //catererSelect.setOnShowing
         
+        //payment combo box
+        customerPaymentsSelect.setOnShowing((event) -> {
+            //create the data access objects
+            PaymentsModel payments = new PaymentsModel();
+            
+            //get the data into the list
+            try {
+                //get the data
+                ObservableList customersList = payments.getCustomerIDs();
+                customerPaymentsSelect.setItems(customersList);// set the data to the combo box
+            } catch (SQLException ex) {
+                Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }); //customerPaymentsSelect.setOnShowing
+        
+        //set the party items in the party payments
+        customerPaymentsSelect.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
+            //create a payment model
+            PaymentsModel payments = new PaymentsModel();
+            
+            //get the data into the parties tab
+            try {
+                ObservableList partiesList  = payments.getPartyTypes(newValue);
+                partyPaymentSelect.setItems(partiesList);
+            } catch (SQLException ex) {
+                Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }); //customerPaymentsSelect.getSelectionModel()
+        
+        //when the sale button is pressed
+        saleButton.setOnAction((event) -> {
+            makeSale(); //make a sale
+        }); //end saleButton.setOnAction
+        
+        //when makePaymentButton is pressed
+        makePaymentButton.setOnAction((event) -> {
+            makePayment(); //make payment
+        }); //makePaymentButton
     }
     
     //update the table view
     public void updateTableView(){
-        //create a new observableList
-        ObservableList salesList = FXCollections.observableArrayList();
+        //create a new salesTableModel
+        SalesTableModel salesHistory = new SalesTableModel();
         
         //set the columns
         rowNumColumn.setCellValueFactory(cellData -> cellData.getValue().getRowNum().asObject());
         customerIDColumn.setCellValueFactory(cellData -> cellData.getValue().getCustomerID());
+        customerNameColumn.setCellValueFactory(cellData -> cellData.getValue().getCustomerName());
         partyTypeColumn.setCellValueFactory(cellData -> cellData.getValue().getPartyType());
-        
-        //create a new payments model
-        PaymentsModel payments = new PaymentsModel();
+        dueDateColumn.setCellValueFactory(cellData -> cellData.getValue().getDueDate());
+        dueTimeColumn.setCellValueFactory(cellData -> cellData.getValue().getDueTime());
+        venueColumn.setCellValueFactory(cellData -> cellData.getValue().getVenue());
+        catererColumn.setCellValueFactory(cellData -> cellData.getValue().getCaterer());
+        addonOneColumn.setCellValueFactory(cellData -> cellData.getValue().getAddonOne());
+        addonTwoColumn.setCellValueFactory(cellData -> cellData.getValue().getAddonTwo());
+        addonThreeColumn.setCellValueFactory(cellData -> cellData.getValue().getAddonThree());
+        totalPriceColumn.setCellValueFactory(cellData -> cellData.getValue().getTotalPrice());
+        toBePaidColumn.setCellValueFactory(cellData -> cellData.getValue().getToBePaid());
         
         try {
-            salesList = payments.getPaymentsRecords();
+            //get the sales history in an observable list
+            ObservableList salesHistoryList = salesHistory.getSalesHistory();
+            salesTable.setItems(salesHistoryList); //set the items in the table to this list
         } catch (SQLException ex) {
             Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        //set the items in the table view
-        paymentsTable.setItems(salesList);
     }//end updateTableView()
     
     //make a sale
@@ -296,16 +372,22 @@ public class SaleController {
         String caterer = catererSelect.getValue();
         BigDecimal total = new BigDecimal(totalPrice.getText());
         
+        System.out.println(dueDate);
+        System.out.println(dueTime);
+        
         //create a new sale object
         Sale sale = new Sale(venue, dueDate, dueTime, addonOne, addonTwo,
                      addonThree, caterer, amountPaid, total, party);
         
-        //create a new Sale DAO object
-        SalesModel salesDAO = new SalesModel(sale);
+        //create a new Sale model object
+        SalesModel salesModel = new SalesModel(sale);
+        
+        //set the customer id
+        salesModel.setCustomerID(customer);
         
         try {
             //update the database
-            salesDAO.insertIntoTable();
+            salesModel.insertIntoTable();
         } catch (SQLException ex) {
             Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -314,7 +396,7 @@ public class SaleController {
         
         //clear the inputs
         customerSaleSelect.getSelectionModel().clearSelection();
-        partySaleSelect.getValue();
+        partySaleSelect.getSelectionModel().clearSelection();
         addDueDate.getEditor().clear();
         addDueTime.getEditor().clear();
         addVenueSelect.getSelectionModel().clearSelection();
@@ -323,6 +405,31 @@ public class SaleController {
         addonThreeSelect.getSelectionModel().clearSelection();
         saleAmountPaid.setText("");
         catererSelect.getSelectionModel().clearSelection();
+        subTotal.setText("");
         totalPrice.setText("");
-    }
+    }//end makeSale()
+    
+    //make a payment
+    public void makePayment(){
+        //get the input
+        String customerID = customerPaymentsSelect.getValue();
+        String partyType = partyPaymentSelect.getValue();
+        
+        //create a new payments model
+        PaymentsModel payments = new PaymentsModel(customerID, partyType);
+        
+        try {
+            //update the database()
+            payments.updateTable();
+        } catch (SQLException ex) {
+            Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //update the table view
+        updateTableView();
+        
+        //clear the data fields
+        customerPaymentsSelect.getSelectionModel().clearSelection();
+        partyPaymentSelect.getSelectionModel().clearSelection();
+    }//end makePayment
 }

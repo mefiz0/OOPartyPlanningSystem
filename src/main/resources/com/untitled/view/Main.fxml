@@ -66,7 +66,7 @@
       </HBox>
    </top>
    <left>
-      <JFXDrawer fx:id="navBar" prefHeight="532.0" prefWidth="181.0" styleClass="sidebar" stylesheets="@../style/MainStyle.css" BorderPane.alignment="CENTER">
+      <JFXDrawer fx:id="navBar" prefHeight="532.0" prefWidth="181.0" styleClass="sidebar" stylesheets="@../style/MainStyle.css" visible="false" BorderPane.alignment="CENTER">
          <children>
             <VBox fx:id="navButtons" prefHeight="464.0" prefWidth="188.0">
                <children>
@@ -85,14 +85,6 @@
                      <graphic>
                         <FontAwesomeIcon iconName="DOLLAR" size="1.5em" styleClass="salesIcon" />
                      </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="salesHistoryButton" alignment="BASELINE_LEFT" graphicTextGap="30.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons_main" stylesheets="@../style/MainStyle.css" text="Sales History" textFill="WHITE">
-                     <graphic>
-                        <FontAwesomeIcon iconName="HISTORY" size="1.5em" styleClass="salesIcon" />
-                     </graphic>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
                   </JFXButton>
                   <JFXButton fx:id="tasksButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="10.0" layoutY="146.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons_main" stylesheets="@../style/MainStyle.css" text="Tasks" textFill="WHITE">
                      <VBox.margin>

@@ -99,15 +99,25 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Payments">
+            <Tab text="History">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="paymentsTable" prefHeight="163.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="salesTable" prefHeight="163.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                             <TableColumn fx:id="rowNumColumn" prefWidth="32.0" text="#" />
-                            <TableColumn fx:id="customerIDColumn" prefWidth="135.0" text="Customer ID" />
-                              <TableColumn fx:id="partyTypeColumn" minWidth="9.0" prefWidth="149.0" text="Party" />
+                            <TableColumn fx:id="customerIDColumn" prefWidth="113.0" text="Customer ID" />
+                              <TableColumn fx:id="customerNameColumn" prefWidth="113.0" text="customerName" />
+                              <TableColumn fx:id="partyTypeColumn" minWidth="9.0" prefWidth="139.0" text="Party" />
+                              <TableColumn fx:id="dueDateColumn" minWidth="9.0" prefWidth="79.0" text="Due Date" />
+                              <TableColumn fx:id="dueTimeColumn" minWidth="9.0" prefWidth="115.0" text="Due Time" />
+                              <TableColumn fx:id="venueColumn" minWidth="9.0" prefWidth="115.0" text="Venue" />
+                              <TableColumn fx:id="catererColumn" minWidth="9.0" prefWidth="115.0" text="Caterer" />
+                              <TableColumn fx:id="addonOneColumn" minWidth="9.0" prefWidth="115.0" text="Addon One" />
+                              <TableColumn fx:id="addonTwoColumn" minWidth="9.0" prefWidth="115.0" text="Addon Two" />
+                              <TableColumn fx:id="addonThreeColumn" minWidth="9.0" prefWidth="115.0" text="Addon Three" />
+                              <TableColumn fx:id="totalPriceColumn" minWidth="9.0" prefWidth="115.0" text="Total Price" />
+                              <TableColumn fx:id="toBePaidColumn" minWidth="9.0" prefWidth="115.0" text="To Be Paid" />
                           </columns>
                         </TableView>
                         <JFXButton fx:id="makePaymentButton" prefHeight="33.0" prefWidth="600.0" ripplerFill="#3d546f" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Make Payment" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
