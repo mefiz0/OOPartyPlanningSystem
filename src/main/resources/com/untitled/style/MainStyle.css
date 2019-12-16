@@ -42,7 +42,7 @@
     -fx-border-width: 0px 0px 3px 0px;
 }
 
-.jfx-text-field{
+.login-text-field{
     -jfx-focus-color: #4099ff;
     -jfx-unfocus-color: #334354;
     -fx-prompt-text-fill: #fff;

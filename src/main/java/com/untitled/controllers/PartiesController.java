@@ -2,6 +2,7 @@ package main.java.com.untitled.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
@@ -104,6 +105,9 @@ public class PartiesController {
 
     @FXML
     private JFXComboBox<String> removePartySelect;
+    
+    @FXML
+    private JFXTabPane dataAccessPane;
 
     @FXML
     void initialize() {
@@ -318,5 +322,11 @@ public class PartiesController {
         
         //reset the combo box selection
         removePartySelect.getSelectionModel().clearSelection();
+    }
+    
+    public void setPermissions(String role){
+        if(role.equals("Event Sales")){
+            partiesPane.getChildren().remove(dataAccessPane);
+        }
     }
 }

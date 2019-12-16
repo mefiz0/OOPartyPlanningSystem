@@ -20,8 +20,8 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="usernameInput" focusColor="#4099ff" labelFloat="true" layoutX="49.0" layoutY="212.0" prefHeight="25.0" prefWidth="212.0" promptText="USERNAME" style="-fx-prompt-text-fill: #fff; -fx-text-fill: #4099ff;" styleClass="jfx-text-field" stylesheets="@../style/MainStyle.css" unFocusColor="#334354" />
-      <JFXPasswordField fx:id="passwordInput" focusColor="BLACK" labelFloat="true" layoutX="49.0" layoutY="284.0" prefHeight="25.0" prefWidth="212.0" promptText="PASSWORD" style="-fx-prompt-text-fill: #fff; -fx-text-fill: #4099ff;" styleClass="jfx-text-field" stylesheets="@../style/MainStyle.css" unFocusColor="WHITE" />
+      <JFXTextField fx:id="usernameInput" focusColor="#4099ff" labelFloat="true" layoutX="49.0" layoutY="212.0" prefHeight="25.0" prefWidth="212.0" promptText="USERNAME" styleClass="login-text-field" stylesheets="@../style/MainStyle.css" unFocusColor="#334354" />
+      <JFXPasswordField fx:id="passwordInput" focusColor="BLACK" labelFloat="true" layoutX="49.0" layoutY="284.0" prefHeight="25.0" prefWidth="212.0" promptText="PASSWORD" styleClass="login-text-field" stylesheets="@../style/MainStyle.css" unFocusColor="WHITE" />
       <JFXButton fx:id="loginButton" layoutY="344.0" prefHeight="35.0" prefWidth="600.0" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="LOG IN">
          <font>
             <Font name="System Bold" size="14.0" />

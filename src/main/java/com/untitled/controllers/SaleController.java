@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.java.com.untitled.Sale;
 import main.java.com.untitled.models.AddonsModel;
+import main.java.com.untitled.models.CatererModel;
 import main.java.com.untitled.models.CustomerModel;
 import main.java.com.untitled.models.PartyModel;
 import main.java.com.untitled.models.PaymentsModel;
@@ -29,7 +30,7 @@ import main.java.com.untitled.models.SalesModel;
 import main.java.com.untitled.models.VenuesModel;
 
 public class SaleController {
-        @FXML
+    @FXML
     private ResourceBundle resources;
 
     @FXML
@@ -97,9 +98,18 @@ public class SaleController {
 
     @FXML
     private JFXComboBox<String> partyPaymentSelect;
+    
+    @FXML
+    private JFXButton calculatePricesButton;
 
     @FXML
     void initialize() {
+        updateTableView();
+        
+        //set these to not visible at start
+        subTotal.setVisible(false);
+        totalPrice.setVisible(false);
+        customerName.setVisible(false);
         
         customerSaleSelect.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
             //create a new customer dao
@@ -109,6 +119,138 @@ public class SaleController {
                 HashMap data = customerDAO.getCustomerDataBasedOnID(newValue);
                 customerName.setText((String) data.get("name")); //set the string
                 customerName.setVisible(true); //and make it visible
+            } catch (SQLException ex) {
+                Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        //calculate the prices
+        calculatePricesButton.setOnAction((event) -> {
+            //get the input data
+            Sale sale = new Sale();
+            String customer = customerSaleSelect.getValue();
+            sale.setType(partySaleSelect.getValue());
+            sale.setDueDate(Date.valueOf(addDueDate.getValue()));
+            sale.setDueTime(Time.valueOf(addDueTime.getValue()));
+            sale.setVenue(addVenueSelect.getValue());
+            sale.setAddonOne(addonOneSelect.getValue());
+            sale.setAddonTwo(addonTwoSelect.getValue());
+            sale.setAddonThree(addonThreeSelect.getValue());
+            sale.setCaterer(catererSelect.getValue());
+            sale.setAmountPaid(new BigDecimal(saleAmountPaid.getText()));
+            
+            try {
+                //set the prices
+                subTotal.setText(Integer.toString(sale.calculateSubtotal()));
+                subTotal.setVisible(true);
+                sale.calculateTotalPrice(sale.calculateSubtotal());
+                totalPrice.setText(sale.getTotalPrice().toString());
+                totalPrice.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        });
+        
+        //set the combo boxes to get the data on click
+        customerSaleSelect.setOnShowing((event) -> {
+            //create the data access objects
+            CustomerModel customerModel = new CustomerModel();
+            
+            //get the data into the list
+            try {
+                //get the data
+                ObservableList customerIDs = customerModel.getListOfAllCustomerIDs();
+                customerSaleSelect.setItems(customerIDs);// set the data to the combo box
+            } catch (SQLException ex) {
+                Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        //set the combo boxes to get the data on click
+        partySaleSelect.setOnShowing((event) -> {
+            //create the data access objects
+            PartyModel partyModel = new PartyModel();
+            
+            //get the data into the list
+            try {
+                //get the data
+                ObservableList partyTypes = partyModel.getListOfAllPartyTypes();
+                partySaleSelect.setItems(partyTypes);// set the data to the combo box
+            } catch (SQLException ex) {
+                Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        //set the combo boxes to get the data on click
+        addVenueSelect.setOnShowing((event) -> {
+            //create the data access objects
+            VenuesModel venues = new VenuesModel();
+            
+            //get the data into the list
+            try {
+                //get the data
+                ObservableList venuesList = venues.getListOfAllVenues();
+                addVenueSelect.setItems(venuesList);// set the data to the combo box
+            } catch (SQLException ex) {
+                Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        //set the combo boxes to get the data on click
+        addonOneSelect.setOnShowing((event) -> {
+            //create the data access objects
+            AddonsModel addonsModel = new AddonsModel();
+            
+            //get the data into the list
+            try {
+                //get the data
+                ObservableList addonsList = addonsModel.getAllAddonsTypes();
+                addonOneSelect.setItems(addonsList);// set the data to the combo box
+            } catch (SQLException ex) {
+                Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        //set the combo boxes to get the data on click
+        addonTwoSelect.setOnShowing((event) -> {
+            //create the data access objects
+            AddonsModel addonsModel = new AddonsModel();
+            
+            //get the data into the list
+            try {
+                //get the data
+                ObservableList addonsList = addonsModel.getAllAddonsTypes();
+                addonTwoSelect.setItems(addonsList);// set the data to the combo box
+            } catch (SQLException ex) {
+                Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        //set the combo boxes to get the data on click
+        addonThreeSelect.setOnShowing((event) -> {
+            //create the data access objects
+            AddonsModel addonsModel = new AddonsModel();
+            
+            //get the data into the list
+            try {
+                //get the data
+                ObservableList addonsList = addonsModel.getAllAddonsTypes();
+                addonThreeSelect.setItems(addonsList);// set the data to the combo box
+            } catch (SQLException ex) {
+                Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        catererSelect.setOnShowing((event) -> {
+            //create the data access objects
+            CatererModel caterer = new CatererModel();
+            
+            //get the data into the list
+            try {
+                //get the data
+                ObservableList caterersList = caterer.getAllCaterers();
+                catererSelect.setItems(caterersList);// set the data to the combo box
             } catch (SQLException ex) {
                 Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -138,34 +280,6 @@ public class SaleController {
         //set the items in the table view
         paymentsTable.setItems(salesList);
     }//end updateTableView()
-
-    
-    //set the combo boxes
-    public void updateSalesComboBoxes(){
-        //create the data access objects
-        CustomerModel customerDAO = new CustomerModel();
-        PartyModel partyDAO = new PartyModel();
-        VenuesModel venuesDAO = new VenuesModel();
-        AddonsModel addonsDAO = new AddonsModel();
-        
-        try {
-            //add all the data to a list
-            ObservableList customerIDs = customerDAO.getListOfAllCustomerIDs();
-            ObservableList partyTypes = partyDAO.getListOfAllPartyTypes();
-            ObservableList venues = venuesDAO.getListOfAllVenues();
-            ObservableList addons = addonsDAO.getAllAddonsTypes();
-            
-            //set the combo boxes
-            customerSaleSelect.setItems(customerIDs);
-            partySaleSelect.setItems(partyTypes);
-            addVenueSelect.setItems(venues);
-            addonOneSelect.setItems(addons);
-            addonTwoSelect.setItems(addons);
-            addonThreeSelect.setItems(addons);
-        } catch (SQLException ex) {
-            Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//end updateSalesBoxes
     
     //make a sale
     public void makeSale(){
@@ -196,6 +310,19 @@ public class SaleController {
             Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        updateTableView();
+        
         //clear the inputs
+        customerSaleSelect.getSelectionModel().clearSelection();
+        partySaleSelect.getValue();
+        addDueDate.getEditor().clear();
+        addDueTime.getEditor().clear();
+        addVenueSelect.getSelectionModel().clearSelection();
+        addonOneSelect.getSelectionModel().clearSelection();
+        addonTwoSelect.getSelectionModel().clearSelection();
+        addonThreeSelect.getSelectionModel().clearSelection();
+        saleAmountPaid.setText("");
+        catererSelect.getSelectionModel().clearSelection();
+        totalPrice.setText("");
     }
 }

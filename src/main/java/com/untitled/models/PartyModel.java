@@ -257,9 +257,11 @@ public class PartyModel extends PartyBaseModel{
         PreparedStatement ps = connection.prepareStatement("SELECT Price FROM parties WHERE Type = '" + type + "'");
         //create the result set
         ResultSet rs = ps.executeQuery();
-        
+        int price = 0;
         //get the results
-        int price = rs.getInt("Price");
+        while(rs.next()){
+            price = rs.getInt("Price");
+        }
         
         //close the statement and the connection
         ps.close();

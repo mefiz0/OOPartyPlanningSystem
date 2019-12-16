@@ -131,6 +131,17 @@ public class Sale extends PartyBase{
         this.amountPaid = amountPaid;
         this.totalPrice = totalPrice;
     }
+    
+    public Sale(String venue, Date dueDate, Time dueTime, String addonOne, String addonTwo, String addonThree, String caterer, BigDecimal amountPaid, String type) {
+        super(type);
+        this.venue = venue;
+        this.dueDate = dueDate;
+        this.dueTime = dueTime;
+        this.addonOne = addonOne;
+        this.addonTwo = addonTwo;
+        this.addonThree = addonThree;
+        this.caterer = caterer;
+    }
 
     public Sale(String venue, Date dueDate, Time dueTime, String addonOne, String addonTwo, String addonThree, String caterer, BigDecimal totalPrice, BigDecimal amountPaid) {
         this.venue = venue;
@@ -144,6 +155,10 @@ public class Sale extends PartyBase{
         this.amountPaid = amountPaid;
     }
     
+    public Sale(){
+        
+    }
+    
     
     //calculate the subtotal
     public int calculateSubtotal() throws SQLException{
@@ -155,11 +170,17 @@ public class Sale extends PartyBase{
         
         //get the prices
         int partyPrice = partyDAO.getPriceOfPartyBasedOnType(this.getType());
+        System.out.println("party price = " + partyPrice);
         int venuePrice = venuesDAO.getPriceOfVenue(this.venue);
+        System.out.println("venue price = " + venuePrice);
         int addonsOnePrice = addonsDAO.getPriceBasedOnAddon(this.addonOne);
+        System.out.println("addonsOnePrice = " + addonsOnePrice);
         int addonsTwoPrice = addonsDAO.getPriceBasedOnAddon(this.addonTwo);
+        System.out.println("addonsTwoPrice = " + addonsTwoPrice);
         int addonsThreePrice = addonsDAO.getPriceBasedOnAddon(this.addonThree);
+        System.out.println("addonsThreePrice = " + addonsThreePrice);
         int catererPrice = catererDAO.getPriceBasedOnCaterer(this.caterer);
+        System.out.println("catererPrice = " + catererPrice);
         
         //return the sub total
         return (partyPrice + venuePrice + addonsOnePrice + addonsTwoPrice + addonsThreePrice + catererPrice);

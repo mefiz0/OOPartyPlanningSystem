@@ -198,8 +198,9 @@ public class AddonsModel implements Model{
         //define the hashmap to store customer data
         int price = 0;
         
+        while(rs.next()){
         price = rs.getInt("Price");
-        
+        }
         //close the statement and the connection
         ps.close();
         connection.close();

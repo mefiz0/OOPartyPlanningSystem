@@ -97,13 +97,13 @@ public class PaymentsModel implements Model{
         //define the statement
         String sqlStatement = "SELECT purchases.PurchaseID, "
                             + "customers.ID, "
-                            + "sold.PartyType, "
+                            + "sold.PartyType "
                             + "FROM purchases "
                             + "LEFT JOIN customers "
                             + "ON purchases.CustomerID = customers.CustomerID "
-                            + "LEFT JOIN sold"
+                            + "LEFT JOIN sold "
                             + "ON purchases.SoldID = sold.SoldID "
-                            + "WHERE purchases.ToBePaid = 'YES'"; 
+                            + "WHERE ToBePaid = 'YES'"; 
         
         //prepare the statment
         PreparedStatement ps = connection.prepareStatement(sqlStatement);

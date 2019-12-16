@@ -12,13 +12,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import main.java.com.untitled.models.UserAccessModel;
 
 public class MainController {
@@ -84,6 +88,12 @@ public class MainController {
     @FXML
     private FontAwesomeIcon closeIcon;
     
+    @FXML
+    private JFXButton logOutButton;
+    
+    @FXML
+    private VBox navButtons;
+    
     //Hashmap to preload and store all javafx anchor panes to improve perfomance
     HashMap<String, AnchorPane> viewPanes = new HashMap<>();
     HashMap<String, Object> viewControllers = new HashMap<>();
@@ -92,7 +102,7 @@ public class MainController {
     @FXML
     void initialize() {
         
-        initializeView();
+        //initializeView();
         
         //if the nav button is clicked show the nav bar
         navButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) ->{
@@ -231,6 +241,37 @@ public class MainController {
             Stage currentStage = (Stage) closeButton.getScene().getWindow();
             currentStage.close();
         });
+        
+        //when the logOutButton is pressed
+        logOutButton.setOnAction((event) -> {
+            UserAccessModel userAccess = new UserAccessModel();
+            try {
+                userAccess.updateTable(); //insert the logged out record
+                Stage currentStage = (Stage) closeButton.getScene().getWindow();
+                currentStage.close(); //close the current stage
+                
+                //open the login page
+                Parent root;
+                try {
+                    //get the main fxml
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/resources/com/untitled/view/Login.fxml")); 
+                    root = loader.load(); //load  it
+                    //set the scene
+                    Scene scene = new Scene(root);
+                    Stage loginStage = new Stage(); // <- new stage
+                    //load the scene to the stage
+                    loginStage.setScene(scene);
+                    loginStage.initStyle(StageStyle.UNDECORATED); //stage style undecorated
+                    loginStage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }   catch (SQLException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        
     }
     
     //set a disabled button to enabled
@@ -303,7 +344,7 @@ public class MainController {
     
     //reapply css for the topbar and the nav bar
     
-    private void initializeView(){
+    private void initializeView(String role){
         //create a new thread to load the scenes
         new Thread(() -> {
             try {
@@ -355,6 +396,7 @@ public class MainController {
                 FXMLLoader partiesLoader = new FXMLLoader(getClass().getResource("/main/resources/com/untitled/view/Parties.fxml"));
                 AnchorPane partiesPane = partiesLoader.load();
                 PartiesController partiesController = partiesLoader.getController();
+                partiesController.setPermissions(role);
                 //add to the hashmaps
                 viewPanes.put("Parties", partiesPane);
                 viewControllers.put("Parties", partiesController);
@@ -410,8 +452,18 @@ public class MainController {
         usernameView.setText(username);
     }
     
-    //set the role
+    //set the role and buttons based on role
     public void setRole(String role){
         roleView.setText(role);
+        
+        if(!role.equalsIgnoreCase("Administrator")){
+            navButtons.getChildren().remove(userSettingsButton);
+        }
+        
+        if(role.equals("Event Sales")){
+            navButtons.getChildren().remove(tasksButton);
+        }
+        
+        initializeView(role);
     }
 }
