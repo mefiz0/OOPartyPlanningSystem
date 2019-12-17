@@ -197,7 +197,20 @@ public class SalesModel implements Model{
             System.out.println(customerID);
         }
         
-        //3 - add to the purchases table
+        //3 - get the tasks id
+        //create a task model
+        TasksModel taskModel = new TasksModel();
+        //set the identifier and the party type
+        taskModel.setIdentifier(identifier);
+        taskModel.setPartyType(this.partyType.get());
+        
+        //insert a new record to the tasks table
+        taskModel.insertIntoTable();
+        
+        //get the task id
+        int taskId = taskModel.getTaskID();
+        
+        //4 - add to the purchases table
         String toBePaid = null;
         
         //compare if the amount paid and the total price is the same
@@ -213,8 +226,8 @@ public class SalesModel implements Model{
         }
         
         //4 - insert record into purchases
-        ps = connection.prepareStatement("INSERT INTO purchases (CustomerID, SoldID, ToBePaid) VALUES("
-                                        + customerID + ", " + soldID + ", '" + toBePaid + "')");
+        ps = connection.prepareStatement("INSERT INTO purchases (CustomerID, SoldID, TaskID, ToBePaid) VALUES("
+                                        + customerID + ", " + soldID + ", "  + taskId + ", '" + toBePaid + "')");
         ps.execute();
         
         //close the statement and the conenction

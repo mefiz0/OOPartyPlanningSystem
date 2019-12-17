@@ -1,27 +1,88 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.java.com.untitled.controllers;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 
-/**
- * FXML Controller class
- *
- * @author sath
- */
-public class TasksController implements Initializable {
+public class TasksController {
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private AnchorPane tasksPane;
+
+    @FXML
+    private TableView<?> tasksTable;
+
+    @FXML
+    private TableColumn<?, ?> rowNumColumn;
+
+    @FXML
+    private TableColumn<?, ?> customerNameColumn;
+
+    @FXML
+    private TableColumn<?, ?> partyTypeColumn;
+
+    @FXML
+    private TableColumn<?, ?> partyIdentifierColumn;
+
+    @FXML
+    private TableColumn<?, ?> taskOneColumn;
+
+    @FXML
+    private TableColumn<?, ?> taskOneProgressColumn;
+
+    @FXML
+    private TableColumn<?, ?> taskTwoColumn;
+
+    @FXML
+    private TableColumn<?, ?> taskTwoProgressColumn;
+
+    @FXML
+    private TableColumn<?, ?> taskThreeColumn;
+
+    @FXML
+    private TableColumn<?, ?> taskThreeProgressColumn;
+
+    @FXML
+    private TableColumn<?, ?> taskFourColumn;
+
+    @FXML
+    private TableColumn<?, ?> taskFourProgressColumn;
+
+    @FXML
+    private JFXComboBox<?> partySelect1;
+
+    @FXML
+    private JFXComboBox<?> partySelect;
+
+    @FXML
+    private JFXTextField updateTaskOneProgress;
+
+    @FXML
+    private JFXTextField updateTaskTwoProgress;
+
+    @FXML
+    private JFXTextField updateTaskThreeProgress;
+
+    @FXML
+    private JFXTextField updateTaskFourProgress;
+
+    @FXML
+    private JFXButton updateProgressButton;
+
+    @FXML
+    void initialize() {
+       
+    }
 }

@@ -282,13 +282,6 @@ public class MainController {
         }
         
         /*
-        Sales History Button
-        */
-        if(salesHistoryButton.isDisabled() == true){
-            salesHistoryButton.setDisable(false);
-        }
-        
-        /*
         tasks button
         */
         if(tasksButton.isDisabled() == true){

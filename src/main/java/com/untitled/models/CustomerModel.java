@@ -136,7 +136,8 @@ public class CustomerModel implements Model{
                                     + "Name = '" + this.name.get() + "', "
                                     + "BankAccountNumber = " + this.bankAccountNum.get() + ", "
                                     + "ContactNumber = " + this.contactNum.get() + ", "
-                                    + "Email = '" + this.emailAddress.get() + "'";
+                                    + "Email = '" + this.emailAddress.get() + "' "
+                                    + "WHERE ID = '" + this.idNum.get() + "'";
         //prepare the statement
         PreparedStatement ps = connection.prepareStatement(updateCustomersTable);
         //execute statement
