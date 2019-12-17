@@ -30,7 +30,7 @@ public class DatabaseConnection {
         }else{
 
             System.out.println("Table " + tableName + " does not exist");
-            stmt.execute(createTable); //create the users table
+            stmt.execute(createTable);
             System.out.println(tableName + " Table Created");
             if(tableName == "users"){
                 stmt.executeUpdate(DatabaseTables.INSERT_ADMIN_TO_USERS_TABLE_SQL);
@@ -74,6 +74,9 @@ public class DatabaseConnection {
         
         //check sold table
         checkTable("sold", dbmd, initTables, DatabaseTables.CREATE_SOLD_TABLE_SQL);
+        
+        //check sold table
+        checkTable("tasks", dbmd, initTables, DatabaseTables.CREATE_TASKS_TABLE_SQL);
 
         //check purchases table
         checkTable("purchases", dbmd, initTables, DatabaseTables.CREATE_PURCHASES_TABLE_SQL);

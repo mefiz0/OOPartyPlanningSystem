@@ -121,6 +121,7 @@ public class MainController {
             
         }); //end customersButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) ->{})
         
+        /* home button is to be implemented later
         homeButton.setOnAction((event) -> {
             resetButtons();
             
@@ -131,7 +132,7 @@ public class MainController {
             //disable the buttons
             homeButton.setDisable(true);
         });
-        
+        */
         salesButton.setOnAction((event) -> {
             resetButtons();
             
@@ -270,10 +271,11 @@ public class MainController {
         
         /*
         home button
-        */
+        --to be implemented later (ver2.0)
         if(homeButton.isDisabled() == true){
             homeButton.setDisable(false);
         }
+        */
         
         /*
         sales button
@@ -335,13 +337,14 @@ public class MainController {
                 
                 /*
                 Home
-                */
+                --to be implemented later (ver2.0)
                 FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/main/resources/com/untitled/view/Home.fxml"));
                 AnchorPane homePane = homeLoader.load();
                 HomeController homeController = homeLoader.getController();
                 //add to the hashmaps
                 viewPanes.put("Home", homePane);
                 viewControllers.put("Home", homeController);
+                */
                 
                 /*
                 Sales

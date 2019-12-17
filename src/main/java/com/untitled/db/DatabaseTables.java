@@ -142,15 +142,15 @@ public class DatabaseTables {
     this table is used for tasks management
     */
     public static final String CREATE_TASKS_TABLE_SQL = "CREATE TABLE tasks ( "
-                                                      + "TaskID INTEGER NOT NULL GENERATE ALWAYS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                                                      + "TaskOne VARCHAR(60),"
-                                                      + "TaskTwo VARCHAR(60),"
-                                                      + "TaskThree VARCHAR(60),"
-                                                      + "TaskFour VARCHAR(60),"
+                                                      + "TaskID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
+                                                      + "TaskOne VARCHAR(60) NOT NULL,"
+                                                      + "TaskTwo VARCHAR(60) NOT NULL,"
+                                                      + "TaskThree VARCHAR(60) NOT NULL,"
+                                                      + "TaskFour VARCHAR(60) NOT NULL,"
                                                       + "TaskOneProgress INTEGER,"
                                                       + "TaskTwoProgress INTEGER,"
                                                       + "TaskThreeProgress INTEGER,"
                                                       + "TaskFourProgress INTEGER,"
-                                                      + "Status VARCHAR((10),"
-                                                      + "PRIMARY KEY(TaskID)";
+                                                      + "Status VARCHAR(10),"
+                                                      + "PRIMARY KEY(TaskID))";
     }
