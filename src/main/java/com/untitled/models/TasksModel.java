@@ -132,6 +132,17 @@ public class TasksModel implements Model{
     public TasksModel() {
         //empty
     }
+
+    public TasksModel(String customerID, String identifier, int taskOneProgress, int taskTwoProgress, int taskThreeProgress, int taskFourProgress) {
+        this.customerID = new SimpleStringProperty(customerID);
+        this.identifier = new SimpleStringProperty(identifier);
+        this.taskOneProgress = new SimpleIntegerProperty(taskOneProgress);
+        this.taskTwoProgress = new SimpleIntegerProperty(taskTwoProgress);
+        this.taskThreeProgress = new SimpleIntegerProperty(taskThreeProgress);
+        this.taskFourProgress = new SimpleIntegerProperty(taskFourProgress);
+    }
+    
+    
     
     @Override
     public void insertIntoTable() throws SQLException {
@@ -367,7 +378,7 @@ public class TasksModel implements Model{
     }
     
     //get a list of customers
-    private ObservableList<String> getCustomers() throws SQLException{
+    public ObservableList<String> getCustomers() throws SQLException{
         ObservableList<String> customersList = FXCollections.observableArrayList(); //create an observable array list
         
         //create a connection object
@@ -381,7 +392,7 @@ public class TasksModel implements Model{
                               + "ON purchases.CustomerID = customers.CustomerID "
                               + "LEFT JOIN tasks "
                               + "ON purchases.TaskID = tasks.TaskID "
-                              + "WHERE tasks.status != 'Complete";
+                              + "WHERE tasks.status != 'Complete'";
         //prepare the statement
         PreparedStatement ps = connection.prepareStatement(customerSelect);
         
@@ -394,31 +405,60 @@ public class TasksModel implements Model{
         return customersList;
     }
     
-    //get a list of customers
-    private ObservableList<String> getIdentifiers(String customerID5) throws SQLException{
-        ObservableList<String> customersList = FXCollections.observableArrayList(); //create an observable array list
+    //get a list of identifiers
+    public ObservableList<String> getIdentifiers(String customerID) throws SQLException{
+        ObservableList<String> identifiersList = FXCollections.observableArrayList(); //create an observable array list
         
         //create a connection object
         Connection connection = DriverManager.getConnection(JDBC_URL);
         
         //prepare the select statement
-        String customerSelect = "SELECT customers.ID, "
+        String getIdentifier = "SELECT customers.ID, "
                               + "tasks.Status, "
+                              + "sold.Identifiers"
                               + "FROM purchases "
                               + "LEFT JOIN customers "
                               + "ON purchases.CustomerID = customers.CustomerID "
                               + "LEFT JOIN tasks "
                               + "ON purchases.TaskID = tasks.TaskID "
-                              + "WHERE tasks.status != 'Complete";
+                              + "LEFT JOIN sold "
+                              + "ON purchases.SoldID = sold.SoldID "
+                              + "WHERE customers.ID = '" + customerID + "'";
         //prepare the statement
-        PreparedStatement ps = connection.prepareStatement(customerSelect);
+        PreparedStatement ps = connection.prepareStatement(getIdentifier);
         
         ResultSet rs = ps.executeQuery();
         
         while(rs.next()){
-            customersList.add(rs.getString("ID"));
+            identifiersList.add(rs.getString("Identifier"));
         }
         
-        return customersList;
+        return identifiersList;
+    }
+    
+     //get customer names at id
+    public String getCustomerNames(String customerID) throws SQLException{
+        String customerName = null;
+        
+        //create a connection object
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+        
+        //prepare the select statement
+        String getIdentifier = "SELECT customers.ID, "
+                              + "customers.Name "
+                              + "FROM purchases "
+                              + "LEFT JOIN customers "
+                              + "ON purchases.CustomerID = customers.CustomerID "
+                              + "WHERE customers.ID = '" + customerID + "'";
+        //prepare the statement
+        PreparedStatement ps = connection.prepareStatement(getIdentifier);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()){
+            customerName = rs.getString("Name");
+        }
+        
+        return customerName;
     }
 }

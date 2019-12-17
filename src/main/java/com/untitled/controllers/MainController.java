@@ -149,6 +149,7 @@ public class MainController {
             //load from hashmap
             TasksController tasksController = (TasksController) viewControllers.get("Tasks");
             borderPane.setCenter(viewPanes.get("Tasks"));
+            tasksController.updateTableView();
             
             //disable the buttons
             tasksButton.setDisable(true);

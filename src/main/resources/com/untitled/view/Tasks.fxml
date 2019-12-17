@@ -16,7 +16,7 @@
       <TableView fx:id="tasksTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="279.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
           <TableColumn fx:id="rowNumColumn" prefWidth="75.0" text="#" />
-          <TableColumn fx:id="customerNameColumn" prefWidth="75.0" text="Customer" />
+          <TableColumn fx:id="customerIDColumn" prefWidth="75.0" text="Customer" />
             <TableColumn fx:id="partyTypeColumn" prefWidth="75.0" text="Party Type" />
             <TableColumn fx:id="partyIdentifierColumn" prefWidth="75.0" text="Identifier" />
             <TableColumn fx:id="taskOneColumn" prefWidth="75.0" text="Task One" />
@@ -43,13 +43,13 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXComboBox fx:id="partySelect1" prefHeight="25.0" prefWidth="931.0" promptText="Customer ID" />
+            <JFXComboBox fx:id="customerIDSelect" prefHeight="25.0" prefWidth="931.0" promptText="Customer ID" />
             <JFXComboBox fx:id="partySelect" prefHeight="25.0" prefWidth="931.0" promptText="Party" GridPane.rowIndex="1" />
             <JFXTextField fx:id="updateTaskOneProgress" prefHeight="25.0" prefWidth="713.0" promptText="Task One Progress" GridPane.rowIndex="2" />
             <JFXTextField fx:id="updateTaskTwoProgress" promptText="Task Two Progress" GridPane.rowIndex="3" />
             <JFXTextField fx:id="updateTaskThreeProgress" promptText="Task Three Progress" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <JFXTextField fx:id="updateTaskFourProgress" promptText="Task Four Progress" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Label text="Customer name" GridPane.columnIndex="3" />
+            <Label fx:id="customerNameLabel" text="Customer name" visible="false" GridPane.columnIndex="3" />
          </children>
       </GridPane>
       <JFXButton fx:id="updateProgressButton" layoutY="353.0" prefHeight="32.0" prefWidth="600.0" styleClass="buttons_other" stylesheets="@../style/MainStyle.css" text="Update Progress" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
