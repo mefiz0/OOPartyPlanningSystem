@@ -70,17 +70,9 @@
          <children>
             <VBox fx:id="navButtons" prefHeight="464.0" prefWidth="188.0">
                <children>
-                  <JFXButton fx:id="homeButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons_main" stylesheets="@../style/MainStyle.css" text="Home" textFill="WHITE">
-                     <VBox.margin>
-                        <Insets top="50.0" />
-                     </VBox.margin>
-                     <graphic>
-                        <FontAwesomeIcon iconName="HOME" size="1.5em" styleClass="homeIcon" />
-                     </graphic>
-                  </JFXButton>
                   <JFXButton fx:id="salesButton" alignment="BASELINE_LEFT" graphicTextGap="47.0" layoutX="10.0" layoutY="110.0" prefHeight="35.0" prefWidth="185.0" ripplerFill="#3d546f" styleClass="buttons_main" stylesheets="@../style/MainStyle.css" text="Sales" textFill="WHITE">
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets top="100.0" />
                      </VBox.margin>
                      <graphic>
                         <FontAwesomeIcon iconName="DOLLAR" size="1.5em" styleClass="salesIcon" />

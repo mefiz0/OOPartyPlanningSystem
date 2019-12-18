@@ -2,6 +2,7 @@ package main.java.com.untitled.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
@@ -67,6 +68,9 @@ public class CateringController {
     @FXML
     private JFXComboBox<String> removeCatererSelect;
 
+    @FXML
+    private JFXTabPane dataAccessPaneCatering;
+    
     @FXML
     void initialize() {
         //initialize the combobox and the tableview
@@ -253,4 +257,13 @@ public class CateringController {
         //clear the selection
         removeCatererSelect.getSelectionModel().clearSelection();
     }//end removeCatererInDatabase()
+    
+    //set what is avaliable to the user depending on the user role
+    public void setPermissions(String role){
+        if(role.equals("Event Sales")){
+            cateringPane.getChildren().remove(dataAccessPaneCatering);
+            
+            AnchorPane.setBottomAnchor(cateringTable, 0.0);
+        }
+    }
 }

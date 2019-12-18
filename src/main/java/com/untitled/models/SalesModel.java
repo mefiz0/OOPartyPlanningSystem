@@ -8,9 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -161,7 +159,7 @@ public class SalesModel implements Model{
                                     + "(Identifier, PartyType, Venue, Caterer, AddonOne, AddOnTwo, AddonThree, DueDate, DueTime, TotalPrice, AmountPaid) "
                                     + "VALUES "
                                     + "('" + identifier + "', " 
-                                    + this.partyType.get() + "', "
+                                    + "'" + this.partyType.get() + "', "
                                     + "'" + this.venue.get() + "', "
                                     + "'" + this.caterer.get() + "', "
                                     + "'" + this.addonOne.get() + "', "
@@ -208,8 +206,15 @@ public class SalesModel implements Model{
         taskModel.insertIntoTable();
         
         //get the task id
-        int taskId = taskModel.getTaskID();
+        ps = connection.prepareStatement("SELECT TaskID FROM tasks");
+        rs = ps.executeQuery();
         
+        int taskId = 0;
+        
+        while(rs.next()){
+            taskId = rs.getInt("TaskID");
+        }
+        System.out.println("taskID " + taskId);
         //4 - add to the purchases table
         String toBePaid = null;
         

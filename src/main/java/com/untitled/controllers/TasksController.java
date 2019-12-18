@@ -105,6 +105,7 @@ public class TasksController {
             
             //get the data into the combo box
             try {
+                //get the data
                 ObservableList customersList = tasks.getCustomers();
                 customerIDSelect.setItems(customersList);
             } catch (SQLException ex) {
@@ -137,11 +138,15 @@ public class TasksController {
         updateTaskOneProgress.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.matches("\\d{0,3}?")) {
-                    Platform.runLater(() -> {
-                        updateTaskOneProgress.setText("");
-                    });
-                }
+                try{
+                    if(!newValue.matches("\\d{0,3}?") || (Integer.parseInt(newValue) > 100)) {
+                        Platform.runLater(() -> {
+                            updateTaskOneProgress.setText("");
+                        });
+                    }
+                } catch(Exception e){
+                    System.out.println("A string was entered that couldn't be parsed! moving on");
+                }//end try catch
             }
             
         });//end updateTaskOneProgress.textProperty().addListener(new ChangeListener<String>()
@@ -150,11 +155,15 @@ public class TasksController {
         updateTaskTwoProgress.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.matches("\\d{0,3}?")) {
-                    Platform.runLater(() -> {
-                        updateTaskTwoProgress.setText("");
-                    });
-                }
+                try{
+                    if(!newValue.matches("\\d{0,3}?") || (Integer.parseInt(newValue) > 100)) {
+                        Platform.runLater(() -> {
+                            updateTaskOneProgress.setText("");
+                        });
+                    }
+                } catch(Exception e){
+                    System.out.println("A string was entered that couldn't be parsed! moving on");
+                }//end try catch
             }
             
         });//end updateTaskTwoProgress.textProperty().addListener(new ChangeListener<String>()
@@ -163,11 +172,15 @@ public class TasksController {
         updateTaskThreeProgress.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.matches("\\d{0,3}?")) {
-                    Platform.runLater(() -> {
-                        updateTaskThreeProgress.setText("");
-                    });
-                }
+                try{
+                    if(!newValue.matches("\\d{0,3}?") || (Integer.parseInt(newValue) > 100)) {
+                        Platform.runLater(() -> {
+                            updateTaskOneProgress.setText("");
+                        });
+                    }
+                } catch(Exception e){
+                    System.out.println("A string was entered that couldn't be parsed! moving on");
+                }//end try catch
             }
             
         });//end updateTaskThreeProgress.textProperty().addListener(new ChangeListener<String>()
@@ -177,11 +190,15 @@ public class TasksController {
         updateTaskFourProgress.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.matches("\\d{0,3}?")) {
-                    Platform.runLater(() -> {
-                        updateTaskFourProgress.setText("");
-                    });
-                }
+                try{
+                    if(!newValue.matches("\\d{0,3}?") || (Integer.parseInt(newValue) > 100)) {
+                        Platform.runLater(() -> {
+                            updateTaskOneProgress.setText("");
+                        });
+                    }
+                } catch(Exception e){
+                    System.out.println("A string was entered that couldn't be parsed! moving on");
+                }//end try catch
             }
             
         });//end updateTaskFourProgress.textProperty().addListener(new ChangeListener<String>()

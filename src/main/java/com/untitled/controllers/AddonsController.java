@@ -2,6 +2,7 @@ package main.java.com.untitled.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
@@ -66,6 +67,13 @@ public class AddonsController {
 
     @FXML
     private JFXComboBox<String> removeAddOnTypeSelect;
+    
+    @FXML
+    private JFXTabPane dataAccessPane;
+    
+    //inject controller for caterer pane
+    @FXML
+    private CateringController cateringController;
 
     @FXML
     void initialize() {
@@ -253,4 +261,14 @@ public class AddonsController {
         //clear the selection
         removeAddOnTypeSelect.getSelectionModel().clearSelection();
     }//end removeAddonInDatabase()
+    
+    //set what is avaliable to the user depending on the user role
+    public void setPermissions(String role){
+        if(role.equals("Event Sales")){
+            addonsPane.getChildren().remove(dataAccessPane);
+            AnchorPane.setBottomAnchor(addonsTable, 0.0);
+            
+            cateringController.setPermissions(role);
+        }
+    }
 }

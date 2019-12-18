@@ -24,9 +24,9 @@
       <DropShadow offsetX="-1.0" offsetY="-1.0" />
    </effect>
    <children>
-      <JFXTabPane stylesheets="@../style/TabPaneStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <JFXTabPane fx:id="salesTabPane" stylesheets="@../style/TabPaneStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
-            <Tab text="Sale">
+            <Tab fx:id="saleTab" text="Sale">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="600.0">
                      <children>
@@ -99,9 +99,9 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="History">
+            <Tab fx:id="historyTab" text="History">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane fx:id="historyPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TableView fx:id="salesTable" prefHeight="163.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
@@ -125,7 +125,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </JFXButton>
-                        <GridPane layoutX="31.0" prefHeight="66.0" prefWidth="540.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="29.0">
+                        <GridPane fx:id="dataAccessGrid" layoutX="31.0" prefHeight="66.0" prefWidth="540.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="29.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="567.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="150.0" />

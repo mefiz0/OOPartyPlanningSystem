@@ -152,6 +152,9 @@ public class TasksModel implements Model{
         //1 - first get the tasks from the parties list
         ArrayList taskList = getTasksFromPartyBasedOnType();
         
+        System.out.println(taskList.get(0) + " " + taskList.get(1));
+        System.out.println(taskList.get(2) + " " + taskList.get(3));
+        
         //2 - define the statement
         String addToTasks = "INSERT INTO tasks "
                           + "(TaskOne, TaskTwo, TaskThree, TaskFour , "
@@ -285,6 +288,13 @@ public class TasksModel implements Model{
         
         //1 - get the task id
         //define the statement
+        
+        //insert an additional ' in the identifier to escape the ' character
+        //get into a string
+        String identifier = this.identifier.get();
+        //get the substrings and inset a ' after the ' to escape it in sql
+        identifier = identifier.substring(0, identifier.indexOf("'")) + "'" + identifier.substring(identifier.indexOf("'"));
+        
         String getTaskID = "SELECT tasks.TaskID, "
                          + "sold.Identifier "
                          + "FROM purchases "
@@ -292,7 +302,8 @@ public class TasksModel implements Model{
                          + "ON purchases.TaskID = tasks.TaskID "
                          + "LEFT JOIN sold "
                          + "ON purchases.SoldID = sold.SoldID "
-                         + "WHERE sold.Identifier = '" + this.identifier.get() + "'";
+                         + "WHERE sold.Identifier = '" + identifier + "'";
+        
         //prepare and execute the statement. get the task id from the result  set
         PreparedStatement ps = connection.prepareStatement(getTaskID);
         ResultSet rs = ps.executeQuery();
@@ -302,6 +313,7 @@ public class TasksModel implements Model{
         //loop through the result set and the get the task id
         while(rs.next()){
             taskId = rs.getInt("TaskID");
+            System.out.println(taskId);
         }
         
         //close the statement connection and the result set
@@ -323,15 +335,15 @@ public class TasksModel implements Model{
                                + "purchases.TaskID, "
                                + "customers.ID, "
                                + "sold.Identifier, "
-                               + "sold.Type, "
+                               + "sold.PartyType, "
                                + "tasks.TaskOne, "
-                               + "task.TaskOneProgress, "
+                               + "tasks.TaskOneProgress, "
                                + "tasks.TaskTwo, "
-                               + "task.TaskTwoProgress, "
+                               + "tasks.TaskTwoProgress, "
                                + "tasks.TaskThree, "
-                               + "task.TaskThreeProgress, "
+                               + "tasks.TaskThreeProgress, "
                                + "tasks.TaskFour, "
-                               + "task.TaskFourProgress, "
+                               + "tasks.TaskFourProgress "
                                + "FROM purchases "
                                + "LEFT JOIN customers "
                                + "ON purchases.CustomerID = customers.CustomerID "
@@ -361,7 +373,7 @@ public class TasksModel implements Model{
             tasks.setRowNum(rowCounter);
             tasks.setCustomerID(rs.getString("ID"));
             tasks.setIdentifier(rs.getString("Identifier"));
-            tasks.setPartyType(rs.getString("Type"));
+            tasks.setPartyType(rs.getString("PartyType"));
             tasks.setTaskOne(rs.getString("TaskOne"));
             tasks.setTaskOneProgress(rs.getShort("TaskOneProgress"));
             tasks.setTaskTwo(rs.getString("TaskTwo"));
@@ -385,20 +397,27 @@ public class TasksModel implements Model{
         Connection connection = DriverManager.getConnection(JDBC_URL);
         
         //prepare the select statement
-        String customerSelect = "SELECT customers.ID, "
-                              + "tasks.Status, "
+        String customerSelect = "SELECT customers.CustomerID, "
+                              + "customers.ID, "
+                              + "tasks.TaskID, "
+                              + "tasks.Status "
                               + "FROM purchases "
                               + "LEFT JOIN customers "
                               + "ON purchases.CustomerID = customers.CustomerID "
                               + "LEFT JOIN tasks "
                               + "ON purchases.TaskID = tasks.TaskID "
-                              + "WHERE tasks.status != 'Complete'";
+                              + "WHERE tasks.Status IS NULL "
+                              + "OR tasks.Status = '-'";
         //prepare the statement
         PreparedStatement ps = connection.prepareStatement(customerSelect);
         
         ResultSet rs = ps.executeQuery();
         
         while(rs.next()){
+            System.out.println(rs.getString("ID"));
+            System.out.println(rs.getString("Status"));
+            System.out.println("THIS WORKS!");
+            
             customersList.add(rs.getString("ID"));
         }
         
@@ -415,7 +434,7 @@ public class TasksModel implements Model{
         //prepare the select statement
         String getIdentifier = "SELECT customers.ID, "
                               + "tasks.Status, "
-                              + "sold.Identifiers"
+                              + "sold.Identifier "
                               + "FROM purchases "
                               + "LEFT JOIN customers "
                               + "ON purchases.CustomerID = customers.CustomerID "

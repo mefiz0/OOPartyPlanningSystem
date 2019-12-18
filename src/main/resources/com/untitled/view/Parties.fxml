@@ -16,7 +16,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="partiesPane" prefHeight="476.0" prefWidth="600.0" styleClass="main-background" stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.untitled.controllers.PartiesController">
    <children>
-      <TableView fx:id="partiesTable" layoutY="33.0" prefHeight="163.0" prefWidth="600.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="partiesTable" layoutY="33.0" stylesheets="@../style/TableViewStyle.css" AnchorPane.bottomAnchor="280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
           <TableColumn fx:id="rowNumColumn" prefWidth="75.0" text="#" />
           <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />

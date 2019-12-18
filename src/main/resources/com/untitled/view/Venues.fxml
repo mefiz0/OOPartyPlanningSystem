@@ -26,7 +26,7 @@
             <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
         </columns>
       </TableView>
-      <JFXTabPane layoutX="14.0" layoutY="272.0" prefHeight="280.0" prefWidth="600.0" stylesheets="@../style/TabPaneStyle.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <JFXTabPane fx:id="dataAccessPane" layoutX="14.0" layoutY="272.0" prefHeight="280.0" prefWidth="600.0" stylesheets="@../style/TabPaneStyle.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <tabs>
             <Tab style="-fx-padding: 0px 157px 0px 157px;" text="Add">
               <content>

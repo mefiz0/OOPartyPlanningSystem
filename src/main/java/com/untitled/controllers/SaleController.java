@@ -3,6 +3,7 @@ package main.java.com.untitled.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import java.math.BigDecimal;
@@ -14,12 +15,14 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import main.java.com.untitled.Services.Sale;
 import main.java.com.untitled.models.AddonsModel;
 import main.java.com.untitled.models.CatererModel;
@@ -132,7 +135,22 @@ public class SaleController {
     
     @FXML
     private JFXButton calculatePricesButton;
+    
+    @FXML
+    private JFXTabPane salesTabPane;
 
+    @FXML
+    private Tab saleTab;
+    
+    @FXML
+    private Tab historyTab;
+    
+    @FXML
+    private AnchorPane historyPane;
+    
+    @FXML
+    private GridPane dataAccessGrid;
+    
     @FXML
     void initialize() {
         //update the table view
@@ -432,4 +450,16 @@ public class SaleController {
         customerPaymentsSelect.getSelectionModel().clearSelection();
         partyPaymentSelect.getSelectionModel().clearSelection();
     }//end makePayment
+    
+    //set what is avaliable to the user depending on the user role
+    public void setPermissions(String role){
+        if(role.equals("Event Manager")){
+            salesTabPane.getTabs().remove(saleTab);
+            
+            historyPane.getChildren().remove(makePaymentButton);
+            historyPane.getChildren().remove(dataAccessGrid);
+            
+            AnchorPane.setBottomAnchor(salesTable, 0.0);
+        }
+    }
 }

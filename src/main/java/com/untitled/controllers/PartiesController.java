@@ -20,7 +20,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import main.java.com.untitled.Services.Party;
-import main.java.com.untitled.models.CustomerModel;
 import main.java.com.untitled.models.PartyModel;
 
 public class PartiesController {
@@ -150,12 +149,12 @@ public class PartiesController {
         When a value is selected from the type drop down box, set the text fields to the data of that type
         */
         modifyTypeSelect.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-            //create a new Customer Data access object
-            PartyModel partyDAO = new PartyModel();
+            //create a new party model
+            PartyModel partyModel = new PartyModel();
             
             try {
                 //store the data in a hashmap
-                HashMap<String, String> data = partyDAO.getPartyDataBasedOnType(newValue);
+                HashMap<String, String> data = partyModel.getPartyDataBasedOnType(newValue);
                 
                 //update the text fields
                 modifyBasePrice.setText(data.get("price"));
@@ -199,12 +198,12 @@ public class PartiesController {
         taskThreeColumn.setCellValueFactory(cellData -> cellData.getValue().getTaskThree());
         taskFourColumn.setCellValueFactory(cellData -> cellData.getValue().getTaskFour());
         
-        //create a new database access object
-        PartyModel partiesDAO = new PartyModel();
+        //create a new party model
+        PartyModel partiesModel = new PartyModel();
         
         try {
             //get the data from the database
-            partiesList = partiesDAO.getPartyRecords();
+            partiesList = partiesModel.getPartyRecords();
         } catch (SQLException ex) {
             Logger.getLogger(CustomersController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -214,11 +213,11 @@ public class PartiesController {
     
     //add data to the type combo boxes
     public void updateTypeComboBoxes(){
-        //create a new customerDAO
-        PartyModel partyDAO = new PartyModel();
+        //create a new partyModel
+        PartyModel partyModel = new PartyModel();
         
         try {
-            ObservableList partyTypes = partyDAO.getListOfAllPartyTypes();
+            ObservableList partyTypes = partyModel.getListOfAllPartyTypes();
             modifyTypeSelect.setItems(partyTypes);
             removePartySelect.setItems(partyTypes);
         } catch (SQLException ex) {
@@ -239,12 +238,12 @@ public class PartiesController {
         //create a new party object
         Party addParty =  new Party(type, basePrice, taskOne, taskTwo, taskThree, taskFour);
         
-        //create a new party dao
-        PartyModel partyDAO = new PartyModel(addParty);
+        //create a new party model
+        PartyModel partyModel = new PartyModel(addParty);
         
         try {
             //update the database
-            partyDAO.insertIntoTable();
+            partyModel.insertIntoTable();
         } catch (SQLException ex) {
             Logger.getLogger(PartiesController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -275,12 +274,12 @@ public class PartiesController {
         //create a new party object
         Party party = new Party(type, basePrice, taskOne, taskTwo, taskThree, taskFour);
         
-        //create a new party dao
-        PartyModel partyDAO = new PartyModel(party);
+        //create a new party model
+        PartyModel modifyParty = new PartyModel(party);
         
         try {
             //update the database
-            partyDAO.updateTable();
+            modifyParty.updateTable();
         } catch (SQLException ex) {
             Logger.getLogger(PartiesController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -306,12 +305,12 @@ public class PartiesController {
         //create a new party object
         Party removeParty = new Party(type);
         
-        //create a new party dao
-        PartyModel partyDAO = new PartyModel(removeParty);
+        //create a new party model
+        PartyModel deleteParty = new PartyModel(removeParty);
         
         try {
             //delete from the database
-            partyDAO.deleteFromTable();
+            deleteParty.deleteFromTable();
         } catch (SQLException ex) {
             Logger.getLogger(PartiesController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -324,9 +323,12 @@ public class PartiesController {
         removePartySelect.getSelectionModel().clearSelection();
     }
     
+    //set what is avaliable to the user depending on the user role
     public void setPermissions(String role){
         if(role.equals("Event Sales")){
             partiesPane.getChildren().remove(dataAccessPane);
+            
+            AnchorPane.setBottomAnchor(partiesTable, 0.0);
         }
     }
 }

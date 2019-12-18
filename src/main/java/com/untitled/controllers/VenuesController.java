@@ -2,6 +2,7 @@ package main.java.com.untitled.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
@@ -94,6 +95,9 @@ public class VenuesController {
 
     @FXML
     private JFXButton removeVenuesButton;
+    
+    @FXML
+    private JFXTabPane dataAccessPane;
 
     @FXML
     void initialize() {
@@ -157,12 +161,12 @@ public class VenuesController {
         */
         
          modifyVenueSelect.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-            //create a new Customer Data access object
-            VenuesModel venuesDAO = new VenuesModel();
+            //create a new venuesmodel
+            VenuesModel venuesModel = new VenuesModel();
             
             try {
                 //store the data in a hashmap
-                HashMap<String, String> data = venuesDAO.getVenueDataBasedOnVenue(newValue);
+                HashMap<String, String> data = venuesModel.getVenueDataBasedOnVenue(newValue);
                 
                 //update the text fields
                 modifyRoad.setText(data.get("road"));
@@ -204,11 +208,11 @@ public class VenuesController {
         capacityColumn.setCellValueFactory(cellData -> cellData.getValue().getCapacity().asObject());
         priceColumn.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());
         
-        //create a new venues data access object
-        VenuesModel venuesDAO = new VenuesModel();
+        //create a new venues model
+        VenuesModel venuesModel = new VenuesModel();
         
         try {
-            venuesList = venuesDAO.getVenuesRecords();
+            venuesList = venuesModel.getVenuesRecords();
         } catch (SQLException ex) {
             Logger.getLogger(VenuesController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -218,11 +222,11 @@ public class VenuesController {
     
     //add data to the combo boxes
     public void updateVenuesComboBox(){
-        //create a new data access object
-        VenuesModel venuesDAO = new VenuesModel();
+        //create a new model
+        VenuesModel venuesModel = new VenuesModel();
         
         try {
-            ObservableList<String> venuesList = venuesDAO.getListOfAllVenues();
+            ObservableList<String> venuesList = venuesModel.getListOfAllVenues();
             modifyVenueSelect.setItems(venuesList);
             removeVenueSelect.setItems(venuesList);
         } catch (SQLException ex) {
@@ -245,11 +249,11 @@ public class VenuesController {
         //pass the data to an venue object
         Venues addVenues = new Venues(venue, road, building, capacity, price);
         
-        //create a new venues data access object
-        VenuesModel venuesDAO = new VenuesModel(addVenues);
+        //create a new venues model
+        VenuesModel venuesModel = new VenuesModel(addVenues);
         
         try {
-            venuesDAO.insertIntoTable();
+            venuesModel.insertIntoTable();
         } catch (SQLException ex) {
             Logger.getLogger(VenuesController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -279,11 +283,11 @@ public class VenuesController {
         //pass the data to an venue object
         Venues modifyVenues = new Venues(venue, road, building, capacity, price);
         
-        //create a new venues data access object
-        VenuesModel venuesDAO = new VenuesModel(modifyVenues);
+        //create a new venues model
+        VenuesModel venuesModel = new VenuesModel(modifyVenues);
         
         try {
-            venuesDAO.updateTable();
+            venuesModel.updateTable();
         } catch (SQLException ex) {
             Logger.getLogger(VenuesController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -307,11 +311,11 @@ public class VenuesController {
         //create a new venue object
         Venues removeVenue = new Venues(venue);
         
-        //create a new venues data access object
-        VenuesModel venuesDAO = new VenuesModel(removeVenue);
+        //create a new venuesmodel
+        VenuesModel venuesModel = new VenuesModel(removeVenue);
         
         try {
-            venuesDAO.deleteFromTable();
+            venuesModel.deleteFromTable();
         } catch (SQLException ex) {
             Logger.getLogger(VenuesController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -323,4 +327,13 @@ public class VenuesController {
         //clear the selection
         removeVenueSelect.getSelectionModel().clearSelection();
     }//end deleteVenueFromDatabase()
+    
+    //set what is avaliable to the user depending on the user role
+    public void setPermissions(String role){
+        if(role.equals("Event Sales")){
+            venuesPane.getChildren().remove(dataAccessPane);
+            
+            AnchorPane.setBottomAnchor(venuesTable, 0.0);
+        }
+    }
 }

@@ -49,13 +49,7 @@ public class MainController {
     private JFXDrawer navBar;
 
     @FXML
-    private JFXButton homeButton;
-
-    @FXML
     private JFXButton salesButton;
-   
-    @FXML
-    private JFXButton salesHistoryButton;
 
     @FXML
     private JFXButton tasksButton;
@@ -104,6 +98,10 @@ public class MainController {
         
         //initializeView();
         
+        navBar.setVisible(false);
+        navIcon.setFill(Color.BLACK);
+        borderPane.setLeft(null);
+        
         //if the nav button is clicked show the nav bar
         navButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) ->{
             
@@ -121,18 +119,6 @@ public class MainController {
             
         }); //end customersButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) ->{})
         
-        /* home button is to be implemented later
-        homeButton.setOnAction((event) -> {
-            resetButtons();
-            
-            //load from hashmap
-            HomeController homeController = (HomeController) viewControllers.get("Home");
-            borderPane.setCenter(viewPanes.get("Home"));
-            
-            //disable the buttons
-            homeButton.setDisable(true);
-        });
-        */
         salesButton.setOnAction((event) -> {
             resetButtons();
             
@@ -265,17 +251,25 @@ public class MainController {
         
     }
     
+    //set the start view
+    private void setInitCenter(String role) throws IOException{
+        /*
+        Sales
+        */
+        FXMLLoader saleLoader = new FXMLLoader(getClass().getResource("/main/resources/com/untitled/view/Sale.fxml"));
+        AnchorPane salePane = saleLoader.load();
+        SaleController saleController = saleLoader.getController();
+        saleController.setPermissions(role);
+        
+        borderPane.setCenter(salePane);
+
+        //disable the buttons
+        salesButton.setDisable(true);
+    }
+    
     //set a disabled button to enabled
     private void resetButtons(){
         //enable the buttons if the button is disabled
-        
-        /*
-        home button
-        --to be implemented later (ver2.0)
-        if(homeButton.isDisabled() == true){
-            homeButton.setDisable(false);
-        }
-        */
         
         /*
         sales button
@@ -336,22 +330,12 @@ public class MainController {
                 //load the fxml scenes and store them in viewCache HashMap
                 
                 /*
-                Home
-                --to be implemented later (ver2.0)
-                FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/main/resources/com/untitled/view/Home.fxml"));
-                AnchorPane homePane = homeLoader.load();
-                HomeController homeController = homeLoader.getController();
-                //add to the hashmaps
-                viewPanes.put("Home", homePane);
-                viewControllers.put("Home", homeController);
-                */
-                
-                /*
                 Sales
                 */
                 FXMLLoader saleLoader = new FXMLLoader(getClass().getResource("/main/resources/com/untitled/view/Sale.fxml"));
                 AnchorPane salePane = saleLoader.load();
                 SaleController saleController = saleLoader.getController();
+                saleController.setPermissions(role);
                 //add to the hashmaps
                 viewPanes.put("Sale", salePane);
                 viewControllers.put("Sale", saleController);
@@ -383,6 +367,7 @@ public class MainController {
                 FXMLLoader venuesLoader = new FXMLLoader(getClass().getResource("/main/resources/com/untitled/view/Venues.fxml"));
                 AnchorPane venuesPane = venuesLoader.load();
                 VenuesController venuesController = venuesLoader.getController();
+                venuesController.setPermissions(role);
                 //add to the hashmaps
                 viewPanes.put("Venues", venuesPane);
                 viewControllers.put("Venues", venuesController);
@@ -393,6 +378,7 @@ public class MainController {
                 FXMLLoader addonsLoader = new FXMLLoader(getClass().getResource("/main/resources/com/untitled/view/Addons.fxml"));
                 AnchorPane addonsPane = addonsLoader.load();
                 AddonsController addonsController = addonsLoader.getController();
+                addonsController.setPermissions(role);
                 //add to the hashmap
                 viewPanes.put("Addons", addonsPane);
                 viewControllers.put("Addons", addonsController);
@@ -403,6 +389,7 @@ public class MainController {
                 FXMLLoader customersLoader = new FXMLLoader(getClass().getResource("/main/resources/com/untitled/view/Customers.fxml"));
                 AnchorPane customersPane = customersLoader.load();
                 CustomersController customersController = customersLoader.getController();
+                customersController.setPermissions(role);
                 //add to the hashmaps
                 viewPanes.put("Customers", customersPane);
                 viewControllers.put("Customers", customersController);
@@ -440,6 +427,14 @@ public class MainController {
             navButtons.getChildren().remove(tasksButton);
         }
         
+        
+        try {
+            setInitCenter(role);
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         initializeView(role);
+        
     }
 }

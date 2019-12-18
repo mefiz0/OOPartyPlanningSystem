@@ -2,6 +2,7 @@ package main.java.com.untitled.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
@@ -91,6 +92,9 @@ public class CustomersController {
 
     @FXML
     private JFXComboBox<String> removeCustomerIDSelect;
+    
+    @FXML
+    private JFXTabPane dataAccessPane;
 
     @FXML
     void initialize() {
@@ -328,4 +332,12 @@ public class CustomersController {
         removeCustomerIDSelect.getSelectionModel().clearSelection();
     }//end deleteCustomerInDatabase(){}
     
+    //set what is avaliable to the user depending on the user role
+    public void setPermissions(String role){
+        if(role.equals("Event Sales")){
+            customersPane.getChildren().remove(dataAccessPane);
+            
+            AnchorPane.setBottomAnchor(customersTable, 0.0);
+        }
+    }
 }
