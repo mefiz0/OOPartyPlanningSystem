@@ -78,13 +78,15 @@ public class PaymentsModel implements Model{
         //1 - get the customer id
         PreparedStatement ps = connection.prepareStatement("SELECT CustomerID FROM customers WHERE ID = '" + this.customerID.get() + "'");
         ResultSet rs = ps.executeQuery();
-        int customerID = rs.getInt("ID");
         
-        ps.close();
-        connection.close();
+        int customerID = 0;
+        
+        while(rs.next()){
+            customerID = rs.getInt("CustomerID");
+        }
         
         //2 - update the table
-        ps = connection.prepareStatement("UPDATE payments SET ToBePaid = 'NO' WHERE CustomerID = " + customerID);
+        ps = connection.prepareStatement("UPDATE purchases SET ToBePaid = 'No' WHERE CustomerID = " + customerID);
         ps.execute();
         connection.close();
     }//end update table
@@ -95,11 +97,11 @@ public class PaymentsModel implements Model{
         Connection connection = DriverManager.getConnection(JDBC_URL);
         
         //create the statement
-        PreparedStatement ps = connection.prepareStatement("SELECT customers.ID FROM "
-                                                          + "purchases "
-                                                          + "LEFT JOIN "
-                                                          + "purchases.CustomerID = customers.CustomerID "
-                                                          + "WHERE purchases.ToBePaid = 'YES'");
+        PreparedStatement ps = connection.prepareStatement("SELECT purchases.CustomerID, "
+                                                          + "customers.ID FROM purchases "
+                                                          + "LEFT JOIN customers "
+                                                          + "ON purchases.CustomerID = customers.CustomerID "
+                                                          + "WHERE purchases.ToBePaid = 'Yes'");
         //get the result set
         ResultSet rs = ps.executeQuery();
         
@@ -107,6 +109,7 @@ public class PaymentsModel implements Model{
         
         while(rs.next()){
             customerIDs.add(rs.getString("ID"));
+            System.out.println(rs.getString("ID"));
         }
         
         return customerIDs;
@@ -120,10 +123,12 @@ public class PaymentsModel implements Model{
         //create the statement
         PreparedStatement ps = connection.prepareStatement("SELECT sold.PartyType FROM "
                                                           + "purchases "
-                                                          + "LEFT JOIN "
-                                                          + "purchases.SoldID = sold.SoldID "
-                                                          + "WHERE purchases.ToBePaid = 'YES' "
-                                                          + "AND customers.ID = '" + customerID + "'");
+                                                          + "LEFT JOIN sold "
+                                                          + "ON purchases.SoldID = sold.SoldID "
+                                                          + "LEFT JOIN customers "
+                                                          + "ON purchases.CustomerID = customers.CustomerID "
+                                                          //+ "WHERE purchases.ToBePaid = 'YES' "
+                                                          + "WHERE customers.ID = '" + customerID + "'");
         //get the result set
         ResultSet rs = ps.executeQuery();
         

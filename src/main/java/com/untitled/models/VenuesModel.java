@@ -196,6 +196,8 @@ public class VenuesModel implements Model{
             venuesDAO.setPrice(resultSet.getInt("Price"));
                 
             venuesList.add(venuesDAO);
+            
+            i++;
         }
         
         return venuesList;

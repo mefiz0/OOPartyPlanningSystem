@@ -192,13 +192,15 @@ public class SalesTableModel {
     //get the salestable objects from the database
     private ObservableList<SalesTableModel> getSalesHistoryObjects(ResultSet rs) throws SQLException{
         ObservableList<SalesTableModel> saleHisttoryList = FXCollections.observableArrayList();
-
+        
+        int rowNum = 1; //set the row numbers
+        
         while(rs.next()){
             //create a new saleTablemodel
             SalesTableModel saleTable = new SalesTableModel();
             
             //set the variables
-            saleTable.setRowNum(rs.getInt("PurchaseID"));
+            saleTable.setRowNum(rowNum);
             saleTable.setCustomerID(rs.getString("ID"));
             saleTable.setCustomerName(rs.getString("Name" ));
             saleTable.setPartyType(rs.getString("PartyType"));
@@ -213,6 +215,8 @@ public class SalesTableModel {
             saleTable.setToBePaid(rs.getString("ToBePaid"));
             
             saleHisttoryList.add(saleTable);
+            
+            rowNum++;
         }
         
         return saleHisttoryList;
